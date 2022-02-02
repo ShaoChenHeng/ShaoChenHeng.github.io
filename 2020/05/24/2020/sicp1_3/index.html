@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>SICP第一章-1.3节 部分内容 | Hexo</title>
+
+
+    <meta name="keywords" content="sicp">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="定积分计算定积分近似值的两种计算方法1.传统计算公式 [latexpage] $\int_{a}^{b}f&#x3D;[f(a + \frac{dx}{2}) + f(a + dx  + \frac{dx}{2}) + f(a + 2dx  + \frac{dx}{2})+ …]$ 其中dx是一个很小的值,将这个公式描述成一个过程. (define (cube x) ( * x x x )  )">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICP第一章-1.3节 部分内容">
+<meta property="og:url" content="http://example.com/2020/05/24/2020/sicp1_3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定积分计算定积分近似值的两种计算方法1.传统计算公式 [latexpage] $\int_{a}^{b}f&#x3D;[f(a + \frac{dx}{2}) + f(a + dx  + \frac{dx}{2}) + f(a + 2dx  + \frac{dx}{2})+ …]$ 其中dx是一个很小的值,将这个公式描述成一个过程. (define (cube x) ( * x x x )  )">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg">
+<meta property="article:published_time" content="2020-05-24T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.823Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="sicp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        SICP第一章-1.3节 部分内容
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/05/" class="post-meta__date button">2020-05-24</a>
+        
+    <span class="separate-dot"></span><a href="/categories/sicp/" class="button">sicp</a>
+
+    <span class="separate-dot"></span><a href="/categories/sicp/book/" class="button">book</a>
+
+    <span class="separate-dot"></span><a href="/categories/sicp/book/math/" class="button">math</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p><img src="/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg"></p>
+<h2 id="定积分计算"><a href="#定积分计算" class="headerlink" title="定积分计算"></a>定积分计算</h2><h3 id="定积分近似值的两种计算方法"><a href="#定积分近似值的两种计算方法" class="headerlink" title="定积分近似值的两种计算方法"></a>定积分近似值的两种计算方法</h3><p><strong>1.传统计算公式</strong></p>
+<p>[latexpage]</p>
+<p>$\int_{a}^{b}f&#x3D;[f(a + \frac{dx}{2}) + f(a + dx  + \frac{dx}{2}) + f(a + 2dx  + \frac{dx}{2})+ …]$</p>
+<p>其中dx是一个很小的值,将这个公式描述成一个过程.</p>
+<p>(define (cube x) ( * x x x )  )</p>
+<p>(define (sum term a next b )<br>    (if ( &gt; a b )<br>        0<br>        ( + ( term a )<br>            ( sum term ( next a ) next b )<br>        )<br>    )<br>)</p>
+<p>(define (integral f a b dx )<br>    (define (add-dx x  ) ( + x dx )  )<br>    ( * ( sum f (+ a ( &#x2F; dx 2.0 )) add-dx b ) dx )<br>)</p>
+<p>(integral cube 0 1 0.01)</p>
+<p><strong>2.辛普森规则</strong></p>
+<p><strong>练习1.29</strong></p>
+<p>辛普森规则是另一种比上面的传统规则更加精确的数值积分方法.(其证明方法还没找到….)函数f在范围a和b之间的定积分近似值是:</p>
+<p>[latexpage]$ \frac{h}{3}[ y_0 + 4y_1+2y_2+4y_3+2y_4+…+2y_{n-2} + 4y_{n-1} + y_n] $</p>
+<p>其中$h &#x3D; \frac{b - a}{n}$,n是某个偶数,$y_k &#x3D; f(a+kh)$定义一个具有参数f, a, b和n,采用辛普森规则计算并返回积分值的过程.</p>
+<p>(define (cube x) ( * x x x )  )</p>
+<p>(define (sum term a next b )<br>    (if ( &gt; a b )<br>        0<br>        ( + ( term a )<br>            ( sum term ( next a ) next b )<br>        )<br>    )<br>)</p>
+<p>(define (simpson f a b n)<br>    (define h ( &#x2F; ( - b a ) n ))</p>
+<pre><code>(define k a )
+
+(define (next k) ( + k 1 ) )
+
+(define (y k) ( f (+ a ( \* k h ) ) ) )
+
+(define (coefficient k)  
+    (cond
+        ((or ( = k 0 ) ( = k n )) 1)
+        (( even? k ) 2)
+        ( else 4 )
+    )
+)
+
+(define (foo k) ( \* ( coefficient k ) ( y k ) ) )
+
+( \* ( sum foo k next n ) ( / h 3.0 ) )
+</code></pre>
+<p>)</p>
+<p>(simpson cube 0 1.5 100)</p>
+<h2 id="函数不动点"><a href="#函数不动点" class="headerlink" title="函数不动点"></a>函数不动点</h2><p>数x称为函数f的不动点,如果x满足方程f(x) &#x3D; x.对于某些函数,通过某个初始猜测出发,反复地应用f</p>
+<p>[latexpage]$ f(x), f(f(x)), f(f(f(x)))… $</p>
+<p>直到值的变化不大时,就可以找到它的一个不动点.我们可以写出fixed-point的代码.</p>
+<p>(define tolerance 0.00001 )</p>
+<p>(define (fixed-point f first-guess )<br>    (define (close-enough? v1 v2  )<br>        ( &lt; ( abs ( - v1 v2 ) ) tolerance ))<br>    (define (try guess  )<br>        (let ( (next ( f guess ) ) )<br>            (if ( close-enough? guess next )<br>                next<br>                ( try next )<br>            )<br>        )<br>    )<br>    ( try first-guess )<br>)</p>
+<h3 id="求解开平方的两种方法"><a href="#求解开平方的两种方法" class="headerlink" title="求解开平方的两种方法"></a>求解开平方的两种方法</h3><h4 id="平均阻尼法"><a href="#平均阻尼法" class="headerlink" title="平均阻尼法"></a>平均阻尼法</h4><p>[latexpage]计算某个数x的平方根,就是要找到一个y使得$y^2 &#x3D; x$,将这一等式变成另一个等价形式$y &#x3D; \frac{x}{y}$,这里要做的就是寻找函数$y \mapsto \frac{x}{y}$的不动点.但是这个搜索不动点的过程不会收敛.从初始猜测$y_1$开始,下一个猜测$y_2&#x3D; \frac{x}{y_1}$,而再下一个猜测是$y_3 &#x3D; \frac{x}{y_2}&#x3D;\frac{x}{\frac{x}{y_1}}&#x3D;y_1$.结果就是进入了一个无限循环,没完没了地重复$y_1$,$y_2$.</p>
+<p>[latexpage]这时将$y &#x3D; \frac{x}{y}$变形为$ y &#x3D; \frac{1}{2} ( y + \frac{x}{y} ) $,那么下一个猜测的值就是$\frac{1}{2} ( y + \frac{x}{y} ) $,而不是$\frac{x}{y}$,做出这种猜测序列的计算过程也就是搜寻$y \mapsto \frac{1}{2} ( y + \frac{x}{y} )$的不动点.</p>
+<p><strong>使用scheme编写的平均阻尼法求平方及立方的代码</strong></p>
+<p>(define (average a b ) ( &#x2F; ( + a b ) 2 ))</p>
+<p>( define tolerance 0.00001 )</p>
+<p>(define (average-damp f )<br>    (lambda (x) ( average x ( f x ) )  )<br>)</p>
+<p>(define (fixed-point f first-guess )<br>    (define (close-enough? v1 v2  )<br>        ( &lt; ( abs ( - v1 v2 ) ) tolerance ))<br>    (define (try guess  )<br>        (let ( (next ( f guess ) ) )<br>            (if ( close-enough? guess next )<br>                next<br>                ( try next )<br>            )<br>        )<br>    )<br>    ( try first-guess )<br>)</p>
+<p>(define (sqrt x )<br>    (fixed-point (average-damp (lambda (y) ( &#x2F; x y ) ) ) 1.0 )<br>)</p>
+<p>(define (cube-root x )<br>    (fixed-point (average-damp (lambda (y) ( &#x2F; x ( square y ) ) ) ) 1.0 )<br>)</p>
+<p>( cube-root 27 )</p>
+<p>更多内容可见:<a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2020/05/24/averagedamp/">平均阻尼法</a></p>
+<h4 id="牛顿迭代法"><a href="#牛顿迭代法" class="headerlink" title="牛顿迭代法"></a>牛顿迭代法</h4><p><a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2020/05/23/newtonmethod/">牛顿迭代法</a></p>
+<p><strong>练习1.40</strong></p>
+<p>[latexpage]定义一个cubic,使用牛顿迭代法计算三次方程$x^3 + ax^2+c$的零点</p>
+<p>(define (cubic a b c )<br>    (lambda (x)  ( + (cube x) ( * a ( square x ) ) ( * b x ) c ) )<br>)</p>
+<p><strong>练习1.31</strong>计算圆周率</p>
+<p>[latexpage]按照下面公式计算$\pi$的近似值.</p>
+<p>$\frac{\pi}{4} &#x3D; \frac{2 * 4 * 4 * 6 * 6 *8…}{3 * 3 * 5 * 5 * 7 * 7…}$</p>
+<p>先将这个式子进行一次变形,分子分母的每次增量就对称了.</p>
+<p>$\frac{\pi}{8} &#x3D; \frac{ 4 * 4 * 6 * 6 *8…}{3 * 3 * 5 * 5 * 7 * 7…}$</p>
+<p>(define (product term a next b )<br>    (if ( &gt; a b )<br>        1<br>        (* ( term a )<br>            ( product term ( next a ) next b )<br>        )<br>    )<br>)</p>
+<p>(define (product2 term a next b)<br>    (define (iter a ans)<br>        (if ( &gt; a b )<br>            ans<br>            ( iter ( + a 1 ) ( * ( term a ) ans ) )<br>        )<br>    )<br>    ( iter a 1 )<br>)</p>
+<p>(define ( multi a b )<br>    (define (itself a) a)<br>    (define (multi-next a) ( + a 1 ))<br>    ( product itself a multi-next b)<br>)</p>
+<p>(define ( pi n )<br>    (define (term-up x )<br>        (cond ( ( &#x3D; x 1 ) 1 )<br>            ( ( even? x ) ( + x 2) )<br>            ( else ( + x 1 ) )<br>        )<br>    )</p>
+<pre><code>(define (term-down x )
+    (cond (( = x 1 ) 3)
+        ( ( even? x ) ( + x 1 ) )
+        (else  ( + x 2 ) )
+    )
+)
+(define (next x ) ( + x 1 ) )
+(  \* ( exact-&gt;inexact ( / ( product2 term-up 1 next n )
+                    ( product2 term-down 1 next n ) )) 8)
+</code></pre>
+<p>)</p>
+<p>( pi 1000 )</p>
+<p><strong>练习1.43</strong></p>
+<p>写一个过程,它的输入是一个计算f的过程和一个正整数n,返回的是能计算f的n次重复应用的那个函数.</p>
+<p>这里的解法是基于<strong>练习1.42</strong>的,scheme能够将过程作为返回值,再一次使我见识到了这个语言神奇的地方.</p>
+<p>(define (compose f g )<br>    (lambda (x)<br>        ( f ( g x ) )<br>    )<br>)</p>
+<p>(define (square x ) ( * x x ))</p>
+<p>(define (repeated f n )<br>    (if ( &#x3D; n 1 )<br>        ;(lambda (x) (f x))<br>        f<br>        (lambda (x) (<br>            f ( (repeated<br>                    f<br>                     (- n 1)<br>                )<br>              x )))<br>    )<br>)</p>
+<p>(define (repeated1 f n )<br>    (define (iter a g )<br>        (if ( &#x3D; a n )<br>            g<br>            (lambda (x) ( f ( g x ) ) )<br>        )<br>    )<br>    ( iter 1 f )<br>)</p>
+<p>(define (repeated2 f n )<br>    (if ( &#x3D; n 1 )<br>        f<br>        (<br>            compose f ( repeated2 f ( - n 1 ) )<br>        )<br>    )<br>)</p>
+<p>(define (repeated3 f n )<br>    (define (iter a g )<br>        (if ( &#x3D; a n )<br>            g<br>            ( compose g ( iter ( + a 1 ) g ) )<br>        )<br>    )<br>    ( iter 1 f )<br>)</p>
+<p>( (repeated3 square 2 ) 5 )</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"><a href="/tags/sicp/" class="post-tags__link button"># sicp</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/05/24/2020/churchcount/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            练习2.6 丘奇计数
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/05/23/2020/newtonmethod/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            牛顿迭代法
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

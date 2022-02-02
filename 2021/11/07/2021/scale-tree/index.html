@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>树的映射以及map函数 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="这篇文章是sicp2.2节内容的笔记，主要记录一下里面提到的scale-tree这个函数。 &#96;&#96;&#96;(scale-tree tree factor)&#96;&#96;&#96;以一棵树和一个因子作为参数，将树上的所有节点的值都乘上因子。 首先提供了一个朴素版本的scale-tree，就是递归左右子树，检查当前节点是否属于叶子节点。如果是，那么就乘上因子；如果不是，那么就继续左右递归。 123456789(define (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树的映射以及map函数">
+<meta property="og:url" content="http://example.com/2021/11/07/2021/scale-tree/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇文章是sicp2.2节内容的笔记，主要记录一下里面提到的scale-tree这个函数。 &#96;&#96;&#96;(scale-tree tree factor)&#96;&#96;&#96;以一棵树和一个因子作为参数，将树上的所有节点的值都乘上因子。 首先提供了一个朴素版本的scale-tree，就是递归左右子树，检查当前节点是否属于叶子节点。如果是，那么就乘上因子；如果不是，那么就继续左右递归。 123456789(define (">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.723Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        树的映射以及map函数
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/11/" class="post-meta__date button">2021-11-07</a>
+        
+    <span class="separate-dot"></span><a href="/categories/python/" class="button">python</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/scheme/" class="button">scheme</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/scheme/sicp/" class="button">sicp</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/scheme/sicp/book/" class="button">book</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>这篇文章是sicp2.2节内容的笔记，主要记录一下里面提到的scale-tree这个函数。</p>
+<p>```(scale-tree tree factor)```以一棵树和一个因子作为参数，将树上的所有节点的值都乘上因子。</p>
+<p>首先提供了一个朴素版本的scale-tree，就是递归左右子树，检查当前节点是否属于叶子节点。如果是，那么就乘上因子；如果不是，那么就继续左右递归。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree</span> tree factor)</span><br><span class="line">  (<span class="name">cond</span> ((<span class="name">null</span>? tree) &#x27;())</span><br><span class="line">    ((<span class="name">not</span> (<span class="name">pair</span>? tree)) (<span class="name">*</span> tree factor))</span><br><span class="line">    (<span class="name">else</span> (<span class="name">cons</span> (<span class="name">scale-tree</span> (<span class="name">car</span> tree) factor)</span><br><span class="line">            (<span class="name">scale-tree</span> (<span class="name">cdr</span> tree) factor)))))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> tree1 (<span class="name">list</span> <span class="number">1</span> (<span class="name">list</span> <span class="number">2</span> (<span class="name">list</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">5</span>) (<span class="name">list</span> <span class="number">5</span> <span class="number">7</span>)))</span><br><span class="line"></span><br><span class="line">（scale-tree  tree1 <span class="number">10</span>）</span><br></pre></td></tr></table></figure>
+
+<p>会使原来的树(也就是tree1)的节点上的值都乘以10。</p>
+<p>下面又提供了一个map加lambda匿名函数的版本，但是比较抽象，一下子难以理解。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree1</span> tree factor)</span><br><span class="line">  (<span class="name">map</span> (<span class="name">lambda</span> (<span class="name">sub-tree</span>)</span><br><span class="line">     (<span class="name">if</span> (<span class="name">pair</span>? sub-tree)</span><br><span class="line">         (<span class="name">scale-tree</span> sub-tree factor)</span><br><span class="line">         (<span class="name">*</span> sub-tree factor)))</span><br><span class="line">       tree))</span><br></pre></td></tr></table></figure>
+
+<p>我使用python重新写了一次，加深理解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> sub_tree : scale_tree(sub_tree, factor) <span class="keyword">if</span> <span class="built_in">type</span>(sub_tree) == <span class="built_in">tuple</span> <span class="keyword">else</span> sub_tree * factor,tree))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree2</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="built_in">iter</span>, tree))</span><br><span class="line"></span><br><span class="line">t = ((<span class="number">1</span>, <span class="number">2</span>), <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里定义的两个函数功能上是一样的，因为scale_tree同时用map、lambda可读性可能不是很高，于是就用高阶函数的方法重新构造了scale_tree2这个函数。</p>
+<p>首先要讲的是map函数，通常使用的map函数的参数列表应该是这样的：</p>
+<p><code>map(function, parameter)</code></p>
+<p>第一个参数接受一个函数，第二个接受一个值或者某种数据结构（也可以传入更多个）。然后将对后面的这个参数使用<code>function</code>。比如说下面这个最简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(square, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])))</span><br></pre></td></tr></table></figure>
+
+<p><code>map</code>会对列表中的每一个数都执行一次square,最后会返回一个<code>[1,4,9]</code>。不过这只是对于一层的列表来执行的。通过更高阶的函数配合可以进行更深层的操作，也就是<code>scale-tree</code>，对树的映射。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>iter</code>函数接受的参数是一棵子树，我这里用python的元组来表示scheme中的list，如果当前位置的元素不是元组了，那么就说明是叶子节点，就需要乘以因子；如果不是那么就继续递归遍历子树，不过值得注意的是这里的递归并不是显示的，是通过map函数来进行的，因为它能将函数迭代地操作在每一层的结构上。</p>
+<p>再去看上面的那个scheme版本，其实就是一样的写法，不过这种遍历树的方法实在是太妙了。</p>
+<p>本来这篇文章应该在上周或者上上周就写好了，但是因为中途又重装了一次arch，又去更新eaf-rss-reader的opml功能，所以一直拖延到了今天才写。不过我总算是把这个这么美妙的方法记录下来了。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/11/10/2021/opml/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            关于opml，使用lxml解析opml文件小记
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2021/11/02/2021/arch_setup/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            Arch折腾记录
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

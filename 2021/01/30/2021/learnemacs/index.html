@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>从零开始的Emacs配置学习 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="该怎么说呢，很早就下载了这个操作系统（编辑器）了，一年前（2019）在看SICP的时候就有想法用emacs写scheme，但是由于配置过于复杂，还是选择了用vscode进行编辑。然后中间因为一些其他的事情停止了对SICP的学习，总共四章的内容也只看了两章多，这次放假希望一次性把emacs配置好再把SICP看完吧。接下来将介绍我的emacs配置过程。 快捷键的使用C 即 Control , M 即">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始的Emacs配置学习">
+<meta property="og:url" content="http://example.com/2021/01/30/2021/learnemacs/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="该怎么说呢，很早就下载了这个操作系统（编辑器）了，一年前（2019）在看SICP的时候就有想法用emacs写scheme，但是由于配置过于复杂，还是选择了用vscode进行编辑。然后中间因为一些其他的事情停止了对SICP的学习，总共四章的内容也只看了两章多，这次放假希望一次性把emacs配置好再把SICP看完吧。接下来将介绍我的emacs配置过程。 快捷键的使用C 即 Control , M 即">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.523Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        从零开始的Emacs配置学习
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/01/" class="post-meta__date button">2021-01-30</a>
+        
+    <span class="separate-dot"></span><a href="/categories/emacs/" class="button">emacs</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>该怎么说呢，很早就下载了这个操作系统（编辑器）了，一年前（2019）在看SICP的时候就有想法用emacs写scheme，但是由于配置过于复杂，还是选择了用vscode进行编辑。然后中间因为一些其他的事情停止了对SICP的学习，总共四章的内容也只看了两章多，这次放假希望一次性把emacs配置好再把SICP看完吧。接下来将介绍我的emacs配置过程。</p>
+<h2 id="快捷键的使用"><a href="#快捷键的使用" class="headerlink" title="快捷键的使用"></a>快捷键的使用</h2><p>C 即 Control , M 即 Alt (至少在我的键盘上是这样的)</p>
+<p><code>C - x , C - s</code> 对当前文档进行保存</p>
+<p><code>C - x, C - c</code> 关闭当前程序</p>
+<p><code>C - x, C - f</code> 输入文件名，emacs会搜索文件并打开</p>
+<p><code>M - x</code> 输入具体操作(这个比较类似 sublime 和 vscode 里面的<code>C - p</code>)</p>
+<p><code>C - w</code>剪切</p>
+<p><code>M - w</code> 复制</p>
+<p><code>C - y</code> 粘贴</p>
+<p><code>M - y</code> 在按下<code>C - y</code>后，按此键，切换粘贴的内容</p>
+<p><code>C - /</code> 撤销</p>
+<p><code>C - g</code>中断当前命令输入</p>
+<p><code>C - s</code> 或者<code>C - r</code> 搜索（方向不同）</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在emacs 27以前的版本通常是在”.emacs”这个文件里进行修改的，具体操作是<code>M - x</code>后，输入.emac回车，就可以进入配置文件了。</p>
+<h2 id="关闭滚动条与工具栏"><a href="#关闭滚动条与工具栏" class="headerlink" title="关闭滚动条与工具栏"></a>关闭滚动条与工具栏</h2><p><code>(scroll-bar-mode -1)</code> 关闭滚动条 <code>(tool-bar-mode -1)</code> 关闭工具栏</p>
+<h2 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h2><p>这个设置和Linux系统下的添加镜像源的操作如出一辙。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;; add tinghua resource</span><br><span class="line">(setq package-archives &#x27;((&quot;gnu&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;)</span><br><span class="line">             (&quot;org&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;)</span><br><span class="line">                         (&quot;melpa&quot; . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;)))</span><br><span class="line"></span><br><span class="line">(package-initialize) ;; You might already have this line</span><br></pre></td></tr></table></figure>
+
+<h2 id="包管理器的初始化、刷新、安装"><a href="#包管理器的初始化、刷新、安装" class="headerlink" title="包管理器的初始化、刷新、安装"></a>包管理器的初始化、刷新、安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    ;; package initialize</span><br><span class="line">(setq package-check-signature nil)</span><br><span class="line"></span><br><span class="line">(require &#x27;package)</span><br><span class="line"></span><br><span class="line">(unless (bound-and-true-p package--initialized)</span><br><span class="line">  (package-initialize))</span><br><span class="line"></span><br><span class="line">;; refresh resource</span><br><span class="line">(unless package-archive-contents</span><br><span class="line">  (package-refresh-contents))</span><br><span class="line"></span><br><span class="line">;; use-package</span><br><span class="line">(unless (package-installed-p &#x27;use-package)</span><br><span class="line">  (package-refresh-contents)</span><br><span class="line">  (package-install &#x27;use-package))</span><br></pre></td></tr></table></figure>
+
+<p><code>unless</code> 语句即如果没有进行(…)那么就进行(…)。</p>
+<h2 id="使用use-package管理扩展"><a href="#使用use-package管理扩展" class="headerlink" title="使用use-package管理扩展"></a>使用use-package管理扩展</h2><h3 id="最基本的格式"><a href="#最基本的格式" class="headerlink" title="最基本的格式"></a>最基本的格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(use-package restart-emacs)</span><br></pre></td></tr></table></figure>
+
+<p><code>M-x</code>后输入<code>restart-emacs</code>,emacs就会重启了。</p>
+<h3 id="常用格式"><a href="#常用格式" class="headerlink" title="常用格式"></a>常用格式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">;; 常用格式</span><br><span class="line">(use-package smooth-scrolling</span><br><span class="line">: ensure t; 是否一定要确保已安装</span><br><span class="line">: defer nil ;是否延迟加载</span><br><span class="line">: init (setq smooth-scrolling-margin 2) ;初始化参数</span><br><span class="line">: config (smooth-scrolling-mode t) ;基本配置参数</span><br><span class="line">: bind ;快捷键绑定</span><br><span class="line">: hook ;hook模式的绑定)</span><br></pre></td></tr></table></figure>
+
+<h3 id="推荐添加的配置"><a href="#推荐添加的配置" class="headerlink" title="推荐添加的配置"></a>推荐添加的配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(eval-and-compile</span><br><span class="line">  (setq use-package-always-ensure t)    ; 不用每个包都手动添加:ensure t 关键字</span><br><span class="line">  (setq use-package-always-defer t)     ; 默认都是延时加载，不用每个包都手动添加:defer t 关键字</span><br><span class="line">  (setq use-package-always-demand nil)  ;</span><br><span class="line">  (setq use-package-expand-minimally t) ;</span><br><span class="line">  (setq use-package-verbose t)          ; 打印安装过程</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="使用-use-package-安装"><a href="#使用-use-package-安装" class="headerlink" title="使用 use-package 安装"></a>使用 use-package 安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过他人编写的文件安装"><a href="#通过他人编写的文件安装" class="headerlink" title="通过他人编写的文件安装"></a>通过他人编写的文件安装</h3><p>在这个开源项目（<a target="_blank" rel="noopener" href="https://github.com/belak/emacs-monokai-pro-theme">https://github.com/belak/emacs-monokai-pro-theme</a> ）中找到了合适版本的emacs配色，然后根据README.md的教程完成。</p>
+<p>将monokai-pro-theme.el文件放入.emacs.d&#x2F;themes&#x2F;中 然后执行<code>M-x package-install monokai-pro-theme</code> 将<code>(load-theme &#39;monokai-pro t)</code>添加到配置文件，重启后就可以看见主题更改了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t）</span><br></pre></td></tr></table></figure>
+
+<h2 id="更换一个更加优雅的状态栏"><a href="#更换一个更加优雅的状态栏" class="headerlink" title="更换一个更加优雅的状态栏"></a>更换一个更加优雅的状态栏</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示行标"><a href="#显示行标" class="headerlink" title="显示行标"></a>显示行标</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(global-linum-mode t)</span><br></pre></td></tr></table></figure>
+
+<h2 id="工程化管理配置"><a href="#工程化管理配置" class="headerlink" title="工程化管理配置"></a>工程化管理配置</h2><p>由于将所有的配置都写到.emacs里会使整个文档看起来很凌乱，于是就需要将不同方面（ui界面，use-package管理等）的配置代码区分开来。</p>
+<p>于是不妨新建一个文件夹&#x2F;.emacs.d&#x2F;lisp&#x2F;里面专门存放配置文件。并且根据配置的不同方向，命名如下：</p>
+<ul>
+<li>init-elpa.el 存放镜像源相关配置</li>
+<li>init-package.el 存放包管理器的相关配置u</li>
+<li>init-startup.el emacs启动时运行的一些代码（关闭工具栏和滚动条等）</li>
+<li>init-ui.el 界面的主题和字体等配置</li>
+</ul>
+<p>比如目前我的init-ui.el是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br><span class="line"></span><br><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t)</span><br><span class="line"></span><br><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br><span class="line"></span><br><span class="line">;; show the line number</span><br><span class="line">(global-linum-mode t)</span><br><span class="line"></span><br><span class="line">;; make the background transparent</span><br><span class="line">(set-frame-parameter (selected-frame) &#x27;alpha (list 85 60))</span><br><span class="line">(add-to-list &#x27;default-frame-alist (cons &#x27;alpha (list 85 60)))</span><br><span class="line">(put &#x27;downcase-region &#x27;disabled nil)</span><br><span class="line"></span><br><span class="line">(provide &#x27;init-ui)</span><br></pre></td></tr></table></figure>
+
+<p><code>(provide &#39;init-ui)</code>在这里是将<code>init-ui</code>暴露的意思，后续的<code>require</code>会根据是否暴露来找到配置文件。</p>
+<p>将所有的配置往&#x2F;.emacs.d&#x2F;目录下的init.el文件里迁移。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(add-to-list &#x27;load-path</span><br><span class="line">         (expand-file-name(concat user-emacs-directory &quot;lisp&quot;)))</span><br><span class="line"></span><br><span class="line">(require &#x27;init-startup)</span><br><span class="line">(require &#x27;init-elpa)</span><br><span class="line">(require &#x27;init-ui)</span><br><span class="line">(require &#x27;init-package)</span><br></pre></td></tr></table></figure>
+
+<p><code>load-path</code>是一个<code>list</code>，需要将配置添加进去。</p>
+<p><code>expand-file-name</code>将后面的两个字符串拼接成一个目录，<code>concat</code>是拼接的意思,<code>user-emacs-directory</code>系统的全局变量，寻找emacs的目录，即&#x2F;.emacs.d&#x2F;这个目录。</p>
+<p>诸如<code>(require &#39;init-startup)</code>require和provide是配对的，调用之前配置好的<code>init-startup</code>。</p>
+<p>这些都配置好了以后就可以把.emacs文件删了。</p>
+<h2 id="关于自定义配置"><a href="#关于自定义配置" class="headerlink" title="关于自定义配置"></a>关于自定义配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(setq custom-file (expand-file-name &quot;custom.el&quot; user-emacs-directory))</span><br></pre></td></tr></table></figure>
+
+<p>通过这个命令可以将一些自定义配置(诸如鼠标点击的)后系统生成的文字，保存到custom.el里面。 通过这个方法可以使得init.el文件看上去并不是那么凌乱了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(when (file-exits-p custom-file)</span><br><span class="line">  (load-file custom-file))</span><br></pre></td></tr></table></figure>
+
+<p>系统可能不会自动加载custom里面的配置，这里的代码意思是当发现custom-file文件存在是就自动加载。</p>
+<h2 id="启动配置"><a href="#启动配置" class="headerlink" title="启动配置"></a>启动配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(prefer-coding-system &#x27;utf-8)</span><br><span class="line">(set-default-coding-systems &#x27;utf-8)</span><br><span class="line">(set-terminal-coding-system &#x27;utf-8)</span><br><span class="line">(set-keyboard-coding-system &#x27;utf-8)</span><br><span class="line">(setq default-buffer-file-coding-system &#x27;utf-8)</span><br></pre></td></tr></table></figure>
+
+<p>用于解决乱码问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(setq gc-cons-threshold most-positive-fixnum)</span><br></pre></td></tr></table></figure>
+
+<p>控制垃圾回收阈值，满了再回收。</p>
+<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><p>使用company插件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(use-package company</span><br><span class="line">  :diminish (company-mode &quot; Cmp.&quot;)</span><br><span class="line">  :defines (company-dabbrev-ignore-case company-dabbrev-downcase)</span><br><span class="line">  :hook (after-init . global-company-mode)</span><br><span class="line">  :config (setq company-dabbrev-code-everywhere t</span><br><span class="line">                company-dabbrev-code-modes t</span><br><span class="line">                company-dabbrev-code-other-buffers &#x27;all</span><br><span class="line">                company-dabbrev-downcase nil</span><br><span class="line">                company-dabbrev-ignore-case t</span><br><span class="line">                company-dabbrev-other-buffers &#x27;all</span><br><span class="line">                company-require-match nil</span><br><span class="line">                company-minimum-prefix-length 1</span><br><span class="line">                company-show-numbers t</span><br><span class="line">                company-tooltip-limit 20</span><br><span class="line">                company-idle-delay 0</span><br><span class="line">                company-echo-delay 0</span><br><span class="line">                company-tooltip-offset-display &#x27;scrollbar</span><br><span class="line">                company-begin-commands &#x27;(self-insert-command))</span><br><span class="line">  (eval-after-load &#x27;company</span><br><span class="line">    &#x27;(add-to-list &#x27;company-backends</span><br><span class="line">                  &#x27;(company-abbrev company-yasnippet company-capf))))</span><br></pre></td></tr></table></figure>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/07/14/2021/856/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            泥潭
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/10/21/2020/g-gliding-2020zjcpcdp/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            G. Gliding 2020浙江省省赛动态规划
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

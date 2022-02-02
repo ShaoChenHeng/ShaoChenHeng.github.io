@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>Pollar-Rho算法 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="Pollar-Rho 算法是一种用于快速分解质因数的算法。 问题引入给定一个正整数$N \in \mathbb{N}_{+}$，试快速找到它的一个因数。 考虑朴素算法，因数是成对分布的，$N$的所有因数可以被分成两块，即$[1,\sqrt N]$和$[\sqrt N+1,N]$。只需要把$[1,\sqrt N]$里的数遍历一遍，再根据除法就可以找出至少两个因数了。这个方法的时间复杂度为$O(\sq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pollar-Rho算法">
+<meta property="og:url" content="http://example.com/2020/08/04/2020/poolar-rho/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Pollar-Rho 算法是一种用于快速分解质因数的算法。 问题引入给定一个正整数$N \in \mathbb{N}_{+}$，试快速找到它的一个因数。 考虑朴素算法，因数是成对分布的，$N$的所有因数可以被分成两块，即$[1,\sqrt N]$和$[\sqrt N+1,N]$。只需要把$[1,\sqrt N]$里的数遍历一遍，再根据除法就可以找出至少两个因数了。这个方法的时间复杂度为$O(\sq">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.323Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        Pollar-Rho算法
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/08/" class="post-meta__date button">2020-08-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/maththeory/" class="button">maththeory</a>
+
+    <span class="separate-dot"></span><a href="/categories/maththeory/algorithmanddatastruct/" class="button">algorithmanddatastruct</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>Pollar-Rho 算法是一种用于快速分解质因数的算法。</p>
+<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>给定一个正整数$N \in \mathbb{N}_{+}$，试快速找到它的一个因数。</p>
+<p>考虑朴素算法，因数是成对分布的，$N$的所有因数可以被分成两块，即$[1,\sqrt N]$和$[\sqrt N+1,N]$。只需要把$[1,\sqrt N]$里的数遍历一遍，再根据除法就可以找出至少两个因数了。这个方法的时间复杂度为$O(\sqrt N)$。</p>
+<p>当$N\ge10^{18}$时，这个算法的运行时间我们是无法接受的，希望有更优秀的算法。一种想法是通过随机的方法，猜测一个数是不是$N$的因数，如果运气好可以在$O(1)$的时间复杂度下求解答案，但是对于$N\ge10^{18}$的数据，成功猜测的概率是$\frac{1}{10^{18}}$,期望猜测的次数是$10^{18}$。如果是在$[1,\sqrt N]$里进行猜测，成功率会大一些。我们希望有方法来优化猜测。</p>
+<h2 id="生日悖论"><a href="#生日悖论" class="headerlink" title="生日悖论"></a>生日悖论</h2><p>不考虑出生年份，问：一个房间中至少多少人，才能使其中两个人生日相同的概率达到$50\%$?</p>
+<p>解： 假设一年有 $n$ 天，屋子中有 $k$ 人，用整数 $1, 2,\dots, k$对这些人进行编号。假定每个人的生日均匀分布于 $n$ 天之中，且两个人的生日相互独立。</p>
+<p>设 k 个人生日互不相同为事件$A$, 则事件$A$的概率为</p>
+<p>$$ P(A)&#x3D;\frac{n}{n} * \frac{n-1}{n} * \dots *\frac{n-k+1}{n} $$</p>
+<p>至少有两个人生日相同的概率为$P(\overline A)&#x3D;1-P(A)$。根据题意可知$P(\overline A)\ge\frac{1}{2}$ ,那么就有$1 * \frac{n-1}{n} * \dots *\frac{n-k+1}{n} \le \frac{1}{2}$</p>
+<p>由不等式$1+x\le e^x$可得</p>
+<p>$$ P(A) \le e^{-\frac{1}{n}}* e^{-\frac{2}{n}}*\dots * e^{-\frac{k-1}{n}}&#x3D;e^{-\frac{k(k-1)}{2n}}\le\frac{1}{2}\ e^{-\frac{k(k-1)}{2n}}\le\frac{1}{2} $$</p>
+<p>将$n&#x3D;365$代入，解得$k&#x3D;23$。所以一个房间中至少23人，使其中两个人生日相同的概率达到$50\%$,但这个数学事实十分反直觉，故称之为一个悖论。</p>
+<p>然而我们可以得到一个不等式方程，$e^{-\frac{k(k-1)}{2n}}\le 1-p$，其中$p$是一个概率。那么当$k&#x3D;57$，$n&#x3D;365$时，可以求得$p\approx 0.99$。</p>
+<p>考虑一个问题，设置一个数据$n$，在$[1,1000]$里随机选取$i$个数（i&#x3D;1时就是它自己），使它们之间有两个数的差值为$k$。当$i&#x3D;1$时成功的概率是$\frac{1}{1000}$，当$i&#x3D;2$时成功的概率是$\frac{1}{500}$（考虑绝对值,$num_2$可以取$num_1-k$或$num_1+k$），随着$i$的增大，这个概率也会增大最后趋向于1。</p>
+<h2 id="优化随机算法"><a href="#优化随机算法" class="headerlink" title="优化随机算法"></a>优化随机算法</h2><p>最大公约数一定是某个数的约数，即$\forall k \in\mathbb{N}_{+},gcd(k,n)|n$，只要选适当的$k$使得$1&lt;\gcd(k,n)&lt; n$，就可以求得一个约数$\gcd(k,n)$。满足这样条件的$k$不少，$k$有若干个质因子，每个质因子及其倍数都是可行的。</p>
+<p>根据生日悖论，取多组数据作差能够优化取数的精确性。那么不妨取一组数 $x_1,x_2,\dots,x_n$若有$1&lt;\gcd(|x_i-x_j|,n) &lt; n$,则称$gcd(|x_i-x_j|,N)$是$N$的一个因子（更严谨一些，应该是非平凡因子，即满足 $1&lt; d &lt; n,d|n$ 的那些数）。</p>
+<h3 id="构造伪随机函数"><a href="#构造伪随机函数" class="headerlink" title="构造伪随机函数"></a>构造伪随机函数</h3><p>构造一个伪随机数序列，取相邻的两项来求$\gcd(|x_i-x_j|,N)$。通过$f(x)&#x3D;(x^2+c)\%n$来生成随机数，其中$c&#x3D;rand()$，是一个随机的常数。</p>
+<p>随机取一个$x_1$，令$x_2&#x3D;f(x_1),x_3&#x3D;f(x_2),\dots,x_i&#x3D;f(x_{i-1})$，在一定范围内可以认为这个数列是“随机”的。</p>
+<p>举个例子，设$N&#x3D;50,c&#x3D;2,x_1&#x3D;1$ $f(x)$生成的数据为</p>
+<p>$$ 1,3,11,23,31,11,23,31,\dots $$</p>
+<p>可以发现数据在3以后都在11,23,31之间循环，这也是$f(x)$被称为伪随机函数的原因。</p>
+<h3 id="Floyd判环"><a href="#Floyd判环" class="headerlink" title="Floyd判环"></a>Floyd判环</h3><p>考虑两个人在赛跑，A的速度快，B的速度慢，经过一定时间后，A总是会和B相遇，且相遇时A跑过的总距离减去B跑过的总距离一定是圈长的n倍。</p>
+<p>初始$a&#x3D;f(1),b&#x3D;f(f(1))$，每一次更新$a&#x3D;f(a),b&#x3D;f(f(b))$，只要检查在更新过程中a、b是否相等，如果相等了，那么就出现了环。</p>
+<p>我们每次判断$d&#x3D;gcd(|x_i-x_j|,n)$，判断d是否满足$1&lt; d&lt; n$，若满足则可直接返回$d$。由于$x_i$是一个伪随机数列，必定会形成环，在形成环时就不能再继续操作了，直接返回n本身，并且在后续操作里调整随机常数$c$，重新分解。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">PR</span><span class="params">(ll N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll c = <span class="built_in">rand</span>() % (N - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    ll t = <span class="built_in">f</span>(<span class="number">0</span>, c, N);</span><br><span class="line">    ll r = <span class="built_in">f</span>(<span class="built_in">f</span>(<span class="number">0</span>, c, N), c, N);</span><br><span class="line">    <span class="keyword">while</span>(t != r)</span><br><span class="line">    &#123;</span><br><span class="line">        ll d = <span class="built_in">gcd</span>(<span class="built_in">abs</span>(t - r), N);</span><br><span class="line">        <span class="keyword">if</span>(d &gt; <span class="number">1</span>) <span class="keyword">return</span> d;</span><br><span class="line">        t = <span class="built_in">f</span>(t, c, N);</span><br><span class="line">        r = <span class="built_in">f</span>(<span class="built_in">f</span>(r, c, N), c, N);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> N;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="倍增优化"><a href="#倍增优化" class="headerlink" title="倍增优化"></a>倍增优化</h3><p>使用$gcd$求解的时间复杂度为$O(log N)$，频繁地调用会使算法运行地很慢，可以通过乘法累积来减少求$gcd$的次数。如果$1&lt; gcd(a,b)$，则有$1&lt; gcd(ac,b)$，$c\in \mathbb{N}_{+}$，并且有$1&lt; gcd(ac \%b,b)&#x3D;gcd(a,b)$。</p>
+<p>考虑每过一段时间将这些差值进行$gcd$运算，设$s&#x3D;\prod|x_0-x_j|\%n$，如果某一时刻得到$s&#x3D;0$那么表示分解失败，退出并返回$n$本身。每隔$2^k$个数，计算是否满足$1&lt; gcd(s, n) &lt; n$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">PR</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll s = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">    ll c= <span class="built_in">rand</span>() % (x - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">0</span>, goal = <span class="number">1</span>;</span><br><span class="line">    ll val = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( goal=<span class="number">1</span>; ;goal &lt;&lt;= <span class="number">1</span>, s = t, val = <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(step = <span class="number">1</span>; step &lt;= goal; ++step)</span><br><span class="line">        &#123;</span><br><span class="line">            t = <span class="built_in">f</span>(t, c, x);</span><br><span class="line">            val= val * <span class="built_in">abs</span>(t - s) % x;</span><br><span class="line">            <span class="keyword">if</span>( (step % <span class="number">127</span>) == <span class="number">0</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                ll d = <span class="built_in">gcd</span>(val,x);</span><br><span class="line">                <span class="keyword">if</span> (d &gt; <span class="number">1</span>) <span class="keyword">return</span> d;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll d = <span class="built_in">gcd</span>(val, x);</span><br><span class="line">        <span class="keyword">if</span>(d &gt; <span class="number">1</span>) <span class="keyword">return</span> d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例题:<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4718">P4718 【模板】Pollard-Rho算法</a></p>
+<p>对于一个数 n ，用<a href="/prime/#_4">Miller Rabin算法</a>判断是否为素数，如果是就可以直接返回了，否则用Pollard-Rho算法找一个因子 p ，将 n 除去因子 p 。再递归分解 n 和 p ，用Miller Rabin判断是否出现质因子，并用max_factor更新就可以求出最大质因子了。由于这个题目的数据过于庞大，用Floyd判环的方法是不够的，这里采用倍增优化的方法。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lll __int128</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> t;</span><br><span class="line">ll max_factor, n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gcd</span>(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qp</span><span class="params">(ll x,ll p,ll mod)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p &amp; <span class="number">1</span>)</span><br><span class="line">            ans = (lll)ans * x % mod;</span><br><span class="line">        x = (lll) x * x % mod;</span><br><span class="line">        p &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">Miller_rabin</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (p &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    ll d = p - <span class="number">1</span>, r = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!(d&amp;<span class="number">1</span>)) ++r, d &gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll k =<span class="number">0</span>; k &lt; <span class="number">10</span>; ++k) &#123;</span><br><span class="line">        ll a = <span class="built_in">rand</span>() % (p - <span class="number">2</span>) + <span class="number">2</span>;</span><br><span class="line">        ll x = <span class="built_in">qp</span>(a, d, p);</span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">1</span> || x == p<span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r - <span class="number">1</span>; ++ i) &#123;</span><br><span class="line">            x = (lll)x * x % p;</span><br><span class="line">            <span class="keyword">if</span>(x == p - <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(x != p - <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">f</span><span class="params">(ll x,ll c,ll n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((lll)x * x + c) % n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">PR</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll s = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">    ll c = (ll)<span class="built_in">rand</span>() % (x - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">0</span>, goal = <span class="number">1</span>;</span><br><span class="line">    ll val = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( goal=<span class="number">1</span>; ;goal &lt;&lt;= <span class="number">1</span>, s = t, val = <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(step = <span class="number">1</span>; step &lt;= goal; ++step)</span><br><span class="line">        &#123;</span><br><span class="line">            t = <span class="built_in">f</span>(t, c, x);</span><br><span class="line">            val= (lll)val * <span class="built_in">abs</span>(t - s) % x;</span><br><span class="line">            <span class="keyword">if</span>( (step % <span class="number">127</span>) == <span class="number">0</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                ll d = <span class="built_in">gcd</span>(val,x);</span><br><span class="line">                <span class="keyword">if</span> (d &gt; <span class="number">1</span>) <span class="keyword">return</span> d;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ll d = <span class="built_in">gcd</span>(val, x);</span><br><span class="line">        <span class="keyword">if</span>(d &gt; <span class="number">1</span>) <span class="keyword">return</span> d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">fac</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= max_factor || x &lt; <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Miller_rabin</span>(x))</span><br><span class="line">    &#123;</span><br><span class="line">        max_factor = <span class="built_in">max</span>(max_factor, x);</span><br><span class="line">        <span class="keyword">return</span>;     </span><br><span class="line">    &#125;</span><br><span class="line">    ll p = x;</span><br><span class="line">    <span class="keyword">while</span>(p &gt;= x) p = <span class="built_in">PR</span>(x);</span><br><span class="line">    <span class="keyword">while</span>((x % p) == <span class="number">0</span>) x /= p;</span><br><span class="line">    <span class="built_in">fac</span>(x),<span class="built_in">fac</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t --)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">srand</span>((<span class="keyword">unsigned</span>)<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line">        max_factor=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n);</span><br><span class="line">        <span class="built_in">fac</span>(n);</span><br><span class="line">        <span class="keyword">if</span>(max_factor == n) <span class="built_in">printf</span>(<span class="string">&quot;Prime\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,max_factor);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/08/05/2020/sccqus/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            强连通分量
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/08/01/2020/mobiusnote/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            莫比乌斯反演笔记
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

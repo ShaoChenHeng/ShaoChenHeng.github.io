@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>Python图论绘制库Graphviz小记 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="话不多说直接上代码，重要的都在注释里． 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061from graphviz import Digraphfrom graphviz import Graph# 有向图 g &#x3D; Dig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python图论绘制库Graphviz小记">
+<meta property="og:url" content="http://example.com/2020/08/30/2020/pygraphviz/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="话不多说直接上代码，重要的都在注释里． 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061from graphviz import Digraphfrom graphviz import Graph# 有向图 g &#x3D; Dig">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/mypicture.png">
+<meta property="article:published_time" content="2020-08-30T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.397Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/mypicture.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        Python图论绘制库Graphviz小记
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/08/" class="post-meta__date button">2020-08-30</a>
+        
+    <span class="separate-dot"></span><a href="/categories/disorder/" class="button">disorder</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>话不多说直接上代码，重要的都在注释里．</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> graphviz <span class="keyword">import</span> Digraph</span><br><span class="line"><span class="keyword">from</span> graphviz <span class="keyword">import</span> Graph</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有向图 g = Digraph(name=&quot;photo&quot;,format=&quot;png&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 无向图</span></span><br><span class="line"><span class="comment"># name 是名称</span></span><br><span class="line"><span class="comment"># format 是导出文件的格式，默认是pdf</span></span><br><span class="line">g = Graph(name=<span class="string">&quot;photo&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># name 是结点的变量名</span></span><br><span class="line"><span class="comment"># label 是显示时候结点的名称，也就是说可以创建两个＂同名＂结点</span></span><br><span class="line"><span class="comment"># color 是描边颜色</span></span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;b1&#x27;</span>, label=<span class="string">&#x27;2&#x27;</span>,color=<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;a&#x27;</span>,label=<span class="string">&#x27;2&#x27;</span>, color=<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;b&#x27;</span>,label=<span class="string">&#x27;5&#x27;</span>, color=<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一条边，连接a与b</span></span><br><span class="line"><span class="comment"># label 为线上显示的文本</span></span><br><span class="line"><span class="comment"># color为线的颜色</span></span><br><span class="line">g.edge(<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;a&#x27;</span>,label=<span class="string">&quot;&quot;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;b1&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,label=<span class="string">&quot;&quot;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;c&#x27;</span>, label=<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;d&#x27;</span>, label=<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;e&#x27;</span>,label=<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;f&#x27;</span>,label=<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;g&#x27;</span>,label=<span class="string">&#x27;7&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;h&#x27;</span>,label=<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;g&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;i&#x27;</span>,label=<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;j&#x27;</span>,label=<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;i&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;j&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;k&#x27;</span>,label=<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;l&#x27;</span>,label=<span class="string">&#x27;10&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;k&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line">g.node(name=<span class="string">&#x27;m&#x27;</span>,label=<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">g.node(name=<span class="string">&#x27;n&#x27;</span>,label=<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;n&#x27;</span>,color=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">g.edge(<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;m&#x27;</span>,color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图像 g.view()</span></span><br><span class="line"><span class="comment"># g.view()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 画图，filename:图片的名称，若无filename，则使用Digraph对象的name，默认会有gv后缀</span></span><br><span class="line"><span class="comment"># directory:图片保存的路径，默认是在当前路径下保存</span></span><br><span class="line">g.view(filename=<span class="string">&quot;mypicture&quot;</span>, directory=<span class="string">&quot;/home/scheng&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>运行后产生的图片文件 <img src="/images/mypicture.png" alt="tournament-tree"></p>
+<p>更多详细内容可以参见</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Edisonleeee/article/details/90214609">地址1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Zzbj/p/11431015.html">地址2</a></p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/09/29/2020/summer-2020/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            Summer 2020 从申请到结项
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/08/10/2020/sectiondpqus/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            区间 DP
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

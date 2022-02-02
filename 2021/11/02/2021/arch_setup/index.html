@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>Arch折腾记录 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="我的y7000上装了三个操作系统，win10，ubuntu，arch。其中win10和ubuntu都跑了俩年了都没挂。前几个星期不小心把arch滚挂了，就没再去理她，反正还有一个ubuntu可以用。然后前几天给ubuntu换桌面启动器的时候一不小心把它也整挂了，各种调试都不行（主要是我菜），于是就打算直接重装一个arch吧，只是重装系统，文件数据都还是有保留的。 这一篇只会记录一些我在装arch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch折腾记录">
+<meta property="og:url" content="http://example.com/2021/11/02/2021/arch_setup/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我的y7000上装了三个操作系统，win10，ubuntu，arch。其中win10和ubuntu都跑了俩年了都没挂。前几个星期不小心把arch滚挂了，就没再去理她，反正还有一个ubuntu可以用。然后前几天给ubuntu换桌面启动器的时候一不小心把它也整挂了，各种调试都不行（主要是我菜），于是就打算直接重装一个arch吧，只是重装系统，文件数据都还是有保留的。 这一篇只会记录一些我在装arch">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/2021-11-02_14-09.png">
+<meta property="og:image" content="http://example.com/images/2021-11-02_14-07.png">
+<meta property="article:published_time" content="2021-11-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.697Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/2021-11-02_14-09.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        Arch折腾记录
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/11/" class="post-meta__date button">2021-11-02</a>
+        
+    <span class="separate-dot"></span><a href="/categories/os/" class="button">os</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p><img src="/images/2021-11-02_14-09.png"></p>
+<p>我的y7000上装了三个操作系统，win10，ubuntu，arch。其中win10和ubuntu都跑了俩年了都没挂。前几个星期不小心把arch滚挂了，就没再去理她，反正还有一个ubuntu可以用。然后前几天给ubuntu换桌面启动器的时候一不小心把它也整挂了，各种调试都不行（主要是我菜），于是就打算直接重装一个arch吧，只是重装系统，文件数据都还是有保留的。</p>
+<p>这一篇只会记录一些我在装arch的时候查询的网站和一些注意事项，不会详细讲怎么装，毕竟网上已经有这么多教程了。</p>
+<p><a target="_blank" rel="noopener" href="https://www.viseator.com/2017/05/19/arch_setup/">https://www.viseator.com/2017/05/19/arch_setup&#x2F;</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/freerqy/p/8502838.html">https://www.cnblogs.com/freerqy/p/8502838.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">https://archlinuxstudio.github.io/ArchLinuxTutorial/#/</a></p>
+<p><a target="_blank" rel="noopener" href="https://arch.icekylin.online/prologue.html">https://arch.icekylin.online/prologue.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a></p>
+<p>上面这几个链接基本上可以解决90%的安装时候的问题了吧（</p>
+<p>记录几个坑点</p>
+<h2 id="wifi连接"><a href="#wifi连接" class="headerlink" title="wifi连接"></a>wifi连接</h2><p>在进入usb启动盘里的arch,wifi是默认关闭的，所以要先将它打开。</p>
+<p><code>rfkill unblock wifi</code></p>
+<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><p>大多数教程并不是使用cfdisk来分区的，我比较喜欢用cfdisk来分区，因为界面相对友好，看的也比较清楚。</p>
+<p>我给根目录分区分的太小了，只分了30g，用了两三天就爆满了。并且后续更改根目录分区是一件比较困难的事情。如果cfdisk上显示根目录分区后已经没有更多的剩余空间了，是很难通过常规手段进行扩容的，所以划分区的时候要注意，要么根目录分区大一些，要么在根目录后剩余一点未分配的磁盘空间。</p>
+<p>我的情况是，跟目录后有一个8g的交换分区，交换分区后面有一个10g的剩余磁盘空间。于是就把交换分区删了，一共腾出来18g的新空间给根目录扩容。然后交换分区就用交换文件来替代。并且在删除&#x2F;添加分区后，要更改fstab文件的相关内容。</p>
+<h2 id="交换空间-x2F-交换文件"><a href="#交换空间-x2F-交换文件" class="headerlink" title="交换空间&#x2F;交换文件"></a>交换空间&#x2F;交换文件</h2><p>交换空间可以用交换目录来替代，因为有的时候电脑的物理内存会满了，然后就会用交换空间&#x2F;交换目录来替代物理内存。也就是说当电脑的物理内存爆满了，使用交换空间&#x2F;交换文件还可以抢救一下。</p>
+<p>关于交换空间&#x2F;交换文件的大小分配，网上各种说法众说纷纭，我选择的是分配了8g给交换文件。一个参考区间是8g~32g建议的大小是8g。</p>
+<h2 id="关于双系统"><a href="#关于双系统" class="headerlink" title="关于双系统"></a>关于双系统</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a> 这一篇文章已经详细介绍了如何安装双系统。第一次安装因为没有设置好EFI分区，导致进系统的时候有引导错误，于是采用了这篇文章里介绍的方法。</p>
+<h2 id="文件迁移"><a href="#文件迁移" class="headerlink" title="文件迁移"></a>文件迁移</h2><p>原先的arch系统的文件和系统是在我的机械硬盘上的，这次把系统装在了固态硬盘里。但是固态硬盘的空间是比较宝贵的，所以软件应该要安装在机械硬盘里，节省空间。可以直接使用上一次的arch的home目录分区的那一块磁盘，首先要做的是把这个盘挂在到当前系统，再使用chown命令重新更改一下那个home里面的文件所有者。chown的时间比较长，需要耐心等待一会儿。</p>
+<p>操作完成后就会发现，之前的软件设置全都回来了，还是十分方便的。</p>
+<h2 id="桌面美化"><a href="#桌面美化" class="headerlink" title="桌面美化"></a>桌面美化</h2><p>这个部分可以直接到b站找一些视频对着操作就好了，kde store里面有许多现成的配置。</p>
+<p>比如我的arch现在看起来是这样的。</p>
+<p><img src="/images/2021-11-02_14-07.png"></p>
+<h2 id="常用应用"><a href="#常用应用" class="headerlink" title="常用应用"></a>常用应用</h2><p>可以在我上面的dock里面看到，我装的常用软件都在dock里面了。</p>
+<p>其中qq是用的deepin-wine-qq，运行起来比较卡，但是目前没有比它好一些的解决方案了。安装方法是yay -s deepin-wine-qq，有一个依赖是deepin-wine6-stable，在安装的时候会产生包冲突，还是反复安装了几次的。要注意的是首先需要去掉<code>/etc/pacman.conf</code>里面multilib的注释，才可以进行安装。</p>
+<p>其他应用使用搜索引擎查一下安装起来还是十分轻松的。</p>
+<p>也可以再在上面提到的那几篇文章里面进行查看，安装自己喜欢的应用。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/11/07/2021/scale-tree/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            树的映射以及map函数
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2021/10/27/2021/jsreadwrite/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            如何让Vue.js能够调用Python函数？
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

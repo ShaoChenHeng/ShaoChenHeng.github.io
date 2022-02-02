@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>2020牛客寒假算法基础集训营2 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="痛定思痛后觉定把牛客算法集训营的题解写一下,以及学习一下比赛时不会的那些知识. 题目链接:https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3003?&amp;headNav&#x3D;www A 做游戏是一道签到题, 当时为了快速解决它, 看漏了条件, 没有真正理解题意, 导致我还是WA了一发.不需要过多的解释, 直接取每一对组合中最小的那个值再累加就好了. #include &lt;bit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020牛客寒假算法基础集训营2">
+<meta property="og:url" content="http://example.com/2020/03/08/2020/nkwinter2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="痛定思痛后觉定把牛客算法集训营的题解写一下,以及学习一下比赛时不会的那些知识. 题目链接:https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3003?&amp;headNav&#x3D;www A 做游戏是一道签到题, 当时为了快速解决它, 看漏了条件, 没有真正理解题意, 导致我还是WA了一发.不需要过多的解释, 直接取每一对组合中最小的那个值再累加就好了. #include &lt;bit">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.523Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        2020牛客寒假算法基础集训营2
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/03/" class="post-meta__date button">2020-03-08</a>
+        
+    <span class="separate-dot"></span><a href="/categories/algorithmquiz/" class="button">algorithmquiz</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>痛定思痛后觉定把牛客算法集训营的题解写一下,以及学习一下比赛时不会的那些知识.</p>
+<p>题目链接:<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/3003?&headNav=www">https://ac.nowcoder.com/acm/contest/3003?&headNav=www</a></p>
+<h2 id="A-做游戏"><a href="#A-做游戏" class="headerlink" title="A 做游戏"></a>A 做游戏</h2><p>是一道签到题, 当时为了快速解决它, 看漏了条件, 没有真正理解题意, 导致我还是WA了一发.不需要过多的解释, 直接取每一对组合中最小的那个值再累加就好了.</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>long long int a,b,c;<br>long long int x,y,z;</p>
+<p>int main()<br>{<br>    scanf(“%lld%lld%lld”,&amp;a,&amp;b,&amp;c);<br>    scanf(“%lld%lld%lld”,&amp;x,&amp;y,&amp;z);<br>    long long int ans &#x3D; 0;<br>    ans &#x3D; min( a , y ) + min( b , z ) + min( c , x );<br>    printf(“%lld”,ans);<br>    return 0;<br>}</p>
+<h2 id="B-排数字"><a href="#B-排数字" class="headerlink" title="B 排数字"></a>B 排数字</h2><p>应该是一道思维题, 要正确理解以下这句话的意思</p>
+<blockquote>
+<p>当两个子串 <strong>S[l1…r1]</strong>, <strong>S[l2…r2]</strong> 满足 l1≠l2​ 或 r1≠r2​ 时它们被认为是不同的。</p>
+</blockquote>
+<p>就是说比如有四个6四个1, 那么最优的应该是6161616而不是616616.</p>
+<p>当然很多选手并不会有616616那种想法,因为我第一发就是计算6和1的个数然后直接</p>
+<p>min( cnt6&#x2F;2, cnt1)交了上去, WA了一发…….</p>
+<p>正确做法是记录6和1的个数, 特判答案为0的情况, 再根据6和1孰多进行计算.</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>long long int len;<br>string ss;</p>
+<p>int main()<br>{<br>    scanf(“%lld”, &amp;len);<br>    cin &gt;&gt; ss;<br>    long long int cnt6, cnt1;<br>    cnt6 &#x3D; cnt1 &#x3D; 0;<br>    for ( long long int i &#x3D; 0; i &lt; len; i ++ )<br>    {<br>        if ( ss[i] &#x3D;&#x3D; ‘6’ ) cnt6 ++;<br>        if ( ss[i] &#x3D;&#x3D; ‘1’ ) cnt1 ++;<br>    }<br>    if ( cnt1 &#x3D;&#x3D; 0 || cnt6 &lt; 2 ) printf(“0\n”);<br>    else if ( cnt6 &gt; cnt1 ) printf(“%lld\n”,cnt1);<br>    else if ( cnt6 &lt;&#x3D; cnt1 ) printf(“%lld\n”,cnt6 - 1);</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+<h2 id="G-判正误"><a href="#G-判正误" class="headerlink" title="G 判正误"></a>G 判正误</h2><p>一看到这题以为是一个大数+快速幂的题目, 于是立马想到用py去偷,.当时认为只用写一个快速幂算法就可以AC, 然而发现了诸多问题.</p>
+<p>使用python的快速幂运算仍然超时, 在python中快速幂运算甚至比最基础的幂运算效率还低, 这可能关系到pyhton的底层幂运算实现, 我猜想是一种比快速幂运算更优的幂运算算法.</p>
+<p>以下是我python的超时代码</p>
+<p>def power( base, exponent ):<br>    res &#x3D; 1<br>    while exponent &gt; 0:<br>        if exponent &amp; 1 :<br>            res &#x3D; res * base<br>        base &#x3D; base * base<br>        exponent &gt;&gt;&#x3D; 1<br>    return res</p>
+<p>n &#x3D; int(input())<br>while n:<br>    n &#x3D; n - 1<br>    s &#x3D; input().split()<br>    a &#x3D; power( int(s[0]), int(s[3]) ) + power( int(s[1]),int(s[4])  ) + power( int(s[2]), int(s[5]) )<br>    if a &#x3D;&#x3D; int(s[6]):<br>        print(“Yes”)<br>    else:<br>        print(“No”)</p>
+<p>后来我看到集训队群里讨论, 有人直接裸写过了这题, 什么大数和快速幂都没用.于是没有想很多立马用C++敲了一发.</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>long long int n;<br>long long int a, b, c, d, e, f, g;<br>long long int ans;</p>
+<p>int main()<br>{<br>    scanf(“%lld”, &amp;n);<br>    while ( n – )<br>    {<br>        ans &#x3D; 0;<br>        scanf(“%lld%lld%lld%lld%lld%lld%lld”,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e,&amp;f,&amp;g);<br>        long long int tmp1 &#x3D; pow( a,d ),tmp2 &#x3D; pow( b,e ),tmp3 &#x3D; pow( c,f );<br>        if ( tmp1 + tmp2 &#x3D;&#x3D; g - tmp3 ) printf(“Yes\n”);<br>        else printf(“No\n”);<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+<p>这里需要注意的是以下这个判断</p>
+<p>if ( tmp1 + tmp2 &#x3D;&#x3D; g - tmp3 ) printf(“Yes\n”);</p>
+<p>第一次写的时候我是tmp1 + tmp2 + tmp3 &#x3D;&#x3D; g , 似乎还是把long long 存爆了….然后改成了</p>
+<p>tmp1 + tmp2 &#x3D;&#x3D; g - tmp3这种写法.</p>
+<p>但是今天(20203.6)我再次把这题交了一遍, 数据加强了….果然还是要快速幂处理的…</p>
+<p>然而用python的另一种写法处理大数和幂运算可以AC</p>
+<p>m &#x3D; 2**10+7<br>n&#x3D;int(input())<br>for i in range(n):<br>    a,b,c,d,e,f,g &#x3D; map(int,input().split())<br>    if ( pow(a,d,m)+pow(b,e,m)+pow(c,f,m) )%m &#x3D;&#x3D; g % m: print(“Yes”)<br>    else : print(“No”)</p>
+<p>数据增强后c++AC代码, 此外在大数的题目设计中, 出题者往往会故意卡掉一些模数, 应当用2-3个模数共同验证, 以提高正确率.这题就是这样的.</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>typedef long long ll;<br>ll n;<br>ll a, b, c, d, e, f, g;<br>ll ans;<br>const long long int mod &#x3D; 1e9+7;</p>
+<p>ll qpow(ll a,ll b)<br>{<br>    ll ans&#x3D;1,base&#x3D;a;<br>    while( b )<br>    {<br>        if( b &amp; 1 ) ans&#x3D;ans*base%mod;<br>        b&gt;&gt;&#x3D;1;<br>        base &#x3D; base * base % mod;<br>    }<br>    return ans % mod;<br>}</p>
+<p>int main()<br>{<br>    &#x2F;&#x2F;m &#x3D; (int)m;<br>    scanf(“%lld”, &amp;n);<br>    while ( n – )<br>    {<br>        ans &#x3D; 0;<br>        scanf(“%lld%lld%lld%lld%lld%lld%lld”,&amp;a,&amp;b,&amp;c,&amp;d,&amp;e,&amp;f,&amp;g);<br>        long long int tmp1,tmp2,tmp3;<br>        tmp1 &#x3D; qpow( a,d ),tmp2 &#x3D; qpow( b,e ),tmp3 &#x3D; qpow( c,f );<br>        if ( tmp1 + tmp2 + tmp3 &#x3D;&#x3D; g % mod ) printf(“Yes\n”);<br>        else printf(“No\n”);<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+<h2 id="I-建通道"><a href="#I-建通道" class="headerlink" title="I 建通道"></a>I 建通道</h2><p>是一道思维题,比赛的时候给题目唬住了….</p>
+<p>首先去重,再找出所有数字的二进制中最靠右的1出现的位置k, 并且要保证k的数量小于数字总数,那么答案就是2^k*(cnt - 1).</p>
+<p>因为选出二进制中尽量靠右的1的那个数据能够使lowbit后的值尽量小.</p>
+<p>举一组例子:</p>
+<ul>
+<li>1 -&gt; 0 0 0 1</li>
+<li>2 -&gt; 0 0 1 0</li>
+<li>3 -&gt; 0 0 1 1</li>
+<li>4 -&gt; 0 1 0 0</li>
+<li>8 -&gt; 1 0 0 0</li>
+</ul>
+<p>那么先选择1与2 4 8 相连, 再是3与2 4 8其中任意一个相连, 最小生成树就形成了, 答案是4.也可以看做是1连接了两次, 推导一下就得到公式2^k*(cnt - 1).</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>typedef long long ll;<br>ll n, a[200010], b[200010];</p>
+<p>int main()<br>{<br>    scanf(“%lld”, &amp;n);<br>    for ( int i &#x3D; 0; i &lt; n; i ++ ) scanf(“%lld”, &amp;a[i]);<br>    sort( a, a + n );<br>    int cnt &#x3D; 1;<br>    b[cnt] &#x3D; a[0];<br>    for ( int i &#x3D; 1; i &lt; n; i ++ )<br>    {<br>        if ( a[i] !&#x3D; a[i-1] )<br>        {<br>            cnt ++;<br>            b[cnt] &#x3D; a[i];<br>        }<br>    }<br>    if ( cnt &#x3D;&#x3D; 1 )<br>    {<br>        printf(“0\n” );<br>        return 0;<br>    }<br>    for ( int i &#x3D; 0; i &lt; 30; i ++ )<br>    {<br>        int k &#x3D; 0;<br>        for ( int j &#x3D; 1; j &lt;&#x3D; cnt; j ++ ) if ( (b[j] &gt;&gt; i) &amp; 1 ) k ++;<br>        if ( k &gt; 0 &amp;&amp; k  &lt; cnt )<br>        {<br>            printf(“%d\n”, (1 &lt;&lt; i) * ( cnt - 1 ) );<br>            return 0;<br>        }<br>    }<br>    return 0;<br>}</p>
+<p>另外据说最小生成树算法也可以AC, 日后更新解法.</p>
+<h2 id="E-做计数"><a href="#E-做计数" class="headerlink" title="E 做计数"></a>E 做计数</h2><p>完全平方后展开,得到 i + j + 2 * sqrt(i * j) &#x3D; k, 只要i*j是平方数.</p>
+<p>判断i * j是否为平方数的方法是, i % sqrt(j) &#x3D;&#x3D; 0</p>
+<p>并且解法的枚举是<strong>O( sqrt(N) * sqrt(N) ) &#x3D; O(N)</strong>, 是不会超时的(比赛时候我把它错分析成O(N^2))了.</p>
+<p>这里还要注意的是i,j相等时只累加一次.</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int n;</p>
+<p>int main()<br>{<br>    long long int ans &#x3D; 0;<br>    scanf(“%d”, &amp;n);<br>    for ( int i &#x3D; 1; i &lt;&#x3D; sqrt(n); i ++ )<br>    {<br>        for ( int j &#x3D; 1; j &lt;&#x3D; i; j ++ )<br>        {<br>            if ( j &#x3D;&#x3D; i ) ans ++;<br>            else if ( ! (i * i % j) )<br>            {<br>                ans +&#x3D; 2;<br>                &#x2F;&#x2F;printf(“%d %d\n”, i, j);<br>            }<br>        }<br>    }<br>    printf(“%lld\n”, ans);<br>    return 0;<br>}</p>
+<h2 id="D-数三角"><a href="#D-数三角" class="headerlink" title="D 数三角"></a>D 数三角</h2><p>又是一道计算几何题, 和杭电的5784类似, 不过5784是数锐角三角形, 这里是数钝角三角形, 解法还是一样的. 是使用极角排序的一个题目.</p>
+<p>#include&lt;bits&#x2F;stdc++.h&gt;<br>using namespace std;<br>typedef long long ll;<br>const double pi&#x3D;acos(-1.0);<br>const double eps&#x3D;1e-9;<br>int n;</p>
+<p>struct node1<br>{<br>    double x,y;<br>} a[510];</p>
+<p>double node[4010];</p>
+<p>int main()<br>{<br>    scanf(“%d”,&amp;n);</p>
+<pre><code>for (int i = 1; i &lt;= n; i ++) scanf(&quot;%lf%lf&quot;,&amp;a\[i\].x,&amp;a\[i\].y);
+ll ans = 0;
+for(int i = 1; i &lt;= n; i ++ )
+&#123;
+    int cnt = 0;
+    for( int j = 1;j &lt;= n; j ++)
+    &#123;
+        if( i == j ) continue;
+        node\[++cnt\] = atan2(a\[i\].y - a\[j\].y, a\[i\].x - a\[j\].x);
+        if( node\[cnt\] &lt; 0 ) node\[cnt\] += 2 \* pi;
+    &#125;
+    sort( node + 1, node + 1 + cnt);
+    for( int j = 1; j &lt;= cnt; j ++) node\[j+cnt\] = node\[j\] + 2 \* pi;
+    int l = 1, r = 1, len = 1;
+    for(int j = 1; j &lt;= cnt; j ++)
+    &#123;
+        while( r &lt;= 2 \* cnt &amp;&amp; node\[r\] - node\[j\] &lt; pi ) r ++;
+        while( l &lt;= 2 \* cnt &amp;&amp; node\[l\] - node\[j\] &lt;= 0.5 \* pi )l++;
+        ans += r - l;
+    &#125;
+&#125;
+printf(&quot;%lld\\n&quot;,ans);
+
+return 0;
+</code></pre>
+<p>}</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/03/11/2020/tianti2016simulate11/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            天梯2016家庭房产
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/03/08/2020/paprika/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            红辣椒
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

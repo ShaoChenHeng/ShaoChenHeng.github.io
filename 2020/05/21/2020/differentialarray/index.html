@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>差分数组 | Hexo</title>
+
+
+    <meta name="keywords" content="differentialarray">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="对于一个数组D,要求其前i项和,$ SUM &#x3D; \sum\limits_{i&#x3D;1}^{n} {D_i}$ 令$f[i] &#x3D; D[i] - D[i-1]      i \in [2, n]$, 当i&#x3D;1时$f[1] &#x3D; D[1] - 0 &#x3D; D[1]$ 简单性质: D[i]的值是f[i]的前缀和,即$D[i] &#x3D;  \sum\li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="差分数组">
+<meta property="og:url" content="http://example.com/2020/05/21/2020/differentialarray/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="对于一个数组D,要求其前i项和,$ SUM &#x3D; \sum\limits_{i&#x3D;1}^{n} {D_i}$ 令$f[i] &#x3D; D[i] - D[i-1]      i \in [2, n]$, 当i&#x3D;1时$f[1] &#x3D; D[1] - 0 &#x3D; D[1]$ 简单性质: D[i]的值是f[i]的前缀和,即$D[i] &#x3D;  \sum\li">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-21T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.773Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="differentialarray">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        差分数组
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/05/" class="post-meta__date button">2020-05-21</a>
+        
+    <span class="separate-dot"></span><a href="/categories/differentialarray/" class="button">differentialarray</a>
+
+    <span class="separate-dot"></span><a href="/categories/differentialarray/algorithmanddatastruct/" class="button">algorithmanddatastruct</a>
+
+    <span class="separate-dot"></span><a href="/categories/differentialarray/algorithmanddatastruct/algorithmquiz/" class="button">algorithmquiz</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>对于一个数组D,要求其前i项和,$ SUM &#x3D; \sum\limits_{i&#x3D;1}^{n} {D_i}$ 令$f[i] &#x3D; D[i] - D[i-1]      i \in [2, n]$, 当i&#x3D;1时$f[1] &#x3D; D[1] - 0 &#x3D; D[1]$ 简单性质: D[i]的值是f[i]的前缀和,即$D[i] &#x3D;  \sum\limits_{j&#x3D;1}^{i} {f_i}$ 计算D[i]的前缀和, $ SUM &#x3D; \sum\limits_{i&#x3D;1}^{n} {D_i} &#x3D; \sum\limits_{i &#x3D; 1} ^{n} \sum\limits_{j &#x3D; 1}^{i}{f_j} &#x3D; ( n - i + 1 ) * {f_i}$ 这种结构可以快速处理一段区域数据的频繁的加减操作,只需要$f[L] +&#x3D; item, f[R+1] -&#x3D; item $就可以了.其中$f[R + 1] &#x3D; D[R+1] - D[R]$ $ f[R + 1] - item &#x3D; D[R+1] - (D[R] + item) $,对区间的两个端点进行操作,就不必对一段区域进行操作了. 相关例题: <a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1556">HDU1556</a> 差分数组的模板题. $arr[i] &#x3D; arr[i-1] + f[i]; 是对f[i] &#x3D; arr[i] - arr[i-1]$的一个变形</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> t, a, b;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; arr, f;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t) &amp;&amp; t )</span><br><span class="line">    &#123;</span><br><span class="line">        arr.<span class="built_in">clear</span>();f.<span class="built_in">clear</span>();</span><br><span class="line">        arr.<span class="built_in">resize</span>(t + <span class="number">1</span>);</span><br><span class="line">        f.<span class="built_in">resize</span>(t + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//f[1] = arr[1];</span></span><br><span class="line">        <span class="keyword">int</span> tmp = t;</span><br><span class="line">        <span class="keyword">while</span> ( tmp -- )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">            f[a] ++; f[b+<span class="number">1</span>] --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= t; i ++  ) </span><br><span class="line">        &#123;</span><br><span class="line">            arr[i] = arr[i<span class="number">-1</span>] + f[i];</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,arr[i]);</span><br><span class="line">            <span class="keyword">if</span> ( i != t ) <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1083">luogu_P1083</a></p>
+<p>二分查找+差分数组.用二分查找来寻找m中不能使条件满足的第一个请求. $f[i]$表示$arr[i]$的差分数组,对租借天数的$left$和$right$进行操作:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f[arr[i].left] += arr[i].weight;</span><br><span class="line">f[arr[i].right+<span class="number">1</span>] -= arr[i].weight;</span><br></pre></td></tr></table></figure>
+
+<p>根据性质1, 如果$f[i]$的前缀和超过了那一天的教师数量$a[i]$就说明这一次的请求是需要修改的.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left, right, weight;</span><br><span class="line">&#125;  arr[<span class="number">1000010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> f[<span class="number">1000010</span>], n, m, a[<span class="number">1000010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">( <span class="keyword">int</span> day )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= day; i ++ )</span><br><span class="line">    &#123;   </span><br><span class="line">        f[arr[i].left] += arr[i].weight;</span><br><span class="line">        f[arr[i].right+<span class="number">1</span>] -= arr[i].weight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        sum += f[i];</span><br><span class="line">        <span class="keyword">if</span> ( sum &gt; a[i] ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ ) <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;arr[i].weight, &amp;arr[i].left, &amp;arr[i].right);</span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">check</span>(m) ) &#123; <span class="built_in">printf</span>(<span class="string">&quot;0\n&quot;</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">1</span>, right = m;</span><br><span class="line">    <span class="keyword">while</span> ( right &gt; left )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = ( left + right ) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> ( <span class="built_in">check</span>(mid) ) left = mid + <span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> right = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; left &lt;&lt; &#x27; &#x27;&lt;&lt;right &lt;&lt;endl;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;-1\n%d\n&quot;</span>,right);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1355/problem/C">codeforce1355C</a></p>
+<p>$x_i \in [A, B]$ $y_i \in [B, C]$ $z_i \in [C, D]$ 只要满足$x_i + y_i &gt; z_i$, 观察可得,需要求满足$[x_i + B, x_i + C]&gt;[C, D]$的那些组合的个数. 设置一个差分数组$a[i], a[i]$记录长度为i的边(或者边的和)的个数. 设置一个maxn, 为题目所给的ABCD相加不会超过的一个值 先遍历一遍区间$x \in [A, B]$求出$[x_i + B, x_i + C]$也就是</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">int</span> i = a; i &lt;= b; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        arr[b + i] ++;</span><br><span class="line">        arr[c + i + <span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>再根据性质1就能够求出两边和为i的数量了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxn; i ++  ) arr[i] += arr[i<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>再进行一次累加,求出前缀和.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">int</span> i = c; i &lt;= d; i ++ ) sum += ( arr[maxn] - arr[i] );</span><br></pre></td></tr></table></figure>
+
+<p>$arr[maxn] - arr[i]$表示比$z_i$大的两边和的总数.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a, b, c, d;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1000080</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> arr[maxn+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d %d&quot;</span>, &amp;a, &amp;b, &amp;c, &amp;d);</span><br><span class="line">    <span class="built_in">memset</span>(arr, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(arr));</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = a; i &lt;= b; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        arr[b + i] ++;</span><br><span class="line">        arr[c + i + <span class="number">1</span>] --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxn; i ++  ) arr[i] += arr[i<span class="number">-1</span>];</span><br><span class="line">    <span class="comment">//求两边和为i的项目的个数</span></span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= maxn; i ++  ) arr[i] += arr[i<span class="number">-1</span>];</span><br><span class="line">    <span class="comment">//前缀和</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = c; i &lt;= d; i ++ ) sum += ( arr[maxn] - arr[i] );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"><a href="/tags/differentialarray/" class="post-tags__link button"># differentialarray</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/05/22/2020/codeforce1355d/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            二分查找Multiset
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/05/09/2020/sicp_1_2/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            SICP第一章-1.2节 部分笔记
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

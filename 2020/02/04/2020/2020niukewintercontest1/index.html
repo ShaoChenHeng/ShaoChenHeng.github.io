@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>2020牛客寒假算法基础集训营1 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="题目链接:https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3002#question 深夜水一篇题解,今天(应该是昨天了)打了一场,575&#x2F;2780,如果早点起床估计rank还会再高些…出题人应该是老ll粉了. A应该算是一道计算几何题,之前没有写过这种题型,是我最后ac的一道题目.大致上就是分类讨论,计算每一类三角形出现个数,大致分为3类:  底边为2高为1,在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020牛客寒假算法基础集训营1">
+<meta property="og:url" content="http://example.com/2020/02/04/2020/2020niukewintercontest1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目链接:https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3002#question 深夜水一篇题解,今天(应该是昨天了)打了一场,575&#x2F;2780,如果早点起床估计rank还会再高些…出题人应该是老ll粉了. A应该算是一道计算几何题,之前没有写过这种题型,是我最后ac的一道题目.大致上就是分类讨论,计算每一类三角形出现个数,大致分为3类:  底边为2高为1,在">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.420Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        2020牛客寒假算法基础集训营1
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/02/" class="post-meta__date button">2020-02-04</a>
+        
+    <span class="separate-dot"></span><a href="/categories/algorithmquiz/" class="button">algorithmquiz</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>题目链接:<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/3002#question">https://ac.nowcoder.com/acm/contest/3002#question</a></p>
+<p>深夜水一篇题解,今天(应该是昨天了)打了一场,575&#x2F;2780,如果早点起床估计rank还会再高些…出题人应该是老ll粉了.</p>
+<h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p>应该算是一道计算几何题,之前没有写过这种题型,是我最后ac的一道题目.大致上就是分类讨论,计算每一类三角形出现个数,大致分为3类:</p>
+<ol>
+<li>底边为2高为1,在最外侧.</li>
+<li>底边为2高为1,在中间,也就是除了最边上的那些列&#x2F;行.</li>
+<li>底为1高为2,注意区分与1,2类重复的那些三角形.</li>
+</ol>
+<p>还有要注意的地方就是计算<strong>底的值</strong>和<strong>对应的高的个数</strong>和<strong>对应组数</strong>的时候,如果出现小于等于零的数据,就要置零了.</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;<br>using namespace std;<br>const int MOD &#x3D;  1e9 + 7;</p>
+<p>long long int n, m;</p>
+<p>int main()<br>{<br>    scanf(“%lld %lld”, &amp;n, &amp;m);<br>    long long int part &#x3D; 0;<br>    long long int left &#x3D; n - 2;<br>    if ( left &gt; 0 )<br>    {<br>        part +&#x3D; (left * n * 2 ) % MOD;<br>        if ( m - 2 &gt; 0 ) part +&#x3D; ( ( left * 2 * n  % MOD) * (m - 2) ) % MOD;<br>    }<br>    long long int up &#x3D; m - 2;<br>    if ( up &gt; 0 )<br>    {<br>        part +&#x3D; ( up * m * 2 ) % MOD;<br>        if ( n - 2 &gt; 0 ) part +&#x3D; ( ( up * 2 * m  % MOD) * ( n - 2) ) % MOD;<br>    }<br>    if ( m - 1 &gt; 0 &amp;&amp; n - 2 &gt; 0 &amp;&amp; m - 2 &gt; 0 ) part +&#x3D; ( ( m - 1 ) * ( n - 2 ) % MOD) * ( m - 2 ) * 2 % MOD;<br>    if ( n - 1 &gt; 0 &amp;&amp; m - 2 &gt; 0 &amp;&amp; n - 2 &gt; 0 ) part +&#x3D; ( ( n - 1 ) * ( m - 2 ) % MOD) * ( n - 2 ) * 2 % MOD;<br>    printf(“%lld\n”,part % MOD);<br>    return 0;<br>}</p>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p>很水的一道题…直接上代码</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int n, x, a,b;</p>
+<p>int main()<br>{<br>    scanf(“%d %d %d %d”,&amp;n, &amp;x, &amp;a, &amp;b);<br>    int perfect &#x3D; n * a;<br>    int great &#x3D; n * b;<br>    double per1 &#x3D; x, per2 &#x3D; 100 - x;<br>    double ans;<br>    ans &#x3D; per1 * 0.01 * perfect + per2 * 0.01 * great;<br>    printf(“%.2lf”, ans);</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p>也是一道水题,数组记录一下然后找没出现的数据就好了.</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int n;<br>map&lt; int, int &gt; m;<br>int cnt[100010];</p>
+<p>int main()<br>{<br>    scanf(“%d”,&amp;n);<br>    int num, i;<br>    for (  i &#x3D; 1; i &lt;&#x3D; n - 1; i ++ )<br>    {<br>        scanf(“%d”,&amp;num);<br>        cnt[num] &#x3D; 1;<br>    }<br>    for (  i &#x3D; 1; i &lt;&#x3D; n; i ++ )<br>    {<br>        if ( cnt[i] &#x3D;&#x3D; 0 )<br>        {<br>            printf(“%d\n”,i);<br>            break;<br>        }<br>    }</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+<h2 id="E"><a href="#E" class="headerlink" title="E"></a>E</h2><p>一道数论题,计算数据的因子个数,然后进行迭代,注意优化一下计算因子个数的算法,第一次直接暴力求素数超时了,以及数据较大要开long long.</p>
+<p>计算因子个数的算法: <a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2020/02/05/countfactors/">https://scheng52123.com/index.php/2020/02/05/countfactors/</a></p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>long long int n;</p>
+<p>long long int _num( long long int n)<br>{<br>    long long int count &#x3D; 2;<br>    for(long long int i &#x3D; 2; i &lt;&#x3D; sqrt(n); i++)<br>    {<br>        if( n % i &#x3D;&#x3D; 0 )<br>        {<br>            if( i &#x3D;&#x3D; sqrt(n) &amp;&amp; n&#x2F;i&#x3D;&#x3D;i)<br>            {<br>                count++;<br>            }<br>            else count +&#x3D; 2;<br>        }<br>    }<br>    return count;<br>}</p>
+<p>int main()<br>{<br>    scanf(“%lld”, &amp;n);<br>    long long int cnt &#x3D; 0;<br>    long long int num &#x3D; _num(n);<br>    cnt ++;<br>    while ( num !&#x3D; 2 )<br>    {<br>        num &#x3D; _num(num);<br>        cnt ++;<br>    }<br>    printf(“%lld\n”,cnt);<br>    return 0;<br>}</p>
+<h2 id="G"><a href="#G" class="headerlink" title="G"></a>G</h2><p>稍微卡了一下,用了双向队列和滑动窗口思想.(看了学长的代码后发现直接O(n^2)暴力也可以…,然后队列应用还有更加巧妙的方法,后续更新).</p>
+<p>将数据放到一个滑动窗口里,用一个数组的双向队列记录每种字母的每一个出现的位置.当单个字母的数量达到k时,记录一下答案的值,然后对应字母的队列弹出最前元素,对应字母的记录值自减一次,相当于滑动窗口前端弹出一个值.时间复杂度为O(n).</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>map&lt; char, int &gt; m;<br>int n, k;</p>
+<p>string ss;</p>
+<p>struct dequeue<br>{<br>    deque<int> q;</p>
+<p>} que[30];</p>
+<p>int main()<br>{<br>    scanf(“%d %d”,&amp;n, &amp;k);<br>    cin &gt;&gt; ss;<br>    int len, ans;<br>    ans &#x3D; 200010;<br>    for ( int i &#x3D; 0; i &lt; n; i ++  )<br>    {<br>        m[ss[i]] ++;<br>        (que[ss[i]-97].q).push_back(i);<br>        if ( m[ss[i]] &#x3D;&#x3D; k )<br>        {<br>            len &#x3D; i - ( que[ss[i]-97].q ).front() + 1;<br>            ans &#x3D; min( ans, len );<br>            m[ss[i]] –;<br>            ( que[ss[i]-97].q ).pop_front();<br>        }<br>    }<br>    if ( ans &#x3D;&#x3D; 200010 ) printf(“-1\n”);<br>    else printf(“%d\n”,ans);<br>    return 0;<br>}</p>
+<p>比赛之后重新写了一个,实际上是可以不用双向队列的,可能是太久没用过队列,导致一些操作忘记了,思路是一样的,代码精简了些.</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int n, k;<br>string ss;</p>
+<p>queue<int> q[30];<br>int cnt[30];</p>
+<p>int main()<br>{<br>    scanf(“%d %d”,&amp;n, &amp;k);<br>    cin &gt;&gt; ss;<br>    int len, ans;<br>    ans &#x3D; 200010;<br>    for ( int i &#x3D; 0; i &lt; n; i ++  )<br>    {<br>        cnt[ss[i]-97] ++;<br>        q[ss[i]-97].push(i);<br>        if ( cnt[ss[i]-97] &#x3D;&#x3D; k )<br>        {<br>            len &#x3D; i - q[ss[i]-97].front() + 1;<br>            ans &#x3D; min( ans, len );<br>            cnt[ss[i]-97] –;<br>            q[ss[i]-97].pop();<br>        }<br>    }<br>    if ( ans &#x3D;&#x3D; 200010 ) printf(“-1\n”);<br>    else printf(“%d\n”,ans);<br>    return 0;<br>}</p>
+<h2 id="H"><a href="#H" class="headerlink" title="H"></a>H</h2><p>这题给我的感觉就像是codeforce上的那种思维题,也是类似G题用一个滑动窗口的思想.</p>
+<p>记录当前窗口长度,0的个数和1的个数.当cnt0和cnt1只要有一个大于k了就说明窗口前端需要弹出一个元素了.整个过程中满足要求的窗口的最大长度就是答案.</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int n, k;<br>string ss;</p>
+<p>int main()<br>{<br>    scanf(“%d %d”, &amp;n, &amp;k);<br>    cin &gt;&gt; ss;<br>    int left, right;<br>    int cnt0, cnt1, sum;<br>    left &#x3D; right &#x3D; 0;<br>    cnt0 &#x3D; cnt1 &#x3D; sum &#x3D; 0;<br>    int ans &#x3D; 1, len;<br>    while ( right &lt;&#x3D; n - 1 )<br>    {<br>        if ( ss[right] &#x3D;&#x3D; ‘0’ ) cnt0 ++;<br>        else cnt1 ++;<br>        sum ++;<br>        if ( cnt0 &lt;&#x3D; k || cnt1 &lt;&#x3D; k )<br>        {<br>            len &#x3D; sum;<br>            ans &#x3D; max(len, ans);<br>        }<br>        else<br>        {<br>            if ( ss[left] &#x3D;&#x3D; ‘0’ ) cnt0 –;<br>            else cnt1 –;<br>            left ++;<br>            sum –;<br>            len &#x3D; sum;<br>            ans &#x3D; max(len, ans);<br>        }<br>        right ++;<br>    }<br>    printf(“%d\n”, ans);<br>    return 0;<br>}</p>
+<h2 id="I"><a href="#I" class="headerlink" title="I"></a>I</h2><p>当时被题目全是niconi的题面整懵了,比赛的时候考虑过dp写法,但是因为太久没练dp导致我不敢写.看了题解之后发现是一个很裸的dp</p>
+<p>代码:</p>
+<p>#include &lt;bits&#x2F;stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>&#x2F;&#x2F;string str.substr(nStart)<br>&#x2F;&#x2F;默认 从str字符串nStart位置开始截取到str结束为止</p>
+<p>&#x2F;&#x2F;string str.substr(nStart, nLength)<br>&#x2F;&#x2F; 从str字符串nStart位置开始截取nLength个字符！<br>&#x2F;&#x2F;如果nLength&gt;剩余的字符则截取到str结束为止</p>
+<p>long long int dp[330000];<br>long long int n, a, b, c;<br>string ss;</p>
+<p>int main()<br>{<br>    scanf(“%lld %lld %lld %lld”, &amp;n, &amp;a, &amp;b, &amp;c);<br>    cin &gt;&gt; ss;<br>    &#x2F;&#x2F;long long int ans &#x3D; 0;<br>    for ( int i &#x3D; 3; i &lt; n; i ++ )<br>    {<br>        dp[i] &#x3D; dp[i - 1];<br>        long long int temp;<br>        if ( ss.substr(i - 3, 4) &#x3D;&#x3D; “nico” )<br>        {<br>            if ( i &#x3D;&#x3D; 3 ) temp &#x3D; dp[i - 3];<br>            else temp &#x3D; dp[i - 4];<br>            dp[i] &#x3D; max( dp[i], temp + a);<br>        }<br>        if ( i &gt;&#x3D; 5 &amp;&amp; ss.substr( i - 5, 6 ) &#x3D;&#x3D; “niconi”  )<br>        {<br>            if ( i &#x3D;&#x3D; 5 ) temp &#x3D; dp[i - 5];<br>            else temp &#x3D; dp[i - 6];<br>            dp[i] &#x3D; max( dp[i], temp + b );<br>        }<br>        if ( i &gt;&#x3D; 9 &amp;&amp; ss.substr( i - 9, 10 ) &#x3D;&#x3D; “niconiconi” )<br>        {<br>            if ( i &#x3D;&#x3D; 9 ) temp &#x3D; dp[i - 9];<br>            else temp &#x3D; dp[i - 10];<br>            dp[i] &#x3D; max( dp[i], temp + c );<br>        }<br>    }<br>    printf(“%lld\n”,dp[n - 1]);</p>
+<pre><code>return 0;
+</code></pre>
+<p>}</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/02/05/2020/countfactors/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            计算因子个数
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/02/03/2020/luogup5788/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            洛谷P5788
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

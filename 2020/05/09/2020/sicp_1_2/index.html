@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>SICP第一章-1.2节 部分笔记 | Hexo</title>
+
+
+    <meta name="keywords" content="book, sicp, maththeory, gcd, fastexp, fib">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="增长的阶练习1.15  b) 在求值( sine a )时,由过程$sine$所产生的计算过程使用的空间和增长的阶是什么? (define(cube x) ( * x x x )) (define( p x ) ( - ( * 3 x ) ( * 4 ( cube x ) ) )) (    define( sine _angle )    (        if ( not ( &gt; (">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICP第一章-1.2节 部分笔记">
+<meta property="og:url" content="http://example.com/2020/05/09/2020/sicp_1_2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="增长的阶练习1.15  b) 在求值( sine a )时,由过程$sine$所产生的计算过程使用的空间和增长的阶是什么? (define(cube x) ( * x x x )) (define( p x ) ( - ( * 3 x ) ( * 4 ( cube x ) ) )) (    define( sine _angle )    (        if ( not ( &gt; (">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg">
+<meta property="article:published_time" content="2020-05-09T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.747Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="book">
+<meta property="article:tag" content="sicp">
+<meta property="article:tag" content="maththeory">
+<meta property="article:tag" content="gcd">
+<meta property="article:tag" content="fastexp">
+<meta property="article:tag" content="fib">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        SICP第一章-1.2节 部分笔记
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/05/" class="post-meta__date button">2020-05-09</a>
+        
+    <span class="separate-dot"></span><a href="/categories/sicp/" class="button">sicp</a>
+
+    <span class="separate-dot"></span><a href="/categories/sicp/book/" class="button">book</a>
+
+    <span class="separate-dot"></span><a href="/categories/sicp/book/maththeory/" class="button">maththeory</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p><img src="/images/timg?image&quality=80&size=b9999_10000&sec=1588870556774&di=c6eedad867e852ee890be696cca9bdb6&imgtype=0&src=http://pic1.zhimg.com/50/4d63acf8ef5243bf1dbac5e99341cbf4_hd.jpg"></p>
+<h2 id="增长的阶"><a href="#增长的阶" class="headerlink" title="增长的阶"></a>增长的阶</h2><p><strong>练习1.15  b)</strong> 在求值( sine a )时,由过程$sine$所产生的计算过程使用的空间和增长的阶是什么?</p>
+<p>(define(cube x) ( * x x x ))</p>
+<p>(define( p x ) ( - ( * 3 x ) ( * 4 ( cube x ) ) ))</p>
+<p>(<br>    define( sine _angle )<br>    (<br>        if ( not ( &gt; ( abs _angle ) 0.1 ) )<br>        _angle<br>        ( p ( sine ( &#x2F; _angle 3.0 ) ) )<br>    )<br>)</p>
+<p>根据<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E5%AE%9A%E7%90%86/3463232?fr=aladdin">主定理</a>分析, $T(n) &#x3D; aT( \frac{b}{n} )+ f(n) $ 其中$a &#x3D; 1, b &#x3D; 3, f(n) &#x3D; \Theta ( 1 )$</p>
+<p>符合主定理的第二条,若$ f(n) &#x3D; \Theta( n ^ \log_b a ) $, 那么$T( n ) &#x3D; \Theta( {n ^ \log_b a} log n )$</p>
+<p>$ \log_b a &#x3D; \log_3 1 &#x3D; 0$ $\therefore $ $T( n ) &#x3D; \Theta( {n ^ \log_b a} log n ) &#x3D; \Theta( log n ) $</p>
+<p>因此计算sine增长的阶是$\Theta(log n)$</p>
+<p><strong>练习1.26</strong> 将原( expmod )的算法更改了一下,时间复杂度发生了改变,由O(log n)变成了O( n ),试分析两个算法的时间复杂度.原算法在下文的<strong>快速幂取模</strong>.以下是更改后的代码.</p>
+<p>(define (expmod base exp m)<br>    (<br>        cond ( ( &#x3D; exp 0 ) 1 )<br>            ( (even? exp)<br>            ( remainder (  * ( expmod base ( &#x2F; exp 2 ) m )<br>                             ( expmod base ( &#x2F; exp 2 ) m )<br>                        ) m ))<br>            (<br>                else ( remainder ( * base ( expmod base ( - exp 1 ) m ) ) m )<br>            )<br>    )<br>)</p>
+<p>[latexpage]</p>
+<p>原算法的递推关系式是$T( n ) &#x3D; T( \frac{n}{2} ) + \Theta( 1 )$ , 根据主定理计算出算法的时间复杂度为$ \Theta( log n ) $</p>
+<p>更改后的递推关系式是$T( n ) &#x3D; 2T( \frac{n}{2} ) + \Theta( 1 )$, 根据主定理计算出算法的时间复杂度为$ \Theta( n ) $</p>
+<p>看上去是相同的计算实际上square(x)将计算减少了很多</p>
+<h2 id="幂运算"><a href="#幂运算" class="headerlink" title="幂运算"></a>幂运算</h2><h3 id="朴素幂运算"><a href="#朴素幂运算" class="headerlink" title="朴素幂运算"></a>朴素幂运算</h3><p>$ b^n &#x3D; b * b ^ {n - 1} $</p>
+<p>$ b ^ 0 &#x3D; 1 $</p>
+<p>可以直接翻译为以下过程</p>
+<p>(<br> define ( expt b n )<br> ( if ( &#x3D; n 0 )<br>   1<br>   ( * b ( expt b ( - n 1 ) ) )<br>   )<br>)</p>
+<p>这是一个线性的递归计算过程,需要$\Theta (n)$的空间( 因为递归运算的堆栈需要空间 )以及</p>
+<p>$ \Theta (n) $的时间.</p>
+<p>一个将空间优化为$ \Theta(1) $ 的迭代版本</p>
+<p>(<br>    define ( expt2 b n )<br>    ( expt_iter b n 1 )<br>)</p>
+<p>(<br>    define ( expt_iter b counter product )<br>    (<br>        if ( &#x3D; counter 0 )<br>        product<br>        (<br>            expt_iter b ( - counter 1 ) ( * b product )<br>        )<br>    )<br>)</p>
+<h3 id="快速幂运算"><a href="#快速幂运算" class="headerlink" title="快速幂运算"></a>快速幂运算</h3><p>在计算$b ^ 8$时可以通过连续求平方,以更少的步骤完成幂运算.例如,在朴素幂运算下$ b ^ 8 $:</p>
+<p>$ b ^ 8 &#x3D; b * ( b * ( b * ( b * ( b * ( b * ( b * b ) ) ) ) ) ) $</p>
+<p>用连续求平方:</p>
+<p>$ b ^ 2 &#x3D; b * b $</p>
+<p>$ b ^ 4 &#x3D; b ^ 2 * b ^ 2 $</p>
+<p>$ b ^ 8 &#x3D; b ^ 4 * b ^ 4 $</p>
+<p>连续求平方发的一般乘幂计算:</p>
+<p>$ b ^ n &#x3D; ( b ^ {n &#x2F; 2} ) $, 若n是偶数</p>
+<p>$ b ^ n &#x3D; b * b ^ { n - 1 } $, 若n是奇数</p>
+<p>将这个方法定义成以下过程:</p>
+<p>(<br>    define ( fast_expt b n )<br>    (<br>        cond ( ( &#x3D; n 0 ) 1 )<br>        ( ( is_even n ) ( square ( fast_expt b ( &#x2F; n 2 ) )) )<br>        ( else ( * b ( fast_expt b ( - n 1 ) ) ) )<br>    )<br>)</p>
+<p>(define ( square n )( * n n ))</p>
+<p>(define ( is_even n )( &#x3D; ( remainder n 2 ) 0))</p>
+<p>时间复杂度为$\Theta ( log n )$</p>
+<p><strong>练习1.16</strong> 利用关系$ ( b ^ { n &#x2F; 2 } ) ^ 2 &#x3D; ( b ^ 2 ) ^ { n &#x2F; 2 } $将上面的快速幂算法改成按照迭代方式的求幂计算.</p>
+<p>(<br>    define ( fast_expt b n  )<br>    ( fast_expt_iter b n 1 )<br>)</p>
+<p>(<br>    define ( fast_expt_iter b counter product )<br>    (<br>        cond ( ( &#x3D; counter 0 ) product )<br>        ( ( is_even counter  ) (  fast_expt_iter ( square b ) ( &#x2F; counter 2 ) product ))<br>        ( else ( fast_expt_iter b ( - counter 1 ) ( * product b ) ) )<br>    )<br>)</p>
+<p>除了基数b和指数n之外,还有一个附加的状态变量a(上面的代码是product),并定义好状态变换,使得从一个状态到另一个状态时乘积$ a b ^ n $不变.在计算过程开始时a取1,并用计算过程结束时a的值作为回答.一般说,定义一个不变量,要求它在状态之间保持不变,这一技术是思考迭代算法设计问题时的一种强有力的方法.</p>
+<h3 id="俄罗斯农夫算法"><a href="#俄罗斯农夫算法" class="headerlink" title="俄罗斯农夫算法"></a>俄罗斯农夫算法</h3><p><strong>练习1.18</strong> 利用反复加法的方式求出乘积.</p>
+<p>(<br> define ( * a b )<br> (<br>  if ( &#x3D; b 0 )<br>      0<br>      ( + a ( * a ( - b 1 ) ) )<br>  )<br> )</p>
+<p>这是一个线性算法,在<strong>练习1.17</strong>中要求将其优化为对数复杂度的算法,并且使用double和halve两个方法;在<strong>练习1.18</strong>中要求再改为迭代计算过程.</p>
+<p><em><strong>练习1.17</strong></em></p>
+<p>( define (double x)( * x 2 ) )</p>
+<p>( define ( halve y ) ( &#x2F; y 2 ) )</p>
+<p>( define (is_even n) ( &#x3D; ( remainder n 2 ) 0 ))</p>
+<p>(<br>    define ( fast_mul1 a b  )<br>    (<br>        cond ( ( &#x3D; b 0 ) 0)<br>        ( ( is_even b ) ( double ( fast_mul1 a ( halve b ) ) ) )<br>        ( else ( + a (fast_mul1 a ( - b 1 ) ) ) )<br>    )<br>)</p>
+<p><strong>练习1.18</strong></p>
+<p>(<br>    define ( fast_mul a b )<br>    ( fast_mul_iter a b 0  )<br>)</p>
+<p>;Russian farmer algorithm<br>(<br>    define ( fast_mul_iter a b product )<br>    (<br>        cond ( ( &#x3D; b 0 ) product)<br>        ( ( is_even b ) ( fast_mul_iter ( double a ) ( halve b ) product ) )<br>        ( else ( fast_mul_iter a ( - b 1 ) ( + product a ) ) )<br>    )<br>)</p>
+<p>这里的$product$就是附加的状态变量,也是最后要输出的答案.</p>
+<p>有一个乘法表达式:$ans &#x3D; a * b$</p>
+<p>当b为奇数时 $ ans &#x3D; a * b_1 + c_1, b_1 &#x3D; ( b - 1 ), c_1 &#x3D; a$并将$c_1$累加到$product$上</p>
+<p>当b为偶数时$ ans &#x3D; (a * 2) * ( b &#x2F; 2 ) $, 这时b的状态就有可能会改变</p>
+<p>当b为0时,就可以输出$product$了</p>
+<p>这一算法又被称为”俄罗斯农夫算法”</p>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><h3 id="朴素斐波那契函数"><a href="#朴素斐波那契函数" class="headerlink" title="朴素斐波那契函数"></a>朴素斐波那契函数</h3><p>根据斐波那契数列的定义:</p>
+<p>[latexpage]</p>
+<p>$Fib( x )&#x3D; \begin{cases} 0, &amp;x &#x3D; 0 \cr 1, &amp; x &#x3D;1 \cr Fib( x - 1 ) + Fib( x - 2 ) , &amp; x &gt; 1 \end{cases}$</p>
+<p>将这个过程翻译为一个计算斐波那契数的递归过程</p>
+<p>(<br> define ( fib n )<br> (<br>  cond (( &#x3D; n 0 ) 0 )<br>          ( ( &#x3D; n 1 ) 1 )<br>          ( else ( + ( fib ( - n 1 ) )<br>                 ( fib ( - n 2 ) ))<br>        )<br>     )<br> )</p>
+<p>但是这个过程有太多的冗余计算,时间复杂度可以说是一个指数级别的.</p>
+<p>$ Fib(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5} $</p>
+<h3 id="迭代的斐波那契函数"><a href="#迭代的斐波那契函数" class="headerlink" title="迭代的斐波那契函数"></a>迭代的斐波那契函数</h3><p>用一对整数a和b将它们分别初始化为$ Fib(1) &#x3D; 1 $ 和$ Fib(0) &#x3D; 0 $,然后反复同时使用下面的变换规则:</p>
+<p>$ a \leftarrow a + b $</p>
+<p>$ b \leftarrow a $</p>
+<p>不难证明在$n$次这些变换后,a和b将分别等于Fib( n + 1 ) 和 Fib( n ), 将其翻译为下面过程:</p>
+<p>( define ( fib2 n )<br>    ( fib_iter 1 0 n)<br>)</p>
+<p>( define ( fib_iter a b count )<br>    (if ( &#x3D; count 0 )<br>        b<br>        ( fib_iter ( + a b ) a ( - count 1 ) )<br>    )<br>)</p>
+<p>另外两种优化思路是(不再贴出代码):</p>
+<p>1.使用记忆化搜索</p>
+<p>2.递推方法,用数组记录fib[0] &#x3D; 0, fib[1] &#x3D; 1, 并递推fib[i] &#x3D; fib[i - 1] + fib[i - 2].</p>
+<p>[latexpage]</p>
+<p><em><strong>练习1.13</strong></em> 证明$Fib( n ) $是最接$\frac{\phi ^ n }{\sqrt 5}$的整数，其中$\phi &#x3D; \frac{1 + \sqrt 5 }{2}$，证明$ Fib(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5} $</p>
+<p>先证明$ Fib(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5} $</p>
+<p>令$A(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5}$</p>
+<p>$Fib(1) &#x3D; 1$ $A(1) &#x3D; 1$ $ Fib(1) &#x3D; A(1) $</p>
+<p>$Fib(2) &#x3D; 1$ $A(1) &#x3D; 1$ $ Fib(2) &#x3D; A(2) $</p>
+<p>设当$k &#x3D; n $时有$ Fib(n) &#x3D; A(n) $，则当$k &#x3D; n + 1$时有</p>
+<p>$Fib(n + 1) &#x3D; Fib( n ) + Fib(n - 1)$</p>
+<p>$Fib( n ) &#x3D; A(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5}$</p>
+<p>$Fib( n - 1 ) &#x3D; A( n - 1 ) &#x3D; \frac{ \phi ^ {n - 1} - \gamma ^ {n - 1}}{\sqrt 5}$</p>
+<p>则有 $Fib( n ) + Fib(n - 1) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5} + \frac{ \phi ^ {n - 1} - \gamma ^ {n - 1}}{\sqrt 5} $ $&#x3D; \frac{\phi ^ n( 1 + \frac{1}{\phi} ) - \gamma ^ n( 1 + \frac{1}{\gamma } )}{\sqrt 5}$</p>
+<p>其中 $ 1 + \frac{1}{\phi ^ n} &#x3D; \frac{3 + \sqrt 5}{1 + \sqrt 5}  &#x3D;  \frac{(3 + \sqrt 5)(1 - \sqrt5)}{(1 + \sqrt5)( 1 - \sqrt 5 )}  &#x3D; \frac{1 + \sqrt 5}{2} &#x3D; \phi$</p>
+<p>          $ 1 + \frac{1}{\gamma ^ n} &#x3D; \frac{3 - \sqrt 5}{1 - \sqrt 5}  &#x3D;  \frac{(3 - \sqrt 5)(1 + \sqrt5)}{(1 - \sqrt5)( 1 + \sqrt 5 )}  &#x3D; \frac{1 - \sqrt 5}{2} &#x3D; \gamma$</p>
+<p>则 $Fib( n ) + Fib(n - 1) &#x3D; \frac{\phi ^ {n + 1} - \gamma ^ { n + 1 }}{\sqrt 5} &#x3D; A(n+1)$</p>
+<p>$ \therefore Fib(n + 1) &#x3D; A(n+1)$</p>
+<p>$ \therefore Fib(n) &#x3D; \frac{ \phi ^ n - \gamma ^ n}{\sqrt 5} $</p>
+<p>这个证明也可以用特征根方程来证明,这里不再赘述.</p>
+<p>$| {Fib(n) - \frac{\phi}{\sqrt 5} | &#x3D; | \frac{\gamma ^ n}{\sqrt 5} |$</p>
+<p>其中 $| \gamma | &#x3D; | \frac{1 - \sqrt 5}{2} | &lt; 1$</p>
+<p>          $ | \gamma ^ 2 | &lt; 1 $</p>
+<p>          $ | \frac{\gamma ^ 2}{\sqrt 5} | &lt;, 0.5$</p>
+<p>$ \therefore $ $ Fib( n )$ 是最接 $\frac{\phi ^ n }{\sqrt 5}$ 的整数</p>
+<p><strong>练习1.19</strong></p>
+<p>[latexpage]</p>
+<p>主要是求出$p_1$和$q_1$ ,题目说的操作两次$T_{pq}$相当于操作一次$T_{p’q’}$</p>
+<p>其中$T_{pq}$是对于对偶$(a,b)$按照如下的规则变化</p>
+<p>$a \leftarrow bq + aq + ap$</p>
+<p>$ b \leftarrow bp + aq $</p>
+<p>对$T_{pq}$操作两次有</p>
+<p>$a_1 &#x3D; bq + a( p + q )$</p>
+<p>$ b_1 &#x3D; bp + aq $</p>
+<p>$ a_2 &#x3D; b_1 q + a_1 ( p + q ) &#x3D; ( b1 + aq ) q + ( bq + a ( p + q )( p + q ) )$</p>
+<p>         $&#x3D; b( 2pq + q^2 ) + q( p ^2 + 2 p ^2 + 2pq )$</p>
+<p>其中$ q_1 &#x3D; 2pq + q^2 $         $ p_1 &#x3D; p ^ 2 + q ^2 $</p>
+<p>$ b_2 &#x3D; b_1 q + a_1 q &#x3D; ( bp + aq ) p + ( bq + a( p + q ) ) q &#x3D; b( p^2 + q^2 ) + a( 2pq + p^2 )$</p>
+<p>这里$b_2$求出的$q_1$和$p_1$可以作为一个验证.</p>
+<p>$\therefore $ $ q_1 &#x3D; 2pq + q^2 $         $ p_1 &#x3D; p ^ 2 + q ^2 $</p>
+<p>然后贴出代码</p>
+<p>(define (fib n )<br>    ( fib_iter 1 0 0 1 n )<br>)</p>
+<p>(define (even? n ) ( &#x3D; ( remainder n 2 ) 0 ) )</p>
+<p>(define (square x ) ( * x x ) )</p>
+<p>(define (fib_iter a b p q count )<br>    (<br>        cond( ( &#x3D; count 0 ) b )<br>            ( ( even? count )<br>                ( fib_iter a<br>                           b<br>                            ( + ( square p) (square q) )<br>                            ( + ( * 2 p q ) ( square q ) )<br>                            ( &#x2F; count 2 )<br>                )<br>            )<br>            (<br>                else ( fib_iter ( + ( * b q ) ( * a q ) ( * a p ) )<br>                        ( + ( * b p ) ( * a q ) )<br>                        p<br>                        q<br>                        ( - count 1 )<br>                )<br>            )<br>    )<br>)</p>
+<h2 id="最大公约数的Lame定理"><a href="#最大公约数的Lame定理" class="headerlink" title="最大公约数的Lame定理"></a>最大公约数的Lame定理</h2><p>如果欧几里得算法需要用k步计算出一对整数的GCD,那么这对数中较小的那个数必然大于或者等于第k个斐波那契数.</p>
+<p>[latexpage]考虑数对序列$( a_k, b_k )$,其中$a_k \geq b_k$, 假设欧几里得算法在第k步结束.</p>
+<p>如果$ ( a_{k+1}, b_{k+1} ) \rightarrow ( a_{k}, b_{k} ) \rightarrow ( a_{k-1}, b_{k-1} )$是归约序列中连续的三个数对,必然有$ b_{k + 1} \geq b_k + b_{k - 1} $.这里的每个归约步骤都是通过应用变换$ a_{k-1} &#x3D; b_k $,   $ b_{ k - 1 } &#x3D; a_{k}$除以$ b_k $的余数.</p>
+<p>$ a_k &#x3D; q b_k + b{ k - 1 } $ 其中$ q \geq 1 $所以有 $ a_k &#x3D; q b_k + b_{k - 1}  \geq b_k + b_{ k - 1 }$,在前一个归约步骤中有$ b_{ k + 1 } &#x3D; a_k $, 因此 $b_{k + 1} &#x3D; a_k &#x3D; q b_k + b_{ k - 1 }  \geq b_k + b_{ k - 1 }$</p>
+<p>要证明$ b_k \geq Fib(k) $, 一定有$ b_1 \geq Fib(1) &#x3D; 1 $</p>
+<p>设$ b_{ k } \geq Fib(k) $</p>
+<p>     $ b_{ k - 1 } \geq Fib(k - 1) $.</p>
+<p>则 $b_{ k } +b_{ k- 1} \geq Fib(k) + Fib(k - 1)$</p>
+<p>$ \because b_{k + 1} \geq b_k + b_{ k - 1 } \geq Fib(k) + Fib(k - 1) $</p>
+<p>$ \therefore  b_{k + 1} \geq Fib( k + 1 )$</p>
+<p>$ \therefore  b_k \geq Fib(k)$</p>
+<h2 id="素数检测"><a href="#素数检测" class="headerlink" title="素数检测"></a>素数检测</h2><p>[latexpage]提供两种素数检测方法,第一种具有$\Theta ( \sqrt n )$的增长阶, 另一个是运用费马小定理的概率算法,具有$\Theta ( log n )$的增长阶.</p>
+<h3 id="传统素数检测方法"><a href="#传统素数检测方法" class="headerlink" title="传统素数检测方法"></a>传统素数检测方法</h3><p>[latexpage]通过枚举2到$ \sqrt(n) $的所有整数来验证n是否为素数.<strong>时间复杂度为$\Theta ( \sqrt n )$</strong></p>
+<p>(define ( smallest_divisor n ) ( find_divisor n 2 ))</p>
+<p>(define ( square x ) ( * x x ) )</p>
+<p>( define ( find_divisor n test_divisor )<br>    (cond ( ( &gt; ( square test_divisor ) n  ) n )<br>          ( ( divides? test_divisor n  ) test_divisor )<br>          ( else ( find_divisor n ( + test_divisor 1 ) ) )<br>    )<br>)</p>
+<p>(define ( divides? a b ) ( &#x3D; ( remainder b a ) 0 ))</p>
+<p>(define ( prime? n )<br>    ( &#x3D; n ( smallest_divisor n ) )<br>)</p>
+<h3 id="费马检查"><a href="#费马检查" class="headerlink" title="费马检查"></a>费马检查</h3><p>[latexpage]<strong>费马小定理</strong>:如果n是一个素数,a是小于n的任意正整数,那么a的n次方与a模n同余.(更多详细内容可见<a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2020/03/13/mod/">费马小定理</a>)对于给定的整数n, 随机任取一个$a &lt; n$ 计算出$ a^n $取模n的余数.如果结果不等于a,那么n就肯定不是素数;如果结果等于a,那么n就有<strong>很大可能</strong>是素数.检查的a越多,那么n是素数的可能性也就越大,也存在一些数据能够欺骗费马检查,所以综上这是一个概率算法.</p>
+<p>要完成费马检查需要先写一个快速幂取模的过程.</p>
+<h4 id="快速幂取模"><a href="#快速幂取模" class="headerlink" title="快速幂取模"></a>快速幂取模</h4><p>快速幂取模基于以下定理</p>
+<p>[latexpage]$(a * b) \% c&#x3D; ( a \% c ) * ( b \% c ) \% c $</p>
+<p>[latexpage]可以将一个大数分成几部分来求模以达到快速运算的目的,这个过程类似之前的fast-exp过程.其增长的阶是$ \Theta( log n ) $.</p>
+<p>费马检查的代码</p>
+<p>(define (square x ) ( * x x ) )</p>
+<p>(define (expmod base exp m)<br>    (<br>        cond ( ( &#x3D; exp 0 ) 1 )<br>            ( (even? exp)<br>            ( remainder ( square ( expmod base ( &#x2F; exp 2 ) m ) ) m ))<br>            (<br>                else ( remainder ( * base ( expmod base ( - exp 1 ) m ) ) m )<br>            )<br>    )<br>)</p>
+<p>(define (fermat_test n )<br>    (define (try_it a )<br>        ( &#x3D; ( expmod a n n ) a )<br>    )<br>    ( try_it ( + 1 ( random( - n 1 ) ) ) )<br>)</p>
+<p>(define (fast_prime? n times)<br>    (<br>        cond( ( &#x3D; times 0 ) true )<br>            ( ( fermat_test n ) ( fast_prime? n ( - times 1 ) ) )<br>            ( else false )<br>    )<br>)</p>
+<p>能够欺骗费马检查的数成为_Carmichael_数,其中最小的只有561,在练习1.28中提供了一种优化过的不会被欺骗的费马检查.以下是对561进行费马检查的中间生成数据,看看它是如何欺骗费马检查的.</p>
+<p>exp &#x3D; 1         * &#x3D; 3                   mod &#x3D; 3<br>exp &#x3D; 2         squared &#x3D; 9             mod &#x3D; 9<br>exp &#x3D; 4         squared &#x3D; 81            mod &#x3D; 81<br>exp &#x3D; 8         squared &#x3D; 6561          mod &#x3D; 390<br>exp &#x3D; 16        squared &#x3D; 152100        mod &#x3D; 69<br>exp &#x3D; 17        * &#x3D; 207                 mod &#x3D; 207<br>exp &#x3D; 34        squared &#x3D; 42849         mod &#x3D; 213<br>exp &#x3D; 35        * &#x3D; 639                 mod &#x3D; 78<br>exp &#x3D; 70        squared &#x3D; 6084          mod &#x3D; 474<br>exp &#x3D; 140       squared &#x3D; 224676        mod &#x3D; 276<br>exp &#x3D; 280       squared &#x3D; 76176         mod &#x3D; 441<br>exp &#x3D; 560       squared &#x3D; 194481        mod &#x3D; 375<br>exp &#x3D; 561       * &#x3D; 1125                mod &#x3D; 3</p>
+<h3 id="Miller-Rabin检查"><a href="#Miller-Rabin检查" class="headerlink" title="Miller-Rabin检查"></a>Miller-Rabin检查</h3><p>[latexpage]费马检查的一种不会被欺骗的变形成为Miller-Rabin检查,来源与费马小定理的一个变形. 如果n是素数,a是小于n的整数,则a的( n - 1 )次幂与1模n同余.这个算法需要查看是否遇到了”1取模的非平凡平方根”,也就是说,是不是存在不等于1或者n-1的数使平方取模等于1.如果1取模的非平凡平方根存在,那么n就不是素数.并且,如果n是非素数的奇数,至少有一半的数a &lt; n 按照这种方式计算$a^{ n - 1 }$,将会遇到1取模n的非平凡平方根.</p>
+<p>[latexpage] Miller-Rabin检查基于的定理: 如果p是素数，x是小于p的正整数，且$x^2$ mod p &#x3D; 1，那么要么x&#x3D;1，要么x&#x3D;p-1。这是显然的，因为$x^2$ mod p &#x3D; 1相当于p能整除$x^2$-1，也即p能整除(x+1)(x-1)。由于p是素数，那么只可能是x-1能被p整除(此时x&#x3D;1)或x+1能被p整除(此时x&#x3D;p-1)。</p>
+<p><strong>练习1.28</strong> 编写Miller-Rabin检查</p>
+<p>(define (square x ) ( * x x ) )</p>
+<p>(define (Miller_Rabin base exp m  )<br>    (<br>        cond( ( &#x3D; exp 0 ) 1)<br>            ( ( square_check base m ) 0)<br>            ( ( even? exp ) ( remainder ( square ( Miller_Rabin base ( &#x2F; exp 2 ) m ) ) m ) )<br>            (else<br>                (remainder  ( Miller_Rabin base ( - exp 1 ) m ) m)<br>            )<br>    )<br>)</p>
+<p>(define (square_check a n )<br>    (<br>        and ( not ( &#x3D; a 1 ) )<br>            ( not ( &#x3D; a ( - n 1 ) ) )<br>            ( &#x3D; 1 ( remainder ( square a ) n ) )<br>    )<br>)</p>
+<p>(define (Miller_Rabin_test n )<br>    (define (try_it a )<br>        ( &#x3D; ( Miller_Rabin a n n ) a )<br>    )<br>    ( try_it ( + 1 ( random( - n 1 ) ) ) )<br>)</p>
+<p>(define (fast_prime? n times)<br>    (<br>        cond( ( &#x3D; times 0 ) true )<br>            ( ( Miller_Rabin_test n ) ( fast_prime? n ( - times 1 ) ) )<br>            ( else false )<br>    )<br>)</p>
+<p>Miller_Rabin方法参考的文章:<a target="_blank" rel="noopener" href="http://www.matrix67.com/blog/archives/234">http://www.matrix67.com/blog/archives/234</a></p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"><a href="/tags/book/" class="post-tags__link button"># book</a><a href="/tags/sicp/" class="post-tags__link button"># sicp</a><a href="/tags/maththeory/" class="post-tags__link button"># maththeory</a><a href="/tags/gcd/" class="post-tags__link button"># gcd</a><a href="/tags/fastexp/" class="post-tags__link button"># fastexp</a><a href="/tags/fib/" class="post-tags__link button"># fib</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/05/21/2020/differentialarray/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            差分数组
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/05/03/2020/abriefhistoryofmankind/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            读&lt;&lt;人类简史&gt;&gt;
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

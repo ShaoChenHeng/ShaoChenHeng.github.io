@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>关于opml，使用lxml解析opml文件小记 | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="首先来介绍一下什么是opml文件。 了解到这种文件主要是因为eaf-rss-reader的一个issue。一般来说像feedly，Inoreader这种的rss-reader是提供了引入&#x2F;导出opml文件的功能的。opml文件将你的feed链接都收集到一个文件里，方便将所有的feed订阅转移到其他的阅读器上。 opml文件其实就是一个xml文件，使用能够解析xml文件的一些库就能将它解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于opml，使用lxml解析opml文件小记">
+<meta property="og:url" content="http://example.com/2021/11/10/2021/opml/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先来介绍一下什么是opml文件。 了解到这种文件主要是因为eaf-rss-reader的一个issue。一般来说像feedly，Inoreader这种的rss-reader是提供了引入&#x2F;导出opml文件的功能的。opml文件将你的feed链接都收集到一个文件里，方便将所有的feed订阅转移到其他的阅读器上。 opml文件其实就是一个xml文件，使用能够解析xml文件的一些库就能将它解析">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.747Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        关于opml，使用lxml解析opml文件小记
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/11/" class="post-meta__date button">2021-11-10</a>
+        
+    <span class="separate-dot"></span><a href="/categories/python/" class="button">python</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>首先来介绍一下什么是opml文件。</p>
+<p>了解到这种文件主要是因为eaf-rss-reader的一个issue。一般来说像feedly，Inoreader这种的rss-reader是提供了引入&#x2F;导出opml文件的功能的。opml文件将你的feed链接都收集到一个文件里，方便将所有的feed订阅转移到其他的阅读器上。</p>
+<p>opml文件其实就是一个xml文件，使用能够解析xml文件的一些库就能将它解析了。但是比较怪的是，feedly网站上居然无法解析由Inoreader生成的xml文件…</p>
+<p>对python来说，解析xml通常会用xml库或者lxml库，我觉得lxml操作起来更加方便，于是就用lxml了。值得注意的一个地方是，xml文件里面有默认的几个特殊字符 <strong>&lt; &gt; &amp; ‘ “</strong> ，如果需要被提取的地方出现了这几个字符，那么就会报一个出现特殊字符的错误：lxml.etree.XMLSyntaxError: xmlParseEntityRef: no name，这个问题是由Emacs China论坛的用户提出的。</p>
+<h2 id="导入解析opml"><a href="#导入解析opml" class="headerlink" title="导入解析opml"></a>导入解析opml</h2><p>接下來介绍一下解析过程。</p>
+<ol>
+<li><p>首先需要一个文件输入，就是将opml文件的位置传入到程序里。</p>
+</li>
+<li><p>获取到文件，开始解析。将opml文件转换成一个feeds_list，里面记录feed链接。</p>
+</li>
+<li><p>逐个将链接解析，添加到本地rss库中。</p>
+</li>
+</ol>
+<p>第1步没有什么好展开讲的，现在在mini-buffer里面直接输入地址还不能补全，也没有检查路径是否存在，所以说实现方案还不够友好，需要再改进一下。</p>
+<p>解析过程最重要的步骤也就是第2步了，这里贴出我的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_import_opml</span>(<span class="params">self, opml_file</span>):</span></span><br><span class="line">        message_to_emacs(<span class="string">&quot;Importing...&quot;</span>)</span><br><span class="line">        parser = etree.XMLParser(encoding = <span class="string">&quot;utf-8&quot;</span>, recover = <span class="literal">True</span>)</span><br><span class="line">        tree = etree.parse(opml_file, parser = parser)</span><br><span class="line">        feeds = tree.xpath(<span class="string">&#x27;/opml/body/outline&#x27;</span>)</span><br><span class="line">        feeds_list = []</span><br><span class="line">        feeds_list = tree.xpath(<span class="string">&#x27;/opml/body/outline/@xmlUrl&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># The above method may not be able to obtain xmlUrl.</span></span><br><span class="line">        <span class="keyword">for</span> feed <span class="keyword">in</span> feeds:</span><br><span class="line">            <span class="keyword">for</span> rss <span class="keyword">in</span> feed.iterchildren():</span><br><span class="line">                feeds_list.append(rss.get(<span class="string">&#x27;xmlUrl&#x27;</span>))</span><br><span class="line">        feeds_list = <span class="built_in">sorted</span>(<span class="built_in">set</span>(feeds_list), key = feeds_list.index)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># unique feed</span></span><br><span class="line">        <span class="keyword">for</span> index, feed <span class="keyword">in</span> <span class="built_in">enumerate</span>(feeds_list):</span><br><span class="line">            <span class="keyword">if</span> feed <span class="keyword">in</span> self.main_item.feedlink_list:</span><br><span class="line">                feeds_list.pop(index)</span><br><span class="line">                message_to_emacs(<span class="string">&quot;Feedlink &#x27;&#123;&#125;&#x27; exists.&quot;</span>.<span class="built_in">format</span>(feed))</span><br><span class="line"></span><br><span class="line">        self.import_opml_thread(feeds_list)</span><br></pre></td></tr></table></figure>
+
+<p>第三行是定义了一个解析器，因为要解决上面提到的特殊字符的问题，所以引入了<code>recover=True</code>这个参数，作用是当碰到特殊字符时直接把他们覆盖掉（用空格）。因为这里并不取到特殊字符所在的那一部分内容，所以是可以直接覆盖掉的。</p>
+<p>第四行使用上面定义的解析器解析xml文件。之后用xpath先读到outline所在位置，这里其实是一个temp。直接用xpath读到xmlUrl标签，记录在feeds_list中，但是有一些网站提供的opml又会读不到。就需要对上面生成的那个temp再操作一次，这个temp主要是为了解决多层outline包裹的问题（比如feedly如果定义了分类那么就会多层包裹）。</p>
+<p>10～12是对多层包裹的处理，考虑到这里实际上是进行了两次解析，可能会生成重复的feeds，于是在13进行一个去重。16～18是与本地feeds进行对比，然后去重，先去重再抓取，提高效率。</p>
+<p>第3步，我最初想的是单个调用原先写的多线程处理抓取的方法，但是这样实现起来会难以控制抓取结果，feed的index也会出现问题（标号index的操作比抓取线程快很多，就会导致index出错）。于是就重新为引入opml重新写了一个独立的线程，不过我觉得这样其实并不优雅。</p>
+<h2 id="导出opml"><a href="#导出opml" class="headerlink" title="导出opml"></a>导出opml</h2><p>导出opml比引入opml实现起来要简单些。</p>
+<p>因为直接使用python的xml库生成的xml文件是没有排版的，整个文件就一行，十分地丑，于是我就写了一个美化排版的递归函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">beautify_opml</span>(<span class="params">self, element, indent, newline, level = <span class="number">0</span></span>):</span></span><br><span class="line">       <span class="keyword">if</span> element:</span><br><span class="line">           <span class="keyword">if</span> element.text == <span class="literal">None</span> <span class="keyword">or</span> element.text.isspace():</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>)</span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>) + element.text.strip() + newline + indent * (level + <span class="number">1</span>)     </span><br><span class="line">       temp = <span class="built_in">list</span>(element)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> subelement <span class="keyword">in</span> temp:</span><br><span class="line">           <span class="keyword">if</span> temp.index(subelement) &lt; (<span class="built_in">len</span>(temp) - <span class="number">1</span>):     </span><br><span class="line">               subelement.tail = newline + indent * (level + <span class="number">1</span>)    </span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               subelement.tail = newline + indent * level   </span><br><span class="line">           self.beautify_opml(subelement, indent, newline, level = level + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>主要思路就是根据层级关系来判断是否需要加缩进以及换行，然后对子树节点再进行递归操作。</p>
+<p>接下来是生成函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_opml</span>(<span class="params">self</span>):</span></span><br><span class="line">    message_to_emacs(<span class="string">&quot;Exporting...&quot;</span>)</span><br><span class="line">    root = Element(<span class="string">&#x27;opml&#x27;</span>)</span><br><span class="line">    root.<span class="built_in">set</span>(<span class="string">&#x27;version&#x27;</span>, <span class="string">&#x27;1.0&#x27;</span>)</span><br><span class="line">    head = SubElement(root, <span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    title = SubElement(head, <span class="string">&#x27;title&#x27;</span>)</span><br><span class="line">    user_name = get_emacs_var(<span class="string">&quot;user-login-name&quot;</span>)</span><br><span class="line">    title.text = <span class="string">&quot;Feeds of &#123;&#125; from eaf-rss-reader&quot;</span>.<span class="built_in">format</span>(user_name)</span><br><span class="line">    body = SubElement(root, <span class="string">&#x27;body&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> self.rss_list:</span><br><span class="line">        outline = SubElement(body, <span class="string">&#x27;outline&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;rss&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;text&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;title&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;xmlUrl&#x27;</span>, item[<span class="string">&#x27;feed_link&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;link&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">            link = item[<span class="string">&#x27;link&#x27;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                link = feedparser.parse(item[<span class="string">&#x27;feed_link&#x27;</span>]).feed.link</span><br><span class="line">            <span class="keyword">except</span> AttributeError:</span><br><span class="line">                link = item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            message_to_emacs(<span class="string">&quot;Failed to export &#123;&#125; &#123;&#125;, please try again later.&quot;</span>.<span class="built_in">format</span>(</span><br><span class="line">                item[<span class="string">&#x27;feed_title&#x27;</span>]</span><br><span class="line">                ,item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            ))</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;htmlUrl&#x27;</span>, link)</span><br><span class="line"></span><br><span class="line">    tree = ElementTree(root)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    self.beautify_opml(root, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    file_location = os.path.join(self.location,</span><br><span class="line">    <span class="string">&#x27;eaf-rss-reader-&#x27;</span> + time.strftime(<span class="string">&quot;%Y-%m-%d-%H%M%S&quot;</span>, time.localtime()) + <span class="string">&#x27;.opml&#x27;</span>)</span><br><span class="line">    tree.write(file_location, encoding = <span class="string">&#x27;utf-8&#x27;</span>, xml_declaration=<span class="literal">True</span>)</span><br><span class="line">    message_to_emacs(<span class="string">&quot;All feeds have been exported. Location is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(file_location))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>生成下一层子节点的方法是<code>SubElement()</code>，eaf-rss-reader的opml文件的层级结构大致是这样的：opml -&gt; head &#x2F; body -&gt; outline1&#x2F;outline2&#x2F;…，某个feed的信息储存在outline的标签参数里面。11～28生成outline，主要包括了feed的title，feed的链接，feed的原链接（网页链接）这三个参数，因为最开始抓取feed的解析疏忽了，没有保存原链接地址，现在已经补上了，对于仍然没有原链接的那部分feed，会进行一个重新抓取，获取到原链接。抓取不到那就只能报错了。</p>
+<p>30～36就是美化排版函数的调用和生成文件了，为了文件不重名，所以采用了时间戳命名的方法。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/11/16/2021/java-package/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            java package小记
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2021/11/07/2021/scale-tree/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            树的映射以及map函数
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

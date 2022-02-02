@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>SICP回顾：cons函数、使用过程定义数据结构（下） | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="接着写上一篇的内容，我打算实现三个基本函数cons、car、cdr，尝试了几种方法都没能很好的实现，并且前两种方法在后来的测试中发现都有问题（第二种方法在嵌套使用的时候仍然有bug）。我逛了一圈github，发现有一位老哥已经用python实现了SICP的大部分习题，https:&#x2F;&#x2F;github.com&#x2F;Reo-LEI&#x2F;SICP-Python 。其中他编写了一个ordered.py，其中对cons">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICP回顾：cons函数、使用过程定义数据结构（下）">
+<meta property="og:url" content="http://example.com/2021/11/22/2021/re_sicp2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="接着写上一篇的内容，我打算实现三个基本函数cons、car、cdr，尝试了几种方法都没能很好的实现，并且前两种方法在后来的测试中发现都有问题（第二种方法在嵌套使用的时候仍然有bug）。我逛了一圈github，发现有一位老哥已经用python实现了SICP的大部分习题，https:&#x2F;&#x2F;github.com&#x2F;Reo-LEI&#x2F;SICP-Python 。其中他编写了一个ordered.py，其中对cons">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.847Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        SICP回顾：cons函数、使用过程定义数据结构（下）
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/11/" class="post-meta__date button">2021-11-22</a>
+        
+    <span class="separate-dot"></span><a href="/categories/emacs/" class="button">emacs</a>
+
+    <span class="separate-dot"></span><a href="/categories/emacs/python/" class="button">python</a>
+
+    <span class="separate-dot"></span><a href="/categories/emacs/python/scheme/" class="button">scheme</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>接着写<a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2021/11/20/re_sicp1/">上一篇</a>的内容，我打算实现三个基本函数<code>cons</code>、<code>car</code>、<code>cdr</code>，尝试了几种方法都没能很好的实现，并且前两种方法在后来的测试中发现都有问题（第二种方法在嵌套使用的时候仍然有bug）。我逛了一圈github，发现有一位老哥已经用python实现了SICP的大部分习题，<a target="_blank" rel="noopener" href="https://github.com/Reo-LEI/SICP-Python">https://github.com/Reo-LEI/SICP-Python</a> 。其中他编写了一个<a target="_blank" rel="noopener" href="https://github.com/Reo-LEI/SICP-Python/blob/master/orderedPair.py">ordered.py</a>，其中对cons的实现和对lister（在scheme里面是list）的实现是比较优雅的。</p>
+<p>我将他的代码稍稍修改了一下，现在的构造是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (a, b)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lister</span>(<span class="params">*args</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coner</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        <span class="keyword">if</span> y == []:</span><br><span class="line">            <span class="keyword">return</span> cons(x, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(x, coner(y[<span class="number">0</span>], y[<span class="number">1</span>:]))</span><br><span class="line">    L = <span class="built_in">list</span>(args)</span><br><span class="line">    first, other = L[<span class="number">0</span>], L[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">return</span> coner(first, other)</span><br></pre></td></tr></table></figure>
+
+<p>其实就是在我的第二次尝试的代码里面使用cons重新写了一个lister数据结构，使cons能够正确处理嵌套结构。</p>
+<p>一个lister接受多个参数（*args使函数能够接收若干个参数）。将args转换为list作为temp保存，<code>tuple()</code>无法接受多个参数。 first取第一个（类似car），other取剩余的（类似cdr），使用内部函数对first与other继续递归构造。而coner函数就是将这个list（或者说是other参数）展开，逐个地将元素用cons链接起来，到list被分解完毕了，就返回一个<code>None</code>作为递归的结束（这就类似scheme里的<code>&#39;()</code> 或者 <code>nil</code>了）。</p>
+<p>这个数据结构能够很好的处理嵌套的lister和cons，是我上一次构造的时候没想到的，我认为是一个较为优雅的方法了，唯一不足的就是对一个lister的直接呈现效果仍然是这样<code>(1, (2, (3, None)))</code>，而不是<code>(1, 2, 3)</code>这样的。不过问题不大。</p>
+<p>因为对重新构造了list的数据结构，那基于list的一些操作函数也会发生变化，python自带的<code>map</code>函数已经无法处理这里的lister了，所以就重新构造了一个<code>mapping</code>和<code>mapping_n</code>函数来作为新的<code>map</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping</span>(<span class="params">func, item</span>):</span> </span><br><span class="line">    <span class="keyword">if</span> is_null(item):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> cons(func(car(item)), mapping(func, cdr(item)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping_n</span>(<span class="params">func, *seqs</span>):</span></span><br><span class="line">    <span class="comment"># 将序列转化为元组</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">seq_trans</span>(<span class="params">seq</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">translator</span>(<span class="params">s</span>):</span></span><br><span class="line">            <span class="keyword">if</span> is_null(cdr(s)):</span><br><span class="line">                <span class="keyword">return</span> [car(s)]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [car(s)]+translator(cdr(s))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">tuple</span>(translator(seq))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_map</span>(<span class="params">f, seq</span>):</span></span><br><span class="line">        <span class="keyword">if</span> is_null(car(seq)):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(f(*seq_trans(car_n(seq))), _<span class="built_in">map</span>(f, cdr_n(seq)))  <span class="comment"># 用*解包元组调用f</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断seqs为树或者多个列表并解包</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(seqs) &gt; <span class="number">1</span>:</span><br><span class="line">        seqs = lister(*seqs)</span><br><span class="line">    <span class="comment"># 若为树直接解包</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        seqs = seqs[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> _<span class="built_in">map</span>(func, seqs)</span><br></pre></td></tr></table></figure>
+
+<p><code>mapping(func, item)</code>，类似原map函数，mapping的第一个参数接受一个函数，第二个参数接受一种数据或者一种数据结构。</p>
+<p>使用cons将item重新链接，并用car、cdr进行分解，对<code>car(item)</code>执行func操作，<code>cdr(item)</code>取剩下的数据部分，传入mapping进行递归。</p>
+<p>而<code>mapping_n</code>是P70脚注78提到的map扩充函数，能够接受多个表作&#x2F;序列作为参数，依次取各个序列第k元素组成序列<code>seq(k)</code>作为<code>func</code>的参数，返回结果序列。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ShaoChenHeng/learnSICP/blob/master/orderedPair.py">这是我修改后的文件</a>，我希望后续能将它变成一个python抽象scheme的标准函数库。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/12/26/2021/rubber2/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            我的音乐播放器，Rubber2
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2021/11/20/2021/re_sicp1/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            SICP回顾：cons函数、使用过程定义数据结构（上）
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>同余 | Hexo</title>
+
+
+    <meta name="keywords" content="maththeory">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="这篇是&lt;&gt;以及&lt;&lt;算法导论&gt;&gt;中数论, 同余内容的笔记． １．一般概念如果有两个整数ａ和ｂ被５除有相同的余数， 我们称他们是”模5同余”的． 例如$2 % 5 &#x3D; 2$, $7 % 5 &#x3D; 2$．这里2和7是模5同余的. 一般地说，　如果整数ａ和ｂ用ｄ除有相同的余数，即如果有一整数ｎ使a - b &#x3D; n * d成立（这里ｄ是一固定整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同余">
+<meta property="og:url" content="http://example.com/2020/03/13/2020/mod/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇是&lt;&gt;以及&lt;&lt;算法导论&gt;&gt;中数论, 同余内容的笔记． １．一般概念如果有两个整数ａ和ｂ被５除有相同的余数， 我们称他们是”模5同余”的． 例如$2 % 5 &#x3D; 2$, $7 % 5 &#x3D; 2$．这里2和7是模5同余的. 一般地说，　如果整数ａ和ｂ用ｄ除有相同的余数，即如果有一整数ｎ使a - b &#x3D; n * d成立（这里ｄ是一固定整">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac%7B(5-1)%7D%7B2%7D%5Ccdot+%5Cfrac%7B(11-1)%7D%7B2%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=11%5Cequiv+1%5E%7B2%7D(mod+%5C+%5C+5)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=5%5Cequiv+4%5E%7B2%7D(mod+%5C+%5C+11)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=%5Cfrac%7B(7-1)%7D%7B2%7D%5Ccdot+%5Cfrac%7B(11-1)%7D%7B2%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=11%5Cequiv+2%5E%7B2%7D(mod+%5C+%5C+7)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=7%5Cequiv+18(mod+%5C+%5C+11)">
+<meta property="article:published_time" content="2020-03-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:54.597Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="maththeory">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=%5Cfrac%7B(5-1)%7D%7B2%7D%5Ccdot+%5Cfrac%7B(11-1)%7D%7B2%7D">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        同余
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2020/03/" class="post-meta__date button">2020-03-13</a>
+        
+    <span class="separate-dot"></span><a href="/categories/maththeory/" class="button">maththeory</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>这篇是&lt;<What Is Mathematics>&gt;以及&lt;&lt;算法导论&gt;&gt;中数论, 同余内容的笔记．</p>
+<h2 id="１．一般概念"><a href="#１．一般概念" class="headerlink" title="１．一般概念"></a>１．一般概念</h2><p>如果有两个整数ａ和ｂ被５除有<strong>相同的余数，</strong> 我们称他们是”模5同余”的．</p>
+<p>例如$2 % 5 &#x3D; 2$, $7 % 5 &#x3D; 2$．这里2和7是模5同余的.</p>
+<p>一般地说，　如果整数ａ和ｂ用ｄ除有相同的余数，即如果有一整数ｎ使a - b &#x3D; n * d成立（这里ｄ是一固定整数），我们就说<strong>ａ和ｂ是模ｄ同余</strong>的．</p>
+<p>关于同余的记号</p>
+<p>a ≡ b ( mod d )</p>
+<p>以下三个命题是等价的</p>
+<ol>
+<li>ａ和ｂ是模ｄ同余的</li>
+<li>存在某个整数ｎ，使a &#x3D; b + n d</li>
+<li>ｄ整除ａ－ｂ</li>
+</ol>
+<p>对于一个一般的关系式ａ＝ｂ，在形式上最重要的性质如下</p>
+<ol>
+<li>恒有a &#x3D; b</li>
+<li>如果a &#x3D; b，则b &#x3D; a</li>
+<li>如果a &#x3D; b，b &#x3D; c，则a &#x3D; c</li>
+</ol>
+<p>再有如果ａ＝ａ’，ｂ＝ｂ’则</p>
+<ol>
+<li>a + b &#x3D; a’ + b’</li>
+<li>a - b &#x3D; a’ - b’</li>
+<li>a * b &#x3D; a’ * b’</li>
+</ol>
+<p>当关系a &#x3D; b用同余关系a ≡ b ( mod d )代替时, 这些性质仍然成立</p>
+<ol>
+<li>恒有a≡a ( mod d )</li>
+<li>如果a≡b ( mod d ), 则b ≡ a ( mod d )</li>
+<li>如果a ≡ b( mod d ), 则b ≡ c( mod d ), 则a ≡ c ( mod d )</li>
+</ol>
+<p>其次如果a ≡ a’ ( mod d ), b ≡ b’ ( mod d ), 则</p>
+<ol>
+<li>a + b ≡ a’ + b’ ( mod d )</li>
+<li>a - b ≡ a’ - b’ ( mod d )</li>
+<li>a * b ≡ a’ * b’ ( mod d )</li>
+</ol>
+<p>关于后三个命题的证明</p>
+<p>a &#x3D; a’ + r * d, b &#x3D; b’ + s * d</p>
+<p>a + b &#x3D; a’ + b’ + ( r + s ) * d</p>
+<p>a - b &#x3D; a’ - b’ + ( r - s ) * d</p>
+<p>a * b &#x3D; a’ * b’ + ( a’ * s + b’ * r + s * r * d ) * d</p>
+<p>关于a * b ≡ a’ * b’ ( mod d )这条性质，我们可以的得到一个应用</p>
+<p>由于　10 ≡ -1 ( mod 11 )</p>
+<p>连续地用同余式乘它自己，得到</p>
+<p>10 ^ 2 ≡ ( -1 ) * ( -1 ) &#x3D; 1 ( mod 11 )</p>
+<p>10 ^ 3 ≡ -1 ( mod 11 )</p>
+<p>10 ^ 4 ≡ 1 ( mod 11 )</p>
+<p>．．．．．．</p>
+<p>这表面对于任何一个十进制整数</p>
+<p>[latexpage]$ z &#x3D; a[0] + a[1] * 10 + a[2] * 10 ^ 2 + … + a[n] * 10 ^ n$</p>
+<p>（　这里 a[0], a[1]的写法用来分别表示个位, 十位并以此类推．）</p>
+<p>被11除后的余数，与它的数码<strong>交替变号求和</strong></p>
+<p>t &#x3D; a[0] - a[1] + a[2] - a[3] + …</p>
+<p>被11除后的余数是一样的，因为</p>
+<p>[latexpage]$z - t &#x3D; a[1] * 11 + a[2] * ( 10 ^ 2 - 1 ) + a[3] * ( 10 ^ 3 + 1 ) + a[4] * ( 10 ^ 4 - 1 ) $…</p>
+<p>而11, 10 ^ 2 - 1, 10 ^ 3 + 1…所有这些数每一个和0都是模11同余的，因此z - t也是这样，所以z被除与t被11除有相同的余数．那么一个数能被11整除的条件是它的数码交替变号之和能被11整除．</p>
+<p>例如3 - 1 + 6 - 2 + 8 - 1 + 9 &#x3D; 22, 数z &#x3D; 3162819能被11整除</p>
+<p>找一个被3或9整除的规律更加简单了.10 ≡ 1 ( mod 3 或 9 ) , 10 ^ n ≡ 1 ( mod 3 或 9 ).即一个整数z的所有数码之和能被3或9整除，那么整数z就能被3或9整除．</p>
+<p>再对于模7同余．</p>
+<p>10 ≡ 3, 10 ^ 2 ≡ 2, 10 ^ 3 ≡ 6, 10 ^ 4 ≡ 4, 10 ^ 5 ≡ 5, 10 ^ 6 ≡ 1……</p>
+<p>然后就都是循环了，因此整数z被7整除的条件是表达式</p>
+<p>r &#x3D; a[0] + a[1] * 3 + a[2] * 2 + a[3] * 6 + a[4] * 4 + a[5] * 5 + a[6] * 1 + …</p>
+<p>r 能被7整除</p>
+<p>对于整数的普遍规律: 仅当a &#x3D; 0或b &#x3D; 0时，a * b &#x3D; 0.推广可以得到</p>
+<p>(7) 仅当a ≡ 0 或 b ≡ 0( mod d )时，有a * b ≡ 0 ( mod d ), 并且d为素数</p>
+<h2 id="２．费马小定理"><a href="#２．费马小定理" class="headerlink" title="２．费马小定理"></a>２．费马小定理</h2><p>如果p是任意一个不能整除整数a的素数,则</p>
+<p>[latexpage]$a ^ { p - 1 } $ ≡ $1 ( mod p )$</p>
+<p>这意味着a的( p - 1 )次幂被p除后余1</p>
+<p>举一些例子:</p>
+<p>[latexpage]$10 ^ 6$ ≡ $1 ( mod 7 )$, $10 ^ 2$ ≡ $1 ( mod 3 )$, $10 ^ 10$ ≡ $1 ( mod 11 )$.</p>
+<p>以及 2 ^ 12 ≡ ( mod 13 ), 5 ^ 10 ≡ 1 ( mod 11 )</p>
+<p>我们可以利用同余式乘法性质来验证这两个式子</p>
+<p>2 ^ 4 &#x3D; 16 ≡ 3 ( mod 13 ),                            5 ^ 2 ≡ 3 ( mod 11 )</p>
+<p>2 ^ 8 ≡ 9 ≡ -4 ( mod 13 ),                           5 ^ 4 ≡ 9 ≡ -2 ( mod 11 )</p>
+<p>2 ^ 8 ≡ 9 ≡ -4 ( mod 13 ),                           5 ^ 4 ≡ 9 ≡ -2 ( mod 11 )</p>
+<p>2 ^ 12 ≡ -4 * 3 &#x3D; 12 ≡ 1 ( mod 13 ),         5 ^ 8 ≡ 4 ( mod 11 )</p>
+<p>                                                                               5 ^ 10 ≡ 3 * 4 &#x3D; 12 ≡ 1 ( mod 11 )</p>
+<p>为了证明费马定理,考虑a的倍数:</p>
+<p>m_1 &#x3D; a,</p>
+<p>m_2 &#x3D; 2 * a,</p>
+<p>m_3 &#x3D; 3 * a,</p>
+<p>… …</p>
+<p>m_( p - 1 ) &#x3D; ( p - 1 ) * a</p>
+<p>这些数中任意两个都不能模p同余，否则存在一对整数r,s, 满足1 &lt;&#x3D; r &lt; s &lt;&#x3D; ( p - 1 )，使p成为</p>
+<p>m_s - m_r &#x3D; ( s - r ) * a 的一个因子．但由规律(7)知这是不可能的，因为s - r是小于p的，所以p不是 s - r的因子，而假设p又不是a的因子，同样地，这些数中没有一个能和0同余，因此数m_1, m_2, m_3……m_(p-1)必须相应地同余于数1, 2, 3, …, ( p - 1 ).故得出</p>
+<p>m_1 * m_2 * m_3 …… m( p - 1 ) &#x3D; 1 * 2 * 3 …… ( p - 1 ) * a ^( p - 1 ) ≡ 1 * 2 * 3 ……( p - 1 ) ( mod p )</p>
+<p>记K &#x3D; m_1 * m_2 * m_3 …… m( p - 1 )，原式就变成</p>
+<p>K * ( a ^ ( p - 1 ) - 1 ) ≡ 0 ( mod p )</p>
+<p>但因为K的因子没有能被p整除的，所以K不能被p整除，因而由规律( 7 )可知，a ^ ( p - 1 ) 必须被p整除,即</p>
+<p>a ^ ( p - 1 ) - 1 ≡ 0 ( mod p )</p>
+<p>这就是费马小定理．</p>
+<h2 id="３．二次剩余"><a href="#３．二次剩余" class="headerlink" title="３．二次剩余"></a>３．二次剩余</h2><p>当p为奇数时，有p &#x3D; 2 * p’ + 1则：</p>
+<p>a ^ ( p - 1 ) - 1 &#x3D; a ^ ( 2 * p’ ) - 1 &#x3D; ( a ^ p’ - 1 ) * ( a ^ p’ + 1 ) ≡ 0 ( mod p )</p>
+<p>这说明或者( a ^ p’ - 1 )或者( a ^ p’ + 1 )必须被p整除，所以对于任一素数p &gt; 2和任一不被p整除的数a有：</p>
+<p>或有a ^ ( ( p - 1 ) &#x2F; 2 ) ≡ 1, 或有 a ^ ( ( p - 1 ) &#x2F; 2 ) ≡ -1 ( mod p ).</p>
+<p>近代数论出现后，数学家就很感兴趣地去寻找什么样的数a使第一种情形成立，什么样的数a使第二种情形成立.假设a与某个数x的平方是模p同余的，即：</p>
+<p>a ≡ x ^ 2 ( mod p )</p>
+<p>则a ^ ( ( p - 1 ) &#x2F; 2 ) ≡ x ^ ( p - 1 )，而它按照费马定理是模p同余于1的．</p>
+<p>一个数a，如果不是p的倍数且模p同余于某个数的平方，则称a为p的<strong>二次剩余</strong>．</p>
+<p>而一个不是p的倍数的数b，不同余于任何数的平方，称它为p的<strong>非二次剩余</strong>．</p>
+<p>每一个p的二次剩余a满足同余式a ^ ( ( p - 1 ) &#x2F; 2 ) ≡ 1 ( mod p )，不难证明对每一个非二次剩余b，有同余式b ^ ( ( p - 1 ) &#x2F; 2 ) ≡ -1 ( mod p )．更进一步，在数1, 2, 3, ……, p - 1中恰有( p - 1 ) &#x2F; 2个二次剩余和( p - 1 ) &#x2F; 2个非二次剩余．</p>
+<p>对于两个不同素数p和q：</p>
+<p>如果乘积( p - 1 ) &#x2F; 2 * ( q - 1 ) &#x2F; 2是偶数，则q是p的二次剩余必须而且只须p是q的二次剩余．</p>
+<p>在乘积( p - 1 ) &#x2F; 2 * ( q - 1 ) &#x2F; 2 是奇数时，这情形相反，p是q的剩余必须而且只须q是p的非剩余．</p>
+<p>这也就是<strong>二次互反律</strong>．</p>
+<p>对于二次互反律的举例：</p>
+<p>偶数情况:：取p&#x3D;5，q&#x3D;11，由于 <img src="https://www.zhihu.com/equation?tex=%5Cfrac%7B(5-1)%7D%7B2%7D%5Ccdot+%5Cfrac%7B(11-1)%7D%7B2%7D" alt="[公式]"> 乘积是偶数，则 <img src="https://www.zhihu.com/equation?tex=11%5Cequiv+1%5E%7B2%7D(mod+%5C+%5C+5)" alt="[公式]"> ，11是二次剩余(mod 5)；并且<img src="https://www.zhihu.com/equation?tex=5%5Cequiv+4%5E%7B2%7D(mod+%5C+%5C+11)" alt="[公式]">，5是二次剩余(mod 11)。</p>
+<p>奇数情况：取p&#x3D;7，q&#x3D;11，由于 <img src="https://www.zhihu.com/equation?tex=%5Cfrac%7B(7-1)%7D%7B2%7D%5Ccdot+%5Cfrac%7B(11-1)%7D%7B2%7D" alt="[公式]"> 乘积是奇数， <img src="https://www.zhihu.com/equation?tex=11%5Cequiv+2%5E%7B2%7D(mod+%5C+%5C+7)" alt="[公式]"> ，11是二次剩余(mod 7)；但是 <img src="https://www.zhihu.com/equation?tex=7%5Cequiv+18(mod+%5C+%5C+11)" alt="[公式]"> ，7是非二次剩余(mod 11)。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"><a href="/tags/maththeory/" class="post-tags__link button"># maththeory</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2020/03/16/2020/tianti200163chuzu/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            天梯2016决赛T3出租
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2020/03/11/2020/tianti2016simulate11/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            天梯2016家庭房产
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>

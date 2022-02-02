@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>SICP回顾：cons函数、使用过程定义数据结构（上） | Hexo</title>
+
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="最近在使用python完成SICP2.2部分的一些经典例题，因为在我看来使用不同的语言来完成一件相同的事情能够加深印象和理解。用python实现例题的部分也会再写成一篇文章，但是这里遇到了一些问题，需要先记录一下。 首先是我对2.2节的感悟：构造一个复杂的东西，是需要许多模块进行组合的。这些模块也可以进行拆分，但是拆分到最底层的某些部分，这些部分的构造一定是简单又正确的。（看上去是一句废话，但是要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SICP回顾：cons函数、使用过程定义数据结构（上）">
+<meta property="og:url" content="http://example.com/2021/11/20/2021/re_sicp1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在使用python完成SICP2.2部分的一些经典例题，因为在我看来使用不同的语言来完成一件相同的事情能够加深印象和理解。用python实现例题的部分也会再写成一篇文章，但是这里遇到了一些问题，需要先记录一下。 首先是我对2.2节的感悟：构造一个复杂的东西，是需要许多模块进行组合的。这些模块也可以进行拆分，但是拆分到最底层的某些部分，这些部分的构造一定是简单又正确的。（看上去是一句废话，但是要">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-20T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T18:14:55.823Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">SCHeng</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="navbar-menu button">Feed</a>
+                
+            </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/atom.xml/" class="dropdown-menu button">Feed</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        SICP回顾：cons函数、使用过程定义数据结构（上）
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2021/11/" class="post-meta__date button">2021-11-20</a>
+        
+    <span class="separate-dot"></span><a href="/categories/python/" class="button">python</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/scheme/" class="button">scheme</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/scheme/sicp/" class="button">sicp</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>最近在使用python完成SICP2.2部分的一些经典例题，因为在我看来使用不同的语言来完成一件相同的事情能够加深印象和理解。用python实现例题的部分也会再写成一篇文章，但是这里遇到了一些问题，需要先记录一下。</p>
+<p>首先是我对2.2节的感悟：构造一个复杂的东西，是需要许多模块进行组合的。这些模块也可以进行拆分，但是拆分到最底层的某些部分，这些部分的构造一定是简单又正确的。（看上去是一句废话，但是要把一个东西构造成简单但是又正确的，还是比较困难的一件事情）</p>
+<p>2.2节的最简单又正确的构造就是三个基本的函数<code>cons</code>、<code>car</code>、<code>cdr</code>，他们是那么简单，但是我又无法使用python将他们用一种优雅的方式构造出来。</p>
+<p>到底是用python的元组来构造scheme的list，还是用python的列表来构造scheme的list，我没有进行深究，我认为这两种数据结构的效果是类似的。</p>
+<h2 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>我打算用python现成的数据结构来表达scheme的list，那么<code>cons</code>、<code>car</code>、<code>cdr</code>也是要基于这种数据结构来进行编写的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple1) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple1 = (tuple1,)</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple2) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple2 = (tuple2,)</span><br><span class="line">    <span class="keyword">return</span> tuple1 + tuple2</span><br></pre></td></tr></table></figure>
+
+<p>这样的构造在不嵌套元组操作的时候看上去是对的，比如说<code>c = cons(1,2)</code>这样的操作会得到<code>c=(1,2)</code>；但是如果进行嵌套元组操作，就会出错，比如说<code>c=cons((1,2,3),(4,5,6))</code>，我们期望得到的是类似<code>c=((1,2,3),(4,5,6))</code>这样的结构，但是输出结果是<code>c=(1,2,3,4,5,6)</code>。这样的构造是不行的。</p>
+<h2 id="第二次尝试"><a href="#第二次尝试" class="headerlink" title="第二次尝试"></a>第二次尝试</h2><p>我改变了<code>cons</code>的构造，然后整体呈现是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item == ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (tuple1,tuple2)</span><br></pre></td></tr></table></figure>
+
+<p>但是这样构造的输出比较丑，我得把元组写成<code>a = (1,(2,(3,(4,()))))</code>这种形式，等价于scheme里面<code>(define a (list 1 2 3 4))</code>，不过后续的部分操作都是对的。使用<code>accumulate</code>函数稍稍验证一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accumulate</span>(<span class="params">op, init, seqs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> is_null(seqs):</span><br><span class="line">        <span class="keyword">return</span> init</span><br><span class="line">    <span class="keyword">return</span> op(car(seqs), accumulate(op, init, cdr(seqs)))</span><br><span class="line"></span><br><span class="line">accumulate(cons, (), a)</span><br><span class="line">accumulate(add, <span class="number">0</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">num1, num2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> num1 + num2</span><br></pre></td></tr></table></figure>
+
+<p>如果硬要把元组写成<code>a=(1,2,3,4)</code>这种格式，会出一点问题….使用<code>accumulate(cons, (), a)</code>看一下就明白了，会变成<code>(1, (2, (3, (4, ()))))</code>这样的格式。显然的，<code>a=(1,2,3,4)</code>这种形式要比<code>(1, (2, (3, (4, ()))))</code>看上去美观多了。</p>
+<p>但是在scheme却不会出现这种情况，比如说对一个list进行操作：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>))</span><br><span class="line">accumulate(<span class="name"><span class="builtin-name">cons</span></span>, &#x27;(), a&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>最终的输出仍然是<code>(1 2 3 4)</code>，所以我推测应该是list与cons的实现存在问题。cons的实现并不是如同我上面那样构造的，或者说当cons应用在list上时呈现效果会有变化。不过更加具体的分析我还没有想好。还有一件更加奇怪的事情。</p>
+<p>当我们去嵌套地调用<code>cons</code>函数时，出现的效果是这样的：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> b (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">cons</span></span> a b ) = ((<span class="name">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我将它描述为“b嵌套了a”或者”a被b嵌套了”。</p>
+<p>但是当我去使用一个函数，情况就发生了变化：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">accumulate-n</span> op init seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">null?</span></span> (<span class="name"><span class="builtin-name">car</span></span> seqs))</span><br><span class="line">      &#x27;()</span><br><span class="line">      (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name">accumulate</span> op init (<span class="name">car-n</span> seqs))</span><br><span class="line">        (<span class="name">accumulate-n</span> op init (<span class="name">cdr-n</span> seqs)))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">car-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> car seqs))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">cdr-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> cdr seqs))</span><br><span class="line">(<span class="name"><span class="builtin-name">load</span></span> <span class="string">&quot;accumulate.scm&quot;</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> sequence (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span>)))</span><br><span class="line"></span><br><span class="line">(<span class="name">accumulate-n</span> cons &#x27;() sequence&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>最后一行的效果是向<code>list1</code>进行一个矩阵翻转。</p>
+<p><code>car-n</code>的结果是生成一个list,然后通过accumulate-n将他们都链接起来，链接的方法是<code>cons</code>，但是最后输出的是<code>((1 4 7 10) (2 5 8 11) (3 6 9 12))</code>，并不是嵌套情况！前面举例的那个方法也是两个list通过<code>cons</code>方法链接起来，但是呈现结果是嵌套的。</p>
+<p>我就开始猜想是不是因为scheme会根据数据结构的不同来选择不一样的链接方案？比如两个list链接就是类似链表的一种链接，而第二个例子因为已经指明了原本的数据结构是一个list,所以<code>cons</code>的链接方案仍然是list形式的。</p>
+<p>我觉得在没有具体了解<code>cons</code>在scheme里面的实现，是无法得到正确的结论的。</p>
+<p>所以对于python直接使用现成数据结构构造<code>cons</code>，我目前只能达到这个阶段了。更深层的内容需要更加了解函数式构造方法后再来补充。现在只能用这种丑陋的方法继续完成sicp例题了。</p>
+<h2 id="第三次尝试，使用过程构造数据结构"><a href="#第三次尝试，使用过程构造数据结构" class="headerlink" title="第三次尝试，使用过程构造数据结构"></a>第三次尝试，使用过程构造数据结构</h2><p>既然都在构造cons了，不如回顾一下p61提到的使用过程构造cons。</p>
+<p>在我之前的尝试里面，cons理所当然地应该是一种数据结构，但是sicp个给了一种方法使他能够被函数构造出来。</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cons</span></span> x y)</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">dispatch</span> m)</span><br><span class="line">    (<span class="name"><span class="builtin-name">cond</span></span> ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">0</span>) x)</span><br><span class="line">      ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">1</span>) y)</span><br><span class="line">      (<span class="name"><span class="builtin-name">else</span></span> (<span class="name">error</span> <span class="string">&quot;Argument not 0 or 1 -- CONS&quot;</span> m))))</span><br><span class="line">  dispatch)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">car</span></span> z) (<span class="name">z</span> <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cdr</span></span> z) (<span class="name">z</span> <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>以及python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">m</span>):</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">elif</span> m == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> y</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Argument not 0 or 1 -- CONSS&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> dispatch</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里定义的cons car cdr等都是过程，cons本质上是一个数据结构。</p>
+<p>当使用cons对两个数据进行组合的时候，返回的是一个函数：</p>
+<p><code>cons(1,2)</code></p>
+<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb550&gt;</code></p>
+<p><code>cons((1,2,3),(4,5,6))</code></p>
+<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code></p>
+<p>当对被构造出来的这种结构使用car、cdr时，会根据情况来返回值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = cons((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>))</span><br><span class="line">b = cons((<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>),a)</span><br><span class="line">car(a)</span><br><span class="line">car(b)</span><br><span class="line">cdr(a)</span><br><span class="line">cdr(b)</span><br></pre></td></tr></table></figure>
+
+<p>前面三种查询都是返回元组本身，也就是可以直接查看到值的结果，但是第四个返回的是<code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code>，因为相当于直接查看a了，a的构造实际上是一个函数。</p>
+<p>其实将被构造出来的这些数据带入car、cdr、cons函数并不难理解，这又让我想起来了经典的例题2.6，同样的2.6是使用过程“重新定义”了数字，这里是用过程重新定义cons的数据结构。</p>
+<p>其实还有一些问题，不过我已经找到较为优雅的方法了，请看我的<a target="_blank" rel="noopener" href="https://scheng52123.com/index.php/2021/11/22/re_sicp1/">下一篇文章</a>。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2021/11/22/2021/re_sicp2/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            SICP回顾：cons函数、使用过程定义数据结构（下）
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2021/11/18/2021/java_compile/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            java手动编译小记
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="Back to Top" title="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
