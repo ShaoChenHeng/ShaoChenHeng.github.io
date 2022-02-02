@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SCHeng</title>
+  
+  <subtitle>It all returns to nothing.</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-02-02T19:47:26.393Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>scheng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我的音乐播放器，Rubber2</title>
+    <link href="http://example.com/2021/12/26/2021/rubber2/"/>
+    <id>http://example.com/2021/12/26/2021/rubber2/</id>
+    <published>2021-12-26T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="android" scheme="http://example.com/categories/android/"/>
+    
+    <category term="javascript" scheme="http://example.com/categories/android/javascript/"/>
+    
+    <category term="vue-js" scheme="http://example.com/categories/android/javascript/vue-js/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SICP回顾：cons函数、使用过程定义数据结构（下）</title>
+    <link href="http://example.com/2021/11/22/2021/re_sicp2/"/>
+    <id>http://example.com/2021/11/22/2021/re_sicp2/</id>
+    <published>2021-11-22T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="emacs" scheme="http://example.com/categories/emacs/"/>
+    
+    <category term="python" scheme="http://example.com/categories/emacs/python/"/>
+    
+    <category term="scheme" scheme="http://example.com/categories/emacs/python/scheme/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SICP回顾：cons函数、使用过程定义数据结构（上）</title>
+    <link href="http://example.com/2021/11/20/2021/re_sicp1/"/>
+    <id>http://example.com/2021/11/20/2021/re_sicp1/</id>
+    <published>2021-11-20T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    <category term="scheme" scheme="http://example.com/categories/python/scheme/"/>
+    
+    <category term="sicp" scheme="http://example.com/categories/python/scheme/sicp/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java手动编译小记</title>
+    <link href="http://example.com/2021/11/18/2021/java_compile/"/>
+    <id>http://example.com/2021/11/18/2021/java_compile/</id>
+    <published>2021-11-18T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.390Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://example.com/categories/java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java package小记</title>
+    <link href="http://example.com/2021/11/16/2021/java-package/"/>
+    <id>http://example.com/2021/11/16/2021/java-package/</id>
+    <published>2021-11-16T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.390Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="interpreter" scheme="http://example.com/categories/interpreter/"/>
+    
+    <category term="java" scheme="http://example.com/categories/interpreter/java/"/>
+    
+    <category term="book" scheme="http://example.com/categories/interpreter/java/book/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于opml，使用lxml解析opml文件小记</title>
+    <link href="http://example.com/2021/11/10/2021/opml/"/>
+    <id>http://example.com/2021/11/10/2021/opml/</id>
+    <published>2021-11-10T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>树的映射以及map函数</title>
+    <link href="http://example.com/2021/11/07/2021/scale-tree/"/>
+    <id>http://example.com/2021/11/07/2021/scale-tree/</id>
+    <published>2021-11-07T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    <category term="scheme" scheme="http://example.com/categories/python/scheme/"/>
+    
+    <category term="sicp" scheme="http://example.com/categories/python/scheme/sicp/"/>
+    
+    <category term="book" scheme="http://example.com/categories/python/scheme/sicp/book/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Arch折腾记录</title>
+    <link href="http://example.com/2021/11/02/2021/arch_setup/"/>
+    <id>http://example.com/2021/11/02/2021/arch_setup/</id>
+    <published>2021-11-02T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.383Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="os" scheme="http://example.com/categories/os/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何让Vue.js能够调用Python函数？</title>
+    <link href="http://example.com/2021/10/27/2021/jsreadwrite/"/>
+    <id>http://example.com/2021/10/27/2021/jsreadwrite/</id>
+    <published>2021-10-27T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.390Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="python" scheme="http://example.com/categories/python/"/>
+    
+    <category term="vue-js" scheme="http://example.com/categories/python/vue-js/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何给一个新的语言命名？</title>
+    <link href="http://example.com/2021/10/26/2021/howtonameanewlanugage/"/>
+    <id>http://example.com/2021/10/26/2021/howtonameanewlanugage/</id>
+    <published>2021-10-26T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.383Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="book" scheme="http://example.com/categories/book/"/>
+    
+    <category term="解释器" scheme="http://example.com/categories/book/%E8%A7%A3%E9%87%8A%E5%99%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我的中国开源之夏2021</title>
+    <link href="http://example.com/2021/10/16/2021/summer2021/"/>
+    <id>http://example.com/2021/10/16/2021/summer2021/</id>
+    <published>2021-10-16T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="summer" scheme="http://example.com/categories/summer/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>远程服务器复制操作小记</title>
+    <link href="http://example.com/2021/09/01/2021/server-copy/"/>
+    <id>http://example.com/2021/09/01/2021/server-copy/</id>
+    <published>2021-09-01T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="os" scheme="http://example.com/categories/os/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>npm权限调试小记</title>
+    <link href="http://example.com/2021/08/26/2021/npm1/"/>
+    <id>http://example.com/2021/08/26/2021/npm1/</id>
+    <published>2021-08-26T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.393Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>泥潭</title>
+    <link href="http://example.com/2021/07/14/2021/856/"/>
+    <id>http://example.com/2021/07/14/2021/856/</id>
+    <published>2021-07-14T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.383Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="disorder" scheme="http://example.com/categories/disorder/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从零开始的Emacs配置学习</title>
+    <link href="http://example.com/2021/01/30/2021/learnemacs/"/>
+    <id>http://example.com/2021/01/30/2021/learnemacs/</id>
+    <published>2021-01-30T00:00:00.000Z</published>
+    <updated>2022-02-02T19:47:26.390Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="emacs" scheme="http://example.com/categories/emacs/"/>
+    
+    
+  </entry>
+  
+</feed>
