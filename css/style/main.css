@@ -848,7 +848,11 @@ overflows table td {
 .cover {
   display: block;
   text-align: center;
+  font-size: 20px;
   margin: 3rem auto;
+}
+.cover .cover__intro {
+  color: #999;
 }
 .cover .cover__logo {
   max-width: 1024px;
@@ -856,13 +860,8 @@ overflows table td {
   margin-right: auto;
 }
 .cover .cover__avatar {
-  border-radius: 50%;
-  width: 96px;
-  height: 96px;
+  border-radius: 0%;
   margin: 0 auto 1rem auto;
-}
-.cover .cover__intro {
-  color: #999;
 }
 .footer {
   display: block;
@@ -944,7 +943,7 @@ overflows table td {
   font-family: rubik, sans-serif, Varela Round;
 }
 .header .header__left .logo__text {
-  font-size: 18px;
+  font-size: 30px;
   padding: 16px 10px 16px 10px;
   border-radius: 5px;
 }
@@ -952,7 +951,7 @@ overflows table td {
   padding: 0 0 0 15px;
 }
 .header .header__right .navbar__menus .navbar-menu {
-  font-size: 16px;
+  font-size: 18px;
   padding: 16px 10px 16px 10px;
   border-radius: 5px;
 }
@@ -1012,7 +1011,7 @@ overflows table td {
 @media screen and (min-width: 1080px) {
   .header {
     position: sticky;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(5px);
   }
 }
 @media screen and (max-width: 764px) {
