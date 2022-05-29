@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>指令设计的三个原则和加速大概率事件</title>
+    <url>/2022/05/29/instruction-design/</url>
+    <content><![CDATA[<p>记录 <em>计算机组成与接口：硬件&#x2F;软件设计</em> 一书中指令部分频繁提到的三个原则和一个概念。</p>
+<h2 id="硬件设计的三条原则"><a href="#硬件设计的三条原则" class="headerlink" title="硬件设计的三条原则"></a>硬件设计的三条原则</h2><ol>
+<li><p><strong>简单源于规整</strong> 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。</p>
+</li>
+<li><p><strong>越小越快</strong> 。对速度的要求导致MIPS只有32个寄存器而不是更多。</p>
+</li>
+<li><p><strong>优秀的设计需要好的折中</strong> 。一个MIPS例子是在指令中提供更大地址与常数，并且保持所有的指令具有相同的长度之间的折中。</p>
+</li>
+</ol>
+<h2 id="加速大概率事件"><a href="#加速大概率事件" class="headerlink" title="加速大概率事件"></a>加速大概率事件</h2><p>加速大概率事件远比优化小概率事件更能提高性能。大概率事件h通常比小概率事件简单，从而易于提高。大概率事件规则意味着设计者需要知道什么事件是经常发生的，这只有通过仔细的实验与评估才能得出。可以把加速大概率事件想象成一辆赛车，由于通常情况下只有一两名乘客因此提高赛车的速度比提高小型货车的速度容易。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>2020牛客寒假算法基础集训营1</title>
     <url>/2020/02/04/2020/2020niukewintercontest1/</url>
     <content><![CDATA[<p>题目链接:<a href="https://ac.nowcoder.com/acm/contest/3002#question">https://ac.nowcoder.com/acm/contest/3002#question</a></p>
@@ -144,6 +159,17 @@
 ]]></content>
   </entry>
   <entry>
+    <title>二分查找</title>
+    <url>/2020/07/22/2020/bianrysearchqus/</url>
+    <content><![CDATA[<p><a href="https://codeforces.ml/problemset/problem/1370/D">1370 D. Odd-Even Subsequence</a></p>
+]]></content>
+      <categories>
+        <category>binarysearch</category>
+        <category>algorithmanddatastruct</category>
+        <category>algorithmquiz</category>
+      </categories>
+  </entry>
+  <entry>
     <title>分块思想</title>
     <url>/2020/07/28/2020/blockqus/</url>
     <content><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P2261">[CQOI2007]余数求和</a></p>
@@ -156,17 +182,6 @@
       <tags>
         <tag>block</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>二分查找</title>
-    <url>/2020/07/22/2020/bianrysearchqus/</url>
-    <content><![CDATA[<p><a href="https://codeforces.ml/problemset/problem/1370/D">1370 D. Odd-Even Subsequence</a></p>
-]]></content>
-      <categories>
-        <category>binarysearch</category>
-        <category>algorithmanddatastruct</category>
-        <category>algorithmquiz</category>
-      </categories>
   </entry>
   <entry>
     <title>图的建立以及使用数据结构存储</title>
@@ -512,6 +527,22 @@ return 0;
       </tags>
   </entry>
   <entry>
+    <title>Hello world!</title>
+    <url>/2020/02/02/2020/hello-world/</url>
+    <content><![CDATA[<p>本来打算用树莓派做博客的,但是因为后续操作过于繁琐以及安全问题(说到底还是我菜)还是放弃了.然后有折腾了好久才把最后这个博客搭建起来.反正我有我的第一个博客了!</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>图论之LCA</title>
+    <url>/2020/07/23/2020/lcaqus/</url>
+    <content><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6540">2019湖南邀请赛 I Neko and tree</a> 由于数据太水了,用 LCA 写一个假算法也可以过(正解是树形DP)</p>
+]]></content>
+      <categories>
+        <category>graphtheory</category>
+        <category>algorithmanddatastruct</category>
+      </categories>
+  </entry>
+  <entry>
     <title>不能说的话</title>
     <url>/2020/03/28/2020/hackersandpainters3/</url>
     <content><![CDATA[<p>&lt;&lt;不能说的话&gt;&gt;是&lt;&lt;黑客与画家&gt;&gt;中的第三章，今天翻看了一遍觉得非常有意思，并且探讨的是一些我未思考过的问题，于是决定记录其中的一些文字下来．但这里讨论的东西也只能作为一种看待问题的新方法，因为我认为作者的一些其他文章很具有主观色彩和’’民族烙印’’．</p>
@@ -546,22 +577,6 @@ return 0;
         <tag>book</tag>
         <tag>hackersandpainters</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello world!</title>
-    <url>/2020/02/02/2020/hello-world/</url>
-    <content><![CDATA[<p>本来打算用树莓派做博客的,但是因为后续操作过于繁琐以及安全问题(说到底还是我菜)还是放弃了.然后有折腾了好久才把最后这个博客搭建起来.反正我有我的第一个博客了!</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>图论之LCA</title>
-    <url>/2020/07/23/2020/lcaqus/</url>
-    <content><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6540">2019湖南邀请赛 I Neko and tree</a> 由于数据太水了,用 LCA 写一个假算法也可以过(正解是树形DP)</p>
-]]></content>
-      <categories>
-        <category>graphtheory</category>
-        <category>algorithmanddatastruct</category>
-      </categories>
   </entry>
   <entry>
     <title>线性DP</title>
@@ -1867,6 +1882,23 @@ return 0;
       </categories>
   </entry>
   <entry>
+    <title>如何让Vue.js能够调用Python函数？</title>
+    <url>/2021/10/27/2021/jsreadwrite/</url>
+    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
+<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次，在Python端定义函数:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
+
+<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>vue-js</category>
+      </categories>
+  </entry>
+  <entry>
     <title>java手动编译小记</title>
     <url>/2021/11/18/2021/java_compile/</url>
     <content><![CDATA[<p>这篇文章记录如何不使用IDE，使用javac进行编译。</p>
@@ -1898,23 +1930,6 @@ return 0;
 ]]></content>
       <categories>
         <category>java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>如何让Vue.js能够调用Python函数？</title>
-    <url>/2021/10/27/2021/jsreadwrite/</url>
-    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
-<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其次，在Python端定义函数:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
-
-<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>vue-js</category>
       </categories>
   </entry>
   <entry>
@@ -2207,7 +2222,7 @@ return 0;
 <p>假设远程服务器IP地址为 192.168.1.100</p>
 <h2 id="从服务器复制文件到本地"><a href="#从服务器复制文件到本地" class="headerlink" title="从服务器复制文件到本地"></a>从服务器复制文件到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp root@192.168.1.100:/data/test.txt /home/myfile/</span><br><span class="line">补充：</span><br><span class="line">1. 多文件拷贝</span><br><span class="line">　　scp root@192.168.1.100:/data/\&#123;test1.txt,test2.cpp,test3.bin,test.*\&#125; /home/myfile/</span><br><span class="line">2. scp默认连接的远端主机22端口，如果ssh不是使用标准的22端口（以233为例）则使用-P（P大写）指定：</span><br><span class="line">　　scp -P 233 root@192.168.1.100:/data/test.txt /home/myfile/</span><br></pre></td></tr></table></figure>
 
-<p><a href="mailto:&#114;&#111;&#111;&#x74;&#64;&#x31;&#57;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#x2e;&#x31;&#x30;&#x30;">&#114;&#111;&#111;&#x74;&#64;&#x31;&#57;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#x2e;&#x31;&#x30;&#x30;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
+<p><a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#x2e;&#x31;&#46;&#49;&#48;&#48;">&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#x2e;&#x31;&#46;&#49;&#48;&#48;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
 <h2 id="从服务器复制文件夹到本地"><a href="#从服务器复制文件夹到本地" class="headerlink" title="从服务器复制文件夹到本地"></a>从服务器复制文件夹到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r root@192.168.1.100:/data/ /home/myfile/</span><br></pre></td></tr></table></figure>
 
 <h2 id="从本地复制文件到服务器"><a href="#从本地复制文件到服务器" class="headerlink" title="从本地复制文件到服务器"></a>从本地复制文件到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp /home/myfile/test.txt root@192.168.1.100:/data/</span><br><span class="line">补充：多文件拷贝</span><br><span class="line">scp /home/myfile/test1.txt test2.cpp test3.bin test.* root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
@@ -2252,99 +2267,5 @@ return 0;
       <categories>
         <category>summer</category>
       </categories>
-  </entry>
-  <entry>
-    <title>解释器代码表示笔记</title>
-    <url>/2022/02/13/note-representing-code/</url>
-    <content><![CDATA[<h3 id="乔姆斯基层次结构"><a href="#乔姆斯基层次结构" class="headerlink" title="乔姆斯基层次结构"></a>乔姆斯基层次结构</h3><p>乔姆斯基层次结构表示不同机器所接受的语言类别。乔姆斯基层次结构的语言类别如下：</p>
-<ul>
-<li>类型0称为无限制语法</li>
-<li>类型1称为上下文相关语法</li>
-<li>类型2称为上下文无关语法</li>
-<li>类型3称为常规语法&#x2F;正则语法</li>
-</ul>
-<p>这是一个层次结构，类型3的语言也是类型2、1、0。类型2的语言也是类型1、0。以此类推。</p>
-<h3 id="Context-Free-Grammars-上下文无关文法"><a href="#Context-Free-Grammars-上下文无关文法" class="headerlink" title="Context-Free Grammars (上下文无关文法)"></a>Context-Free Grammars (上下文无关文法)</h3><p>在上一章节<a href="http://craftinginterpreters.com/scanning.html">Scanning</a>中，将字符进行分组称为Token（词法标签&#x2F;词法单元）的规则被称为常规语法（regular language）。常规语法可以产生一系列 <strong>扁平</strong> 的Token序列，但是不能够处理深度嵌套的表达式，比如使用树形结构构造一个四则运算表达式的树，就是一种深度嵌套的表达式。</p>
-<p>上下文无关文法能够处理这种深度嵌套的表达式。</p>
-<h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><p>我们无法列举出这样一套语法，这套语法能够包含无限多有效字符串。我们可以创建一套有限的规则，你可以把它们想象成一场你可以朝两个方向“玩”的游戏。</p>
-<p>如果从规则入手，你可以用它们生成语法规则内的字符串，通过这种形式创建的字符串被称为 <strong>推导式</strong> （派生式），因为每一个字符串都是由语法规则中推到出来的。<br>在游戏的每一步中，都要选择一条规则，然后按照它告诉你的去做。围绕形式化语法的大部分语言都倾向这种发誓。规则被称为生成式，因为他们生成了语法中的字符串。</p>
-<p>这个生成过程和GEB里面提到的 <em>WU 谜题</em> 这一章节的内容有一些相同之处。</p>
-<h4 id="WU-谜题"><a href="#WU-谜题" class="headerlink" title="WU 谜题"></a>WU 谜题</h4><p>这个谜题就是“你能产生 <strong>WU</strong> 吗？”，提供了一个字符串 <strong>WJ</strong> ，提供一些规则，使用这些规则把一个字符串变成另一个。重要的、几乎用不着说明的一点是，你决不能做任何违背规则的事情。我们可以把这个限制称做“形式化要求”。</p>
-<p>关于我们的形式系统———— <strong>WJU系统</strong> ————要说的第一件事就是它只用了三个字母： <strong>W</strong> 、<strong>J</strong> 、 <strong>U</strong> 。也就是说，WJU系统中的所有字符串都是由这三个字母组成的。一些WJU系统的例子：</p>
-<ul>
-<li>WU</li>
-<li>UJW</li>
-<li>WUUWUU</li>
-<li>UJJUWJUUJWUJJUWJUUJWUJJU</li>
-</ul>
-<p>提供的规则有：</p>
-<ol>
-<li>如果一个现有的字符串结尾是J,则可以在其后面再加上一个U。</li>
-<li>如果一个现有的字符串是Wx,那么就可以得到Wxx。</li>
-<li>如果JJJ出现在一个现有的字符串中，那么可以用U替代这个JJJ得到一个新的字符串。</li>
-<li>如果UU出现在一个现有的字符串中，就可以把它这个UU去掉。</li>
-</ol>
-<p>规则2中的”x“可以表示任意的字符串。例子：</p>
-<ul>
-<li>WJU -&gt; WJUJU</li>
-<li>WUW -&gt; WUWUW</li>
-<li>WU  -&gt; WUU</li>
-</ul>
-<p>规则3的例子：</p>
-<ul>
-<li>UWJJJWU -&gt; UWUWU</li>
-<li>WJJJJ -&gt; WJU &#x2F; WUJ</li>
-<li>JJWJJ -&gt; 这个啥也得不到</li>
-<li>WJJJ -&gt; WU</li>
-</ul>
-<p>规则4的例子：</p>
-<ul>
-<li>UUU -&gt; UU</li>
-<li>WUUUJJJ -&gt; WUJJJ</li>
-</ul>
-<p>以上就是 WU谜题 的全部规则，现在可以试试找出 WU 了。</p>
-<p>&amp;nbsp;<br>&amp;nbsp;</p>
-<p>上下文无关文法中的每一个生成式都有一个 <strong>头部</strong> （其名称）和描述其生成内容的 <strong>主体</strong>。从纯粹的形式上来看，主体只是一系列的符号，符号有两种：</p>
-<ul>
-<li><strong>终止符</strong> 是语法字母表中的一个字母，它可以是任意一个字面值。在我们定义的语法中，终止符是独立的词素（lexemes）———来自扫描器的词法单元（Token），比如 <code>if</code> 或 <code>1234</code>。</li>
-</ul>
-<p>这些词素（lexemes）被称为“终止符”，表示“终点”，因为它们不会使游戏进行下一步动作了。只是简单地产生了一个符号。</p>
-<ul>
-<li><strong>非终止符</strong> 是对语法中另一条规则的命名引用，它的意思是“执行那条规则然后将它产生的内容插入到这里”。这样，语法就构成了。</li>
-</ul>
-<p>一个细节： 你可以有多个同名规则，当遇到一个该名字的非终止符时，可以为他选择同名规则中的任意一条。</p>
-<p>我们试图提出一个简单的形式(这是一个巴科斯范式 <strong>BNF</strong> 的变形)。 每个规则都是一个名称，后跟一个箭头（<code>→</code>），后跟一系列符号，最后以分号（<code>;</code>）结尾。 终止符是带引号的字符串，非终止符是小写的单词。</p>
-<p>比如这个早餐菜单语法：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">breakfast  → protein <span class="string">&quot;with&quot;</span> breakfast <span class="string">&quot;on the side&quot;</span> ;</span><br><span class="line">breakfast  → protein ;</span><br><span class="line">breakfast  → bread ;</span><br><span class="line"></span><br><span class="line">protein    → crispiness <span class="string">&quot;crispy&quot;</span> <span class="string">&quot;bacon&quot;</span> ;</span><br><span class="line">protein    → <span class="string">&quot;sausage&quot;</span> ;</span><br><span class="line">protein    → cooked <span class="string">&quot;eggs&quot;</span> ;</span><br><span class="line"></span><br><span class="line">crispiness → <span class="string">&quot;really&quot;</span> ;</span><br><span class="line">crispiness → <span class="string">&quot;really&quot;</span> crispiness ;</span><br><span class="line"></span><br><span class="line">cooked     → <span class="string">&quot;scrambled&quot;</span> ;</span><br><span class="line">cooked     → <span class="string">&quot;poached&quot;</span> ;</span><br><span class="line">cooked     → <span class="string">&quot;fried&quot;</span> ;</span><br><span class="line"></span><br><span class="line">bread      → <span class="string">&quot;toast&quot;</span> ;</span><br><span class="line">bread      → <span class="string">&quot;biscuits&quot;</span> ;</span><br><span class="line">bread      → <span class="string">&quot;English muffin&quot;</span> ;</span><br></pre></td></tr></table></figure>
-
-<p>用这个规则来生成一份早餐，随机选第一个<code>breakfast</code>。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">protein <span class="string">&quot;with&quot;</span> breakfast <span class="string">&quot;on the side&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>展开第一个非终止符，<code>protein</code>,选一个对应的表达式，选第三个吧。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">protein    → cooked <span class="string">&quot;eggs&quot;</span> ;</span><br></pre></td></tr></table></figure>
-
-<p>然后再展开 <code>cooked</code> 的生成式，选“poached”吧，这是一个终止符，我们加上它。目前整个早餐字符串是这样的：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;poached&quot;</span> <span class="string">&quot;eggs&quot;</span> <span class="string">&quot;with&quot;</span> breakfast <span class="string">&quot;on the side&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>下一个非终止符还是 <code>breakfast</code> ,第一个 <code>breakfast</code>生成式递归地指向了<code>breakfast</code>规则。语法中的递归是一个很好的标志，表明这个语法是上下文无关的而不是正则的。特别地，递归的非终结符两边都有生成式的递归，意味着语言不是正则的。</p>
-<p>利用这个递归的<code>breakfast</code>，反复递归第一条<code>breakfast</code>就可以生成各种早餐了。</p>
-<p>每当我们遇到一个规则具有多个生成式时，我们只是随意选了一个。正是这种灵活性，允许少量的语法规则能够编码出组合性更强的字符串集。一个规则直接地或者间接地引用它自己，这就提高了这个规则的灵活性，让我们能够将无限多的字符串打包到一个有限的语法中。</p>
-<p>&amp;nbsp;<br>&amp;nbsp;</p>
-<p>先去实现一个Lox语言的子集，一旦可以对这个子集进行表示、解析和解释，那么后续的操作就是为它添加新的特性和新的语法。首先要考虑的是这些内容：</p>
-<ul>
-<li><p><strong>字面量</strong> 。数字、字符串、布尔值和<code>nil</code>。</p>
-</li>
-<li><p><strong>一元表达式</strong> 。前缀<code>！</code>执行逻辑非运算，<code>-</code>对数字求反。</p>
-</li>
-<li><p><strong>二元表达式</strong> ，其中包括中缀算数符号<code>+，-，*，/</code>以及逻辑运算符号<code>==，！=，&lt;，&lt;=，&gt;，&gt;=</code>。</p>
-</li>
-<li><p><strong>括号</strong> 。 <code>（</code> 和 <code>）</code> 。</p>
-</li>
-</ul>
-<p>上面提到的这些运算已经能够完成简单四则运算了。</p>
-<p>用一种BNF变形来表示这种语法结构：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">expression     → literal</span><br><span class="line">               | unary</span><br><span class="line">               | binary</span><br><span class="line">               | grouping ;</span><br><span class="line"></span><br><span class="line">literal        → NUMBER | STRING | <span class="string">&quot;true&quot;</span> | <span class="string">&quot;false&quot;</span> | <span class="string">&quot;nil&quot;</span> ;</span><br><span class="line">grouping       → <span class="string">&quot;(&quot;</span> expression <span class="string">&quot;)&quot;</span> ;</span><br><span class="line">unary          → ( <span class="string">&quot;-&quot;</span> | <span class="string">&quot;!&quot;</span> ) expression ;</span><br><span class="line">binary         → expression operator expression ;</span><br><span class="line">operator       → <span class="string">&quot;==&quot;</span> | <span class="string">&quot;!=&quot;</span> | <span class="string">&quot;&lt;&quot;</span> | <span class="string">&quot;&lt;=&quot;</span> | <span class="string">&quot;&gt;&quot;</span> | <span class="string">&quot;&gt;=&quot;</span></span><br><span class="line">               | <span class="string">&quot;+&quot;</span>  | <span class="string">&quot;-&quot;</span>  | <span class="string">&quot;*&quot;</span> | <span class="string">&quot;/&quot;</span> ;</span><br></pre></td></tr></table></figure>
-
-]]></content>
   </entry>
 </search>

@@ -25,7 +25,7 @@
     <!-- meta -->
 
 
-<title>我的音乐播放器，Rubber2 | SCHeng</title>
+<title>指令设计的三个原则和加速大概率事件 | SCHeng</title>
 
 
 
@@ -33,23 +33,17 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="这是本学期一门课程（移动互联）的课程作业，这门课安排的语言是kotlin，但是我用了两下感觉编程体验并不好。后来得知是可以使用任何语言的，于是就选择了较为趁手的Vue.js，再结合uni-app套件实现安卓打包，理论上也可以打包成为ipa，不过我目前还没测试过。 github地址为：https:&#x2F;&#x2F;github.com&#x2F;ShaoChenHeng&#x2F;Rubber2 更多的描述内容已经写在github页">
+    <meta name="description" content="记录 计算机组成与接口：硬件&#x2F;软件设计 一书中指令部分频繁提到的三个原则和一个概念。 硬件设计的三条原则 简单源于规整 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。  越小越快 。对速度的要求导致MIPS只有32个寄存器而不是更多。  优秀的设计需要好的折中 。一个MIPS例子是在指令中提供更大地址与常数，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的音乐播放器，Rubber2">
-<meta property="og:url" content="http://example.com/2021/12/26/2021/rubber2/index.html">
+<meta property="og:title" content="指令设计的三个原则和加速大概率事件">
+<meta property="og:url" content="http://example.com/2022/05/29/instruction-design/index.html">
 <meta property="og:site_name" content="SCHeng">
-<meta property="og:description" content="这是本学期一门课程（移动互联）的课程作业，这门课安排的语言是kotlin，但是我用了两下感觉编程体验并不好。后来得知是可以使用任何语言的，于是就选择了较为趁手的Vue.js，再结合uni-app套件实现安卓打包，理论上也可以打包成为ipa，不过我目前还没测试过。 github地址为：https:&#x2F;&#x2F;github.com&#x2F;ShaoChenHeng&#x2F;Rubber2 更多的描述内容已经写在github页">
+<meta property="og:description" content="记录 计算机组成与接口：硬件&#x2F;软件设计 一书中指令部分频繁提到的三个原则和一个概念。 硬件设计的三条原则 简单源于规整 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。  越小越快 。对速度的要求导致MIPS只有32个寄存器而不是更多。  优秀的设计需要好的折中 。一个MIPS例子是在指令中提供更大地址与常数，">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/home.jpg">
-<meta property="og:image" content="http://example.com/images/play1.jpg">
-<meta property="og:image" content="http://example.com/images/play2.jpg">
-<meta property="og:image" content="http://example.com/images/mine.jpg">
-<meta property="og:image" content="http://example.com/images/search2.jpg">
-<meta property="article:published_time" content="2021-12-26T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-02T19:47:26.393Z">
+<meta property="article:published_time" content="2022-05-29T22:54:24.000Z">
+<meta property="article:modified_time" content="2022-05-29T22:58:05.427Z">
 <meta property="article:author" content="scheng">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/home.jpg">
 
 
     
@@ -138,17 +132,11 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        我的音乐播放器，Rubber2
+        指令设计的三个原则和加速大概率事件
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2021/12/" class="post-meta__date button">2021-12-26</a>
+        <a href="/archives/2022/05/" class="post-meta__date button">2022-05-29</a>
         
-    <span class="separate-dot"></span><a href="/categories/android/" class="button">android</a>
-
-    <span class="separate-dot"></span><a href="/categories/android/javascript/" class="button">javascript</a>
-
-    <span class="separate-dot"></span><a href="/categories/android/javascript/vue-js/" class="button">vue-js</a>
-
  
         
     
@@ -166,19 +154,20 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>这是本学期一门课程（移动互联）的课程作业，这门课安排的语言是kotlin，但是我用了两下感觉编程体验并不好。后来得知是可以使用任何语言的，于是就选择了较为趁手的Vue.js，再结合uni-app套件实现安卓打包，理论上也可以打包成为ipa，不过我目前还没测试过。</p>
-<p>github地址为：<a target="_blank" rel="noopener" href="https://github.com/ShaoChenHeng/Rubber2">https://github.com/ShaoChenHeng/Rubber2</a></p>
-<p>更多的描述内容已经写在github页面了，可以自行查看，这里不再赘述。</p>
-<h2 id="运行图片"><a href="#运行图片" class="headerlink" title="运行图片"></a>运行图片</h2><p><img src="/images/home.jpg" alt="home"> <img src="/images/play1.jpg" alt="play1"> <img src="/images/play2.jpg" alt="play2"> <img src="/images/mine.jpg" alt="mine">) <img src="/images/search2.jpg" alt="search">)</p>
-<h2 id="weex-和-uni-app-以及-Hbuilderx"><a href="#weex-和-uni-app-以及-Hbuilderx" class="headerlink" title="weex 和 uni-app 以及 Hbuilderx"></a>weex 和 uni-app 以及 Hbuilderx</h2><p>（要不是这里是博客，我可能已经破口大骂了，哈哈哈。）</p>
-<p>weex和uni-app还有许多兼容性问题，这也给我的css排版工作带来了很多问题。最终地播放界面是可以更加好看的（我的最初设想是提取图片主色和次色进行颜色渐变作为背景，无奈各种npm库无法直接使用，手写八叉树的话，uni-app画布建立又与传统js不同；css部分也不支持blur，不支持多方向多颜色的渐变。所以我十分痛苦也十分无奈。），以后我也会慢慢改进呈现出我想要的那个状态来。</p>
-<p>uni-app只能在Hbuilderx上进行编译运行，而Hbuilderx只能运行在Windows上，这给我带来了一次 <strong>最不好</strong> 的编程体验。在写这个程序的十天里，我经历了两次莫名奇妙的文件自行被编辑器改动；只要出现引号内的长内容（比如说在进行数据渲染前我需要添加一些测试图片url），就会出现文字排版错误，光标不知道自己该在哪里。</p>
-<p>在逐渐习惯了Emacs的全键盘操作后，频繁地进行键鼠切换是一件很痛苦地事情。</p>
-<p>要不是迫不得已，我以后不会优先考虑将Hbuilderx作为我的编辑器。</p>
+        <p>记录 <em>计算机组成与接口：硬件&#x2F;软件设计</em> 一书中指令部分频繁提到的三个原则和一个概念。</p>
+<h2 id="硬件设计的三条原则"><a href="#硬件设计的三条原则" class="headerlink" title="硬件设计的三条原则"></a>硬件设计的三条原则</h2><ol>
+<li><p><strong>简单源于规整</strong> 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。</p>
+</li>
+<li><p><strong>越小越快</strong> 。对速度的要求导致MIPS只有32个寄存器而不是更多。</p>
+</li>
+<li><p><strong>优秀的设计需要好的折中</strong> 。一个MIPS例子是在指令中提供更大地址与常数，并且保持所有的指令具有相同的长度之间的折中。</p>
+</li>
+</ol>
+<h2 id="加速大概率事件"><a href="#加速大概率事件" class="headerlink" title="加速大概率事件"></a>加速大概率事件</h2><p>加速大概率事件远比优化小概率事件更能提高性能。大概率事件h通常比小概率事件简单，从而易于提高。大概率事件规则意味着设计者需要知道什么事件是经常发生的，这只有通过仔细的实验与评估才能得出。可以把加速大概率事件想象成一辆赛车，由于通常情况下只有一两名乘客因此提高赛车的速度比提高小型货车的速度容易。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2022-02-02</p></div> 
+    <div class="post-footer__meta"><p>updated at 2022-05-29</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
@@ -186,30 +175,16 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2022/05/29/instruction-design/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            指令设计的三个原则和加速大概率事件
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2021/11/22/2021/re_sicp2/" class="nav__link">
+                <a href="/2021/12/26/2021/rubber2/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            SICP回顾：cons函数、使用过程定义数据结构（下）
+                            我的音乐播放器，Rubber2
                         </div>
                     </div>
                     <div>
