@@ -38,6 +38,29 @@
   </entry>
   
   <entry>
+    <title>解释器代码表示笔记</title>
+    <link href="http://example.com/2022/02/13/2022/note-representing-code/"/>
+    <id>http://example.com/2022/02/13/2022/note-representing-code/</id>
+    <published>2022-02-13T21:09:21.000Z</published>
+    <updated>2022-06-05T22:50:16.803Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+    <category term="interpreter" scheme="http://example.com/tags/interpreter/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我的音乐播放器，Rubber2</title>
     <link href="http://example.com/2021/12/26/2021/rubber2/"/>
     <id>http://example.com/2021/12/26/2021/rubber2/</id>
@@ -358,29 +381,6 @@
     
     
     <category term="javascript" scheme="http://example.com/categories/javascript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>泥潭</title>
-    <link href="http://example.com/2021/07/14/2021/856/"/>
-    <id>http://example.com/2021/07/14/2021/856/</id>
-    <published>2021-07-14T00:00:00.000Z</published>
-    <updated>2022-02-02T19:47:26.383Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    <category term="disorder" scheme="http://example.com/categories/disorder/"/>
     
     
   </entry>

@@ -142,6 +142,32 @@
                     <div class="post-entry__header"></div>
 <div class="post-entry__content">
     <h2 class="post-entry__title">
+        如何让Vue.js能够调用Python函数？
+    </h2>
+    
+        <p>
+            这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 QWebChannel 来实现vue.js调用python函数的方法。
+首先，在Vue组件的created()函数中写下如下代码，表示绑定Python端的QWebChannel对象pyobject到JavaScript端的window.pyobj...
+        </p>
+    
+</div>
+<div class="post-entry__meta">
+    <a href="/archives/2021/10/" class="post-meta__date button">2021-10-27</a>
+    
+    <span class="separate-dot"></span><a href="/categories/python/" class="button">python</a>
+
+    <span class="separate-dot"></span><a href="/categories/python/vue-js/" class="button">vue-js</a>
+
+ 
+</div>
+<div class="post-entry__tags"></div> 
+<a href="/2021/10/27/2021/jsreadwrite/" class="post-entry__link">如何让Vue.js能够调用Python函数？</a>
+                </div>
+            
+                <div class='post-entry content-card'>
+                    <div class="post-entry__header"></div>
+<div class="post-entry__content">
+    <h2 class="post-entry__title">
         如何给一个新的语言命名？
     </h2>
     
@@ -368,31 +394,6 @@ dp[i][j] 为在$i$的位置,已经向左移动了$j$次的最大和
 </div>
 <div class="post-entry__tags"><a href="/tags/dp/" class="post-tags__link button"># dp</a></div> 
 <a href="/2020/10/09/2020/linedp/" class="post-entry__link">线性DP</a>
-                </div>
-            
-                <div class='post-entry content-card'>
-                    <div class="post-entry__header"></div>
-<div class="post-entry__content">
-    <h2 class="post-entry__title">
-        Summer 2020 从申请到结项
-    </h2>
-    
-        <p>
-            非常荣幸能够参与这次的暑期活动，参加了 Oi Wiki 的内容维护，编写和完善了一些算法与数据结构的页面。这篇文章记录一下我整个Summer 2020活动的过程。
-大一一学年以及2020年总算做了点事情吧，没有碌碌无为(大概)，自我感觉良好。大一刚入学的时候是打算直接参与 Google 的 GSoC 的，但是因为我太菜了，并没有什么信心去准备。并且大一投入了一些时间到算法竞赛中，没有仔细去了解工程这方面的东西，于是大一的一大半段时间都在咕咕。
-
-        </p>
-    
-</div>
-<div class="post-entry__meta">
-    <a href="/archives/2020/09/" class="post-meta__date button">2020-09-29</a>
-    
-    <span class="separate-dot"></span><a href="/categories/summer/" class="button">summer</a>
-
- 
-</div>
-<div class="post-entry__tags"></div> 
-<a href="/2020/09/29/2020/summer-2020/" class="post-entry__link">Summer 2020 从申请到结项</a>
                 </div>
             
         
