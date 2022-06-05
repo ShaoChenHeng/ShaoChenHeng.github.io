@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>指令设计的三个原则和加速大概率事件</title>
-    <url>/2022/05/29/instruction-design/</url>
-    <content><![CDATA[<p>记录 <em>计算机组成与接口：硬件&#x2F;软件设计</em> 一书中指令部分频繁提到的三个原则和一个概念。</p>
-<h2 id="硬件设计的三条原则"><a href="#硬件设计的三条原则" class="headerlink" title="硬件设计的三条原则"></a>硬件设计的三条原则</h2><ol>
-<li><p><strong>简单源于规整</strong> 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。</p>
-</li>
-<li><p><strong>越小越快</strong> 。对速度的要求导致MIPS只有32个寄存器而不是更多。</p>
-</li>
-<li><p><strong>优秀的设计需要好的折中</strong> 。一个MIPS例子是在指令中提供更大地址与常数，并且保持所有的指令具有相同的长度之间的折中。</p>
-</li>
-</ol>
-<h2 id="加速大概率事件"><a href="#加速大概率事件" class="headerlink" title="加速大概率事件"></a>加速大概率事件</h2><p>加速大概率事件远比优化小概率事件更能提高性能。大概率事件h通常比小概率事件简单，从而易于提高。大概率事件规则意味着设计者需要知道什么事件是经常发生的，这只有通过仔细的实验与评估才能得出。可以把加速大概率事件想象成一辆赛车，由于通常情况下只有一两名乘客因此提高赛车的速度比提高小型货车的速度容易。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>2020牛客寒假算法基础集训营1</title>
     <url>/2020/02/04/2020/2020niukewintercontest1/</url>
     <content><![CDATA[<p>题目链接:<a href="https://ac.nowcoder.com/acm/contest/3002#question">https://ac.nowcoder.com/acm/contest/3002#question</a></p>
@@ -527,22 +512,6 @@ return 0;
       </tags>
   </entry>
   <entry>
-    <title>Hello world!</title>
-    <url>/2020/02/02/2020/hello-world/</url>
-    <content><![CDATA[<p>本来打算用树莓派做博客的,但是因为后续操作过于繁琐以及安全问题(说到底还是我菜)还是放弃了.然后有折腾了好久才把最后这个博客搭建起来.反正我有我的第一个博客了!</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>图论之LCA</title>
-    <url>/2020/07/23/2020/lcaqus/</url>
-    <content><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6540">2019湖南邀请赛 I Neko and tree</a> 由于数据太水了,用 LCA 写一个假算法也可以过(正解是树形DP)</p>
-]]></content>
-      <categories>
-        <category>graphtheory</category>
-        <category>algorithmanddatastruct</category>
-      </categories>
-  </entry>
-  <entry>
     <title>不能说的话</title>
     <url>/2020/03/28/2020/hackersandpainters3/</url>
     <content><![CDATA[<p>&lt;&lt;不能说的话&gt;&gt;是&lt;&lt;黑客与画家&gt;&gt;中的第三章，今天翻看了一遍觉得非常有意思，并且探讨的是一些我未思考过的问题，于是决定记录其中的一些文字下来．但这里讨论的东西也只能作为一种看待问题的新方法，因为我认为作者的一些其他文章很具有主观色彩和’’民族烙印’’．</p>
@@ -577,6 +546,22 @@ return 0;
         <tag>book</tag>
         <tag>hackersandpainters</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello world!</title>
+    <url>/2020/02/02/2020/hello-world/</url>
+    <content><![CDATA[<p>本来打算用树莓派做博客的,但是因为后续操作过于繁琐以及安全问题(说到底还是我菜)还是放弃了.然后有折腾了好久才把最后这个博客搭建起来.反正我有我的第一个博客了!</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>图论之LCA</title>
+    <url>/2020/07/23/2020/lcaqus/</url>
+    <content><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6540">2019湖南邀请赛 I Neko and tree</a> 由于数据太水了,用 LCA 写一个假算法也可以过(正解是树形DP)</p>
+]]></content>
+      <categories>
+        <category>graphtheory</category>
+        <category>algorithmanddatastruct</category>
+      </categories>
   </entry>
   <entry>
     <title>线性DP</title>
@@ -1100,25 +1085,6 @@ return 0;
       </tags>
   </entry>
   <entry>
-    <title>强连通分量</title>
-    <url>/2020/08/05/2020/sccqus/</url>
-    <content><![CDATA[<h2 id="Tarjan-模板"><a href="#Tarjan-模板" class="headerlink" title="Tarjan 模板"></a>Tarjan 模板</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pre[u] = lowlink[u] = ++dfs_clock;</span><br><span class="line">    S.<span class="built_in">push</span>(u);insta[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i; i = e[i].next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> ( !pre[v] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(v);</span><br><span class="line">            lowlink[u] = <span class="built_in">min</span>(lowlink[u], lowlink[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ( insta[v] )</span><br><span class="line">        &#123;</span><br><span class="line">            lowlink[u] = <span class="built_in">min</span>( lowlink[u], pre[v] );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( lowlink[u] == pre[u] )</span><br><span class="line">    &#123;</span><br><span class="line">        scc_cnt ++;</span><br><span class="line">        <span class="keyword">for</span> ( ;; )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = S.<span class="built_in">top</span>(); S.<span class="built_in">pop</span>();insta[x] = <span class="literal">false</span>;</span><br><span class="line">            sccno[x] = scc_cnt;</span><br><span class="line">            all[scc_cnt] ++;</span><br><span class="line">            <span class="keyword">if</span> ( x == u ) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Garbow-模板"><a href="#Garbow-模板" class="headerlink" title="Garbow 模板"></a>Garbow 模板</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">garbow</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    stack1[++p1] = u;</span><br><span class="line">    stack2[++p2] = u;</span><br><span class="line">    low[u] = ++dfs_clock;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = e[i].next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(!low[v]) <span class="built_in">garbow</span>(v);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(!sccno[v])</span><br><span class="line">            <span class="keyword">while</span>( low[stack2[p2]] &gt; low[v] ) p2 --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>( stack2[p2] == u)</span><br><span class="line">    &#123;</span><br><span class="line">        p2 --;</span><br><span class="line">        scc_cnt ++;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            sccno[stack1[p1]] = scc_cnt;</span><br><span class="line">            <span class="comment">//all_scc[scc_cnt] ++; </span></span><br><span class="line">        &#125; <span class="keyword">while</span>(stack1[p1--] != u) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_scc</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfs_clock = scc_cnt = <span class="number">0</span>;</span><br><span class="line">    p1 = p2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(sccno, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sccno));</span><br><span class="line">    <span class="built_in">memset</span>(low, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(low));</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">        <span class="keyword">if</span> ( !low[i] ) <span class="built_in">garbow</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.luogu.com.cn/problem/P2341">[USACO03FALL][HAOI2006]受欢迎的牛 G</a></p>
-<p><a href="https://codeforces.ml/contest/1249/problem/B2">B2. Books Exchange (hard version)</a></p>
-]]></content>
-      <categories>
-        <category>graphtheory</category>
-        <category>algorithmanddatastruct</category>
-        <category>algorithmquiz</category>
-      </categories>
-      <tags>
-        <tag>scc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搜索算法</title>
     <url>/2020/02/07/2020/search/</url>
     <content><![CDATA[<h2 id="广度优先搜索算法"><a href="#广度优先搜索算法" class="headerlink" title="广度优先搜索算法"></a>广度优先搜索算法</h2><p>广度优先搜索(BFS)之所以如此得名是因为该算法始终是将已发现结点和未发现结点之间的边界, 沿其广度方向向外扩展.即算法需要在发现所有距离源结点s为k的所有结点之后,才会发现距离原点s为k + 1的其他结点.</p>
@@ -1135,6 +1101,25 @@ return 0;
       </categories>
       <tags>
         <tag>search</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>强连通分量</title>
+    <url>/2020/08/05/2020/sccqus/</url>
+    <content><![CDATA[<h2 id="Tarjan-模板"><a href="#Tarjan-模板" class="headerlink" title="Tarjan 模板"></a>Tarjan 模板</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pre[u] = lowlink[u] = ++dfs_clock;</span><br><span class="line">    S.<span class="built_in">push</span>(u);insta[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i; i = e[i].next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span> ( !pre[v] )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">tarjan</span>(v);</span><br><span class="line">            lowlink[u] = <span class="built_in">min</span>(lowlink[u], lowlink[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ( insta[v] )</span><br><span class="line">        &#123;</span><br><span class="line">            lowlink[u] = <span class="built_in">min</span>( lowlink[u], pre[v] );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( lowlink[u] == pre[u] )</span><br><span class="line">    &#123;</span><br><span class="line">        scc_cnt ++;</span><br><span class="line">        <span class="keyword">for</span> ( ;; )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = S.<span class="built_in">top</span>(); S.<span class="built_in">pop</span>();insta[x] = <span class="literal">false</span>;</span><br><span class="line">            sccno[x] = scc_cnt;</span><br><span class="line">            all[scc_cnt] ++;</span><br><span class="line">            <span class="keyword">if</span> ( x == u ) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Garbow-模板"><a href="#Garbow-模板" class="headerlink" title="Garbow 模板"></a>Garbow 模板</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">garbow</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    stack1[++p1] = u;</span><br><span class="line">    stack2[++p2] = u;</span><br><span class="line">    low[u] = ++dfs_clock;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = e[i].next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(!low[v]) <span class="built_in">garbow</span>(v);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(!sccno[v])</span><br><span class="line">            <span class="keyword">while</span>( low[stack2[p2]] &gt; low[v] ) p2 --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>( stack2[p2] == u)</span><br><span class="line">    &#123;</span><br><span class="line">        p2 --;</span><br><span class="line">        scc_cnt ++;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            sccno[stack1[p1]] = scc_cnt;</span><br><span class="line">            <span class="comment">//all_scc[scc_cnt] ++; </span></span><br><span class="line">        &#125; <span class="keyword">while</span>(stack1[p1--] != u) ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_scc</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfs_clock = scc_cnt = <span class="number">0</span>;</span><br><span class="line">    p1 = p2 = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(sccno, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sccno));</span><br><span class="line">    <span class="built_in">memset</span>(low, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(low));</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ )</span><br><span class="line">        <span class="keyword">if</span> ( !low[i] ) <span class="built_in">garbow</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.luogu.com.cn/problem/P2341">[USACO03FALL][HAOI2006]受欢迎的牛 G</a></p>
+<p><a href="https://codeforces.ml/contest/1249/problem/B2">B2. Books Exchange (hard version)</a></p>
+]]></content>
+      <categories>
+        <category>graphtheory</category>
+        <category>algorithmanddatastruct</category>
+        <category>algorithmquiz</category>
+      </categories>
+      <tags>
+        <tag>scc</tag>
       </tags>
   </entry>
   <entry>
@@ -1882,23 +1867,6 @@ return 0;
       </categories>
   </entry>
   <entry>
-    <title>如何让Vue.js能够调用Python函数？</title>
-    <url>/2021/10/27/2021/jsreadwrite/</url>
-    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
-<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其次，在Python端定义函数:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
-
-<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>vue-js</category>
-      </categories>
-  </entry>
-  <entry>
     <title>java手动编译小记</title>
     <url>/2021/11/18/2021/java_compile/</url>
     <content><![CDATA[<p>这篇文章记录如何不使用IDE，使用javac进行编译。</p>
@@ -1930,6 +1898,23 @@ return 0;
 ]]></content>
       <categories>
         <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何让Vue.js能够调用Python函数？</title>
+    <url>/2021/10/27/2021/jsreadwrite/</url>
+    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
+<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次，在Python端定义函数:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
+
+<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>vue-js</category>
       </categories>
   </entry>
   <entry>
@@ -2222,7 +2207,7 @@ return 0;
 <p>假设远程服务器IP地址为 192.168.1.100</p>
 <h2 id="从服务器复制文件到本地"><a href="#从服务器复制文件到本地" class="headerlink" title="从服务器复制文件到本地"></a>从服务器复制文件到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp root@192.168.1.100:/data/test.txt /home/myfile/</span><br><span class="line">补充：</span><br><span class="line">1. 多文件拷贝</span><br><span class="line">　　scp root@192.168.1.100:/data/\&#123;test1.txt,test2.cpp,test3.bin,test.*\&#125; /home/myfile/</span><br><span class="line">2. scp默认连接的远端主机22端口，如果ssh不是使用标准的22端口（以233为例）则使用-P（P大写）指定：</span><br><span class="line">　　scp -P 233 root@192.168.1.100:/data/test.txt /home/myfile/</span><br></pre></td></tr></table></figure>
 
-<p><a href="mailto:&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#x2e;&#x31;&#46;&#49;&#48;&#48;">&#x72;&#x6f;&#111;&#x74;&#x40;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#x2e;&#x31;&#46;&#49;&#48;&#48;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
+<p><a href="mailto:&#114;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#x2e;&#x31;&#x30;&#48;">&#114;&#x6f;&#x6f;&#116;&#64;&#x31;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#49;&#x2e;&#x31;&#x30;&#48;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
 <h2 id="从服务器复制文件夹到本地"><a href="#从服务器复制文件夹到本地" class="headerlink" title="从服务器复制文件夹到本地"></a>从服务器复制文件夹到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r root@192.168.1.100:/data/ /home/myfile/</span><br></pre></td></tr></table></figure>
 
 <h2 id="从本地复制文件到服务器"><a href="#从本地复制文件到服务器" class="headerlink" title="从本地复制文件到服务器"></a>从本地复制文件到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp /home/myfile/test.txt root@192.168.1.100:/data/</span><br><span class="line">补充：多文件拷贝</span><br><span class="line">scp /home/myfile/test1.txt test2.cpp test3.bin test.* root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
@@ -2267,5 +2252,20 @@ return 0;
       <categories>
         <category>summer</category>
       </categories>
+  </entry>
+  <entry>
+    <title>指令设计的三个原则和加速大概率事件</title>
+    <url>/2022/05/29/2022/instruction-design/</url>
+    <content><![CDATA[<p>记录 <em>计算机组成与接口：硬件&#x2F;软件设计</em> 一书中指令部分频繁提到的三个原则和一个概念。</p>
+<h2 id="硬件设计的三条原则"><a href="#硬件设计的三条原则" class="headerlink" title="硬件设计的三条原则"></a>硬件设计的三条原则</h2><ol>
+<li><p><strong>简单源于规整</strong> 。规整性使MIPS指令集具有很多特点：所有指令长度统一、算术指令总是需要三个寄存器操作数和寄存器字段在每种指令格式的位置相同。</p>
+</li>
+<li><p><strong>越小越快</strong> 。对速度的要求导致MIPS只有32个寄存器而不是更多。</p>
+</li>
+<li><p><strong>优秀的设计需要好的折中</strong> 。一个MIPS例子是在指令中提供更大地址与常数，并且保持所有的指令具有相同的长度之间的折中。</p>
+</li>
+</ol>
+<h2 id="加速大概率事件"><a href="#加速大概率事件" class="headerlink" title="加速大概率事件"></a>加速大概率事件</h2><p>加速大概率事件远比优化小概率事件更能提高性能。大概率事件h通常比小概率事件简单，从而易于提高。大概率事件规则意味着设计者需要知道什么事件是经常发生的，这只有通过仔细的实验与评估才能得出。可以把加速大概率事件想象成一辆赛车，由于通常情况下只有一两名乘客因此提高赛车的速度比提高小型货车的速度容易。</p>
+]]></content>
   </entry>
 </search>
