@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-05-29T22:58:05.427Z</updated>
+  <updated>2022-07-07T23:53:28.916Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统引论 Q&amp;A</title>
+    <link href="http://example.com/2022/07/07/OS1/"/>
+    <id>http://example.com/2022/07/07/OS1/</id>
+    <published>2022-07-07T22:54:05.000Z</published>
+    <updated>2022-07-07T23:53:28.916Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>指令设计的三个原则和加速大概率事件</title>
@@ -358,29 +379,6 @@
     
     
     <category term="os" scheme="http://example.com/categories/os/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>npm权限调试小记</title>
-    <link href="http://example.com/2021/08/26/2021/npm1/"/>
-    <id>http://example.com/2021/08/26/2021/npm1/</id>
-    <published>2021-08-26T00:00:00.000Z</published>
-    <updated>2022-02-02T19:47:26.393Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
     
     
   </entry>
