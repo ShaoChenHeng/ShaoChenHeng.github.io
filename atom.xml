@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-07-07T23:53:28.916Z</updated>
+  <updated>2022-08-06T18:41:09.114Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>进程描述与控制 Q&amp;A</title>
+    <link href="http://example.com/2022/08/06/OS2/"/>
+    <id>http://example.com/2022/08/06/OS2/</id>
+    <published>2022-08-06T18:40:27.000Z</published>
+    <updated>2022-08-06T18:41:09.114Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>操作系统引论 Q&amp;A</title>
@@ -356,29 +377,6 @@
     
     
     <category term="summer" scheme="http://example.com/categories/summer/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>远程服务器复制操作小记</title>
-    <link href="http://example.com/2021/09/01/2021/server-copy/"/>
-    <id>http://example.com/2021/09/01/2021/server-copy/</id>
-    <published>2021-09-01T00:00:00.000Z</published>
-    <updated>2022-02-02T19:47:26.393Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html"></summary>
-        
-      
-    
-    
-    
-    <category term="os" scheme="http://example.com/categories/os/"/>
     
     
   </entry>
