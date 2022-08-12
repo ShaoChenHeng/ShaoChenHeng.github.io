@@ -25,7 +25,7 @@
     <!-- meta -->
 
 
-<title>Archive: 2022/8 | SCHeng</title>
+<title>关于“取指-执行”小记 | SCHeng</title>
 
 
 
@@ -33,13 +33,15 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="It all returns to nothing.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SCHeng">
-<meta property="og:url" content="http://example.com/archives/2022/08/index.html">
+    <meta name="description" content="计算机是一个不断进行“取指-执行”的自动化设备，内存的使用也离不开这个“取指-执行”的基本过程。现在有一条指令 mov %eax,[300]，如何“取指-执行”这条指令呢？我们将自己想象成一台计算机认真梳理整个过程：  这条指令需要放在内存中;  用 PC 指针指向这条指令;  将这条指令取到 CPU 的IR寄存器中;  解释这条指令发现要从300这个内存单元中取出一个32位二进制数赋给EAX寄存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于“取指-执行”小记">
+<meta property="og:url" content="http://example.com/2022/08/12/OS4/index.html">
 <meta property="og:site_name" content="SCHeng">
-<meta property="og:description" content="It all returns to nothing.">
+<meta property="og:description" content="计算机是一个不断进行“取指-执行”的自动化设备，内存的使用也离不开这个“取指-执行”的基本过程。现在有一条指令 mov %eax,[300]，如何“取指-执行”这条指令呢？我们将自己想象成一台计算机认真梳理整个过程：  这条指令需要放在内存中;  用 PC 指针指向这条指令;  将这条指令取到 CPU 的IR寄存器中;  解释这条指令发现要从300这个内存单元中取出一个32位二进制数赋给EAX寄存">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-12T02:49:36.000Z">
+<meta property="article:modified_time" content="2022-08-12T02:50:27.214Z">
 <meta property="article:author" content="scheng">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -49,6 +51,13 @@
  
 
     
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/monokai.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
     
     
 
@@ -118,110 +127,81 @@
 </header>
 
 
-    <div class="cover">
-        <div class="cover__logo">
-            
-                <img no-lazy alt="author Image" class="cover__avatar" src="https://raw.githubusercontent.com/ShaoChenHeng/hexo-theme-cards/master/source/image/ayanami.gif">
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        关于“取指-执行”小记
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/08/" class="post-meta__date button">2022-08-12</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>计算机是一个不断进行“取指-执行”的自动化设备，内存的使用也离不开这个“取指-执行”的基本过程。现在有一条指令 <code>mov %eax,[300]</code>，如何“取指-执行”这条指令呢？我们将自己想象成一台计算机认真梳理整个过程：</p>
+<ol>
+<li><p>这条指令需要放在内存中;</p>
+</li>
+<li><p>用 PC 指针指向这条指令;</p>
+</li>
+<li><p>将这条指令取到 CPU 的IR寄存器中;</p>
+</li>
+<li><p>解释这条指令发现要从300这个内存单元中取出一个32位二进制数赋给EAX寄存器;</p>
+</li>
+<li><p>在地址总线上发出地址300，从数据总线上将内存地址300处存放的内容传回并赋给寄存器EAX;</p>
+</li>
+</ol>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-08-12</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
             
         </div>
-        
-        
-            <div class="cover__intro">
-                <p>It all returns to nothing.</p>
- 
-            </div>
-        
+        <div class="nav__next">
+            
+                <a href="/2022/08/06/OS3/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            处理机调度 Q&amp;A
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
     </div>
 
-            
-<main class='main'>
-    
-		
-    <div class="post-list">
-        
-            
-                <div class='post-entry content-card'>
-                    <div class="post-entry__header"></div>
-<div class="post-entry__content">
-    <h2 class="post-entry__title">
-        关于“取指-执行”小记
-    </h2>
-    
-        <p>
-            计算机是一个不断进行“取指-执行”的自动化设备，内存的使用也离不开这个“取指-执行”的基本过程。现在有一条指令 mov %eax,[300]，如何“取指-执行”这条指令呢？我们将自己想象成一台计算机认真梳理整个过程：
-
-这条指令需要放在内存中;
-
-用 PC 指针指向这条指令;
-
-将这条指令取到 CPU 的IR寄存器中;
-
-解释这条指令发现要从300这个内存单元中取出一个32位二进制数赋给EAX寄存器;
 
 
-        </p>
-    
-</div>
-<div class="post-entry__meta">
-    <a href="/archives/2022/08/" class="post-meta__date button">2022-08-12</a>
-    
- 
-</div>
-<div class="post-entry__tags"></div> 
-<a href="/2022/08/12/OS4/" class="post-entry__link">关于“取指-执行”小记</a>
-                </div>
-            
-                <div class='post-entry content-card'>
-                    <div class="post-entry__header"></div>
-<div class="post-entry__content">
-    <h2 class="post-entry__title">
-        处理机调度 Q&amp;A
-    </h2>
-    
-        <p>
-            1. 高级调度与低级调度的主要任务是什么?为什么要引入中级调度?
-高级调度又称为作业调度。它是批处理系统中使用的一种调度。其主要任务是按照某种算法从外存的后备队列上选择一个或多个作业调入内存，并为其创建进程、分配必要的资源，然后再将所创建的进程控制块插入就绪队列中。
-        </p>
-    
-</div>
-<div class="post-entry__meta">
-    <a href="/archives/2022/08/" class="post-meta__date button">2022-08-06</a>
-    
- 
-</div>
-<div class="post-entry__tags"></div> 
-<a href="/2022/08/06/OS3/" class="post-entry__link">处理机调度 Q&amp;A</a>
-                </div>
-            
-                <div class='post-entry content-card'>
-                    <div class="post-entry__header"></div>
-<div class="post-entry__content">
-    <h2 class="post-entry__title">
-        进程描述与控制 Q&amp;A
-    </h2>
-    
-        <p>
-            1. 什么是前趋图？为什么要引入前趋图？前驱图是一个有向无环图，用于描述进程之间执行的先后顺序。图中的每个结点可用来表示一个进程或程序段，节点间的有向边则表示两个结点之间存在的偏序或前驱关系。
-原因：为了更好地描述进程地顺序和并发执行情况。
-
-        </p>
-    
-</div>
-<div class="post-entry__meta">
-    <a href="/archives/2022/08/" class="post-meta__date button">2022-08-06</a>
-    
- 
-</div>
-<div class="post-entry__tags"></div> 
-<a href="/2022/08/06/OS2/" class="post-entry__link">进程描述与控制 Q&amp;A</a>
-                </div>
-            
-        
-    </div>
-    
 
 
-	
 </main>
 
             <footer class="footer">
