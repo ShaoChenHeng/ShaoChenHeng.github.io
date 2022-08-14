@@ -499,6 +499,541 @@
 ]]></content>
   </entry>
   <entry>
+    <title>死锁 Q&amp;A</title>
+    <url>/2022/08/14/OS5/</url>
+    <content><![CDATA[<h3 id="1-试举例说明竞争不可抢占资源所引起的死锁。"><a href="#1-试举例说明竞争不可抢占资源所引起的死锁。" class="headerlink" title="1. 试举例说明竞争不可抢占资源所引起的死锁。"></a>1. 试举例说明竞争不可抢占资源所引起的死锁。</h3><p>不可抢占资源：也就是在p1进程占有使用的时候，p2进程不能去抢。</p>
+<p>在两个进程都在运行中，且在进行下一步的时候操作所需的不可抢占资源都被对方正在占有。<br>进程此时没有办法进行下一步结束释放资源，也不能自己终止，就进入了无限等待的状态，此为死锁。</p>
+<h3 id="2-为了破坏“请求和保持”条件而提出了两种协议，试比较这两种协议。"><a href="#2-为了破坏“请求和保持”条件而提出了两种协议，试比较这两种协议。" class="headerlink" title="2. 为了破坏“请求和保持”条件而提出了两种协议，试比较这两种协议。"></a>2. 为了破坏“请求和保持”条件而提出了两种协议，试比较这两种协议。</h3><p>第一种协议：所有进程在开始运行之前，必须一次性地申请其在整个运行过程中所需的全部资源。优点就是简单、易行且安全；缺点就是资源被严重浪费、进程经常发生饥饿现象。这样的方法虽然可以把死锁杜绝，但是明显太过于死板，浪费资源。当浪费的资源到达一定的值的时候，危害不会比死锁带来的小。明显的治标不治本。</p>
+<p>第二种协议：允许一个进程只获得运行初期所需的资源后，便开始运行。进程运行过程中再逐步释放已分配给自己的、且已用毕的全部资源，然后再请求新的所需资源。比上一种要好一些，应该这种方法不仅尽可能的减少死锁发生的概率，而且避免了一定程度的资源浪费，假如死锁发生的结果还可以接受的情况下，使用第二种方式相比第一种却要好的多。</p>
+<h3 id="3-何谓死锁？简述死锁发生的四个必要条件，如何避免与预防死锁？"><a href="#3-何谓死锁？简述死锁发生的四个必要条件，如何避免与预防死锁？" class="headerlink" title="3. 何谓死锁？简述死锁发生的四个必要条件，如何避免与预防死锁？"></a>3. 何谓死锁？简述死锁发生的四个必要条件，如何避免与预防死锁？</h3><p>死锁是指多个进程因竞争资源而造成的一种僵局（互相等待），若无外力作用，这些进程都将无法向前推进。例如，在某一个计算机系统中只有一台打印机和一台输入 设备，进程P1正占用输入设备，同时又提出使用打印机的请求，但此时打印机正被进程P2 所占用，而P2在未释放打印机之前，又提出请求使用正被P1占用着的输入设备。这样两个进程相互无休止地等待下去，均无法继续执行，此时两个进程陷入死锁状态。</p>
+<p><strong>死锁产生的原因</strong></p>
+<ol>
+<li><p>系统资源的竞争<br>系统资源的竞争导致系统资源不足，以及资源分配不当，导致死锁。</p>
+</li>
+<li><p>进程运行推进顺序不合适<br>进程在运行过程中，请求和释放资源的顺序不当，会导致死锁。</p>
+</li>
+</ol>
+<p><strong>产生死锁的四个必要条件</strong></p>
+<p>互斥条件：一个资源每次只能被一个进程使用，即在一段时间内某资源仅为一个进程所占有。此时若有其他进程请求该资源，则请求进程只能等待。</p>
+<p>请求与保持条件：进程已经保持了至少一个资源，但又提出了新的资源请求，而该资源 已被其他进程占有，此时请求进程被阻塞，但对自己已获得的资源保持不放。</p>
+<p>不可剥夺条件:进程所获得的资源在未使用完毕之前，不能被其他进程强行夺走，即只能 由获得该资源的进程自己来释放（只能是主动释放)。</p>
+<p>循环等待条件: 若干进程间形成首尾相接循环等待资源的关系</p>
+<p>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之一不满足，就不会发生死锁。</p>
+<p><strong>死锁的避免与预防</strong></p>
+<ol>
+<li>死锁避免的基本思想:</li>
+</ol>
+<p>系统对进程发出每一个系统能够满足的资源申请进行动态检查,并根据检查结果决定是否分配资源,如果分配后系统可能发生死锁,则不予分配,否则予以分配。这是一种保证系统不进入死锁状态的动态策略。</p>
+<p>理解了死锁的原因，尤其是产生死锁的四个必要条件，就可以最大可能地避免、预防和解除死锁。所以，在系统设计、进程调度等方面注意如何让这四个必要条件不成立，如何确定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态的情况下占用资源。因此，对资源的分配要给予合理的规划。</p>
+<ol start="2">
+<li>死锁避免和死锁预防的区别：</li>
+</ol>
+<p>死锁预防是设法至少破坏产生死锁的四个必要条件之一,严格的防止死锁的出现,而死锁避免则不那么严格的限制产生死锁的必要条件的存在,因为即使死锁的必要条件存在,也不一定发生死锁。死锁避免是在系统运行过程中注意避免死锁的最终发生。</p>
+<h3 id="4-在解决死锁问题的几个方法中，哪种方法最易于实现？哪种方法使资源利用率最高？"><a href="#4-在解决死锁问题的几个方法中，哪种方法最易于实现？哪种方法使资源利用率最高？" class="headerlink" title="4. 在解决死锁问题的几个方法中，哪种方法最易于实现？哪种方法使资源利用率最高？"></a>4. 在解决死锁问题的几个方法中，哪种方法最易于实现？哪种方法使资源利用率最高？</h3><p>预防死锁方法最容易实现，但由于所施加的限制条件过于严格，会导致系统资源利用率和系统吞吐量降低；而检测和解除死锁方法可是系统获得较好的资源利用率和系统吞吐量。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>泥潭</title>
+    <url>/2021/07/14/2021/856/</url>
+    <content><![CDATA[<p>首先我想说的是这篇文章本来不应该存在的，但是由于太多想法如果不写一写，我就会一直思考这些想法，现在我不想去再想这些事情了。这篇文章会有很多我的主观情感，但是我尽量写的客观一些。五月份就打算写了，一直因为很多事情才拖到现在。主要记录一下到目前（大二结束）我看待事物看待人的态度的转变。</p>
+<p>刚刚进入大学的时候我对待各种人和事情的看法还是和高中相似的，我的高中没有什么坏人，所以一开始我就习惯用好的眼光看待别人。十分感谢我的专业的学长学姐，是他们带我第一次在未进入真正大学生活的军训期间给了我改变自己的想法的机会，大学的大部分人都是为了自己的利益的。就像这些带学弟学妹的学长学姐，或是为了学分或是为了其他目的，自己能力根本不够，但是硬是要凑上去，只是为了自己的利益。但是我还是把大学的整个环境想的太好了。我想想，这些学长学姐也只是学生，为了一些学分绩点无可厚非，但是老师教授总不会这样子吧？</p>
+<p>大一一开始的十月份，我认识了一个人，以下就简称为W。当时听了他讲述，我认为他是一个十分厉害的人，在那个时候可以算是志同道合的一个人吧。但是认识的人总是如同第一次见面的时候该有多好，随着对一个人的深入了解，这个人的各种个性就会暴露出来。大一第一次放假，是爸妈来接我回家的，当时我对他们说我认识了一个很厉害的人，人生经历曲折，而且这些事情他都挺过来了。不得不说我爸妈在这一方面还是有远见的，他们说“这种人十分聪明，也许表面上他看上去容易相处，但是内心并不是这样的，甚至连怎么算计你都已经想好了。”当时我觉得他们的话太过恶毒，就没有太理会。后来W的种种行为的确证明了我父母的话是正确的。在大一阶段，我会因为一个人的单一行为直接认定他是好的，并且不会因为一个人的单一行为直接认定他的坏的。然而就目前而言，我对待一个人的态度的改变是渐进的，我不会因为一个人的单一行为直接认定他是好的，可能会因为一个人的单一行为直接认定他的坏的，并且在第一次了解到某人时，我不会认定对方是一个好人。这种态度转变和W的行为和学院里认识的一些人的行为是有关系的。</p>
+<p>我第一次接触编程是在初三的一个假期，当时上网冲浪无意间看到了一些和编程相关的内容，就开始搜索各种编程语言，看到最多的就是C和C++了。我一直对这方面的东西很感兴趣。询问正在学习编程的表哥，他推荐我先学Python,于是在初三五一的假期我安装了第一个Python的解释器，写了写 ```print”Hello World!”```以及其他的一些语句。中考考完的第二天，我马上去图书馆找来了Python的相关书籍以及Linux的书开始学编程。到高一开始，我写的最棒的程序大概就是一个Python的百度贴吧爬虫了吧。后来高中学业繁忙就没有在深入学习了。但是有一次表哥和我提到了算法，那是我第一听说算法，所有的程序的背后都是由算法支撑的。高二的一个晚自习下课，学校的某科技社团突然说要找人报名信息技术竞赛（也就是Noip），我就报名了后来暑假学习C语言和算法，准备10月份（对不起我忘记了是10月还是11月）的Noip。第一次参加很烂很烂，不再细说…虽然第二次也很烂。反正这就是我对算法和数据结构的最初体验，我感觉我对这个东西还是喜欢的，这也成为了我高中时期的一个爱好。</p>
+<p>那么到了大学我自然是继续研究算法与数据结构了，也很自然地参加了校ACM集训队，如果不发生意外，在大一的下学期是完全有机会去参加区域赛的。但是意外还是发生了，这也是我对W态度改观的最初阶段。突然发生的疫情冲击了我所有的安排，我再也无心关注这些比赛。我觉得这些比赛再当时的那个时间节点已经不可能举行了，我就开始读一些科普的书，而不是写代码。我高中读的书（非技术性书本）真的很少，更多是在写题目和看课内书。W开始散播焦虑，W就是一个容易焦虑的人，并且喜欢将焦虑施加在其他人身上。并且W的控制欲望也在逐渐表达。</p>
+<p>返校后W似乎有要排除异己的行为。我当时在看SICP，W来询问我最近在做的事情，我和W说了一番，从W的举止反应来看，W应该已经觉得不参加训练而去看其他的书已经是令W十分失望的行为了。我当时同时在学算法与FP（函数式编程），FP真的太妙了！FP的各种表达与我一直接触的过程式的程序设计完全不同，对我吸引很强。但是后来我没有继续看SICP，继续去搞算法与程序设计竞赛的事情了。</p>
+<p>当为一个爱好投入了太多时间，而忽略了其他事情（也有可能是其他的爱好）的时候，也是一件十分悲伤的事情。</p>
+<p>到了大一的暑假时间，我把大部分的暑假时间都投入到了训练里面。但是以防万一，我申请了中科院的编程之夏。我在刚进入大学的时候就有两个目标，一个是参与GSoC，一个是ACM铜牌。中科院编程之夏作为我的GSoC的前置任务吧，通过它来熟悉开源这方面的一些东西，并且是参与OI Wiki社区，也是对我训练的一个提升。庆幸的是，还好我申请了中科院编程之夏。暑假过后，内部决定将更多的名额分配给上一届学长。然后有趣的事情就发生了。由于学长队伍的变动，W将我许多已经组建完的队伍数次拆分重组，这也导致了许多同学心态的变化。区域赛拿到的名额是打星，没有正式名额。十分混乱地，我居然参加了省赛，并且在强力的D君的领导下，我们成功地得到了铜牌。后来的各种打星均无入铜线。W多次散播焦虑，让同学们感受与他自己相同程度的压力，下半年的时间里我已经开始对W的行为反感了，并且他对同班同学一些行为让我觉得这个人是有问题的。</p>
+<p>关于学校的课程，我最初进入大学以为我终于可以一门心思学编程的东西了，但是事实不是这样子的。学校总是会喜欢安排一些不相关的东西来影响学生学习的。诸如大学物理、电工电子技术这些课程，我曾无数次地自问，我明明是要成为软件工程师或者算法工程师的，为什么却要学习这种以后一辈子都用不上的东西呢？类似的问题在我的高中阶段也出现过，我问过自己我以后是要进计算机或者软件工程专业的人，为什么要去学习生物和地理呢？每一次上生物课的时候我都无比煎熬，每一天我都为了认真学习生物而找一个能够说服自己去学习生物学的理由。所以我高中阶段就一直对大学抱有幻想，幻想我能够一门心思学编程和我感兴趣的东西，但是到了大学才发现实际上不是这样的。我和我的大学班主任W君讨论过这个问题，我很深刻地记得他的一句话“当我们没有能去去改变自己不喜欢的事情的时候，最好的办法就是接受它。”。我知道这句话是绝对正确的，但是我根本无法服从。我也和学院领导T讨论过课程的事情，我洋洋洒洒写了许多字，里面包括了我对诸如大学物理、电工、应用文（计算机专业居然要学应用文，太可笑了）这些无用课程的讨论，以及我希望添加学习的一些最基础内容，诸如Git，Python,增强基础数学的学习等等。但是没有回应，渐渐地我觉得我们学院可能已经没救了，虽然它有许多“光鲜”的荣誉。我也不再想去纠正事情不好的做法。</p>
+<p>2020年的下半年的大部分时间直到2021年的4月上旬，是我目前过的最难受的一段时间。因为我真的不知道该去做些什么，是应该继续训练竞赛，还是去做工程方面的东西？一直没有决定，也没有行动。只是看了一些书，期间在看混凝土数学和GEB。精神也不好，由于W的行为，原本安静的实验室可以说是乌烟瘴气，我忍受不了嘈杂的环境，神经性耳鸣了半个多月。W喜欢用自己的思维来决定事情的发展方向，例如一场比拼手速的比赛名额通过思维来选拔参赛队员，由于W除了思维强力，在别的事情上一无是处，于是他经常安排码量少想的多的问题给大家。这也造成了各种题目训练不均的问题。再加上学院领导给了W过多的权力，W的控制欲的本性暴露了出来。由于神经性耳鸣，每天都十分难受，我已经不想再去管这些事情了。期间唯二的好事，一是认识了T君，但是T君是一个保守的人，起初并无过多交谈，是痛苦但又快乐的一件事；二是我找到了一件可能成为我终身参与的一项运动————网球，进入大学这么久，我终于开始运动了。我觉得我通过打网球认识的一些同学，性质上来说就很单纯，因为与他们不会有其他的一些活动，就是单纯的打球，所以不会再产生对这个人的种种看法。事实上，参与程序设计竞赛也应该是一件十分简单的事情，或者说什么事情本身都应该是简单纯粹的，但是由于人的因素，因为人会加入个人的情感到一件事情上，这就会使一些原本简单事情变得很复杂。</p>
+<p>到了2021年的4月下旬，我突然想起来我应该去参加GSoC了，于是翻看各种社区，查找各种资料，看了将近一周，在五月初完成了proposal。然后又得知了我的队伍居然被分配到去银川参赛了，因为各种队伍的参赛队伍都已经打完名额了，大二拿得出手的队伍又那么几个，于是我的队伍就去比赛了。之后就是和队友隔几天就进行一次组队训练，我也很意外地发现了，我可能再写计算几何方面的题目上有一些天赋？可惜发现的太晚了，我已经打算好了在银川赛后就不再打了，认真搞工程和开源方面的事情。但是恶心人的事情就发生了。（事实上在银川的时候我也非常厌恶他的做法了，用D君的话来说就是“明明是一个心智不成熟的人，却要伪装成大人模样，太搞笑了。”）。</p>
+<p>我不想详细描述这件事情，用一句话概括就是，君子疾夫舍曰欲之而必为之辞。我终于还是被W给恶心到了，他的做法犹如去年暑假对待同届同学一样恶心，只不过去年没有恶心到我，今年把我恶心到了。这件事情之后，又有多少同届的同学会再相信他呢？估计不多吧。我又可怜起下一届的同学们了，也许在他们半年多的训练之后，也经历一次W的“舍曰欲之而必为之辞”。</p>
+<p>实际上这件事情对我的影响不是很大，但是我的确是看清了W，并且不会再去轻易相信一个人。现在想想我先前的信任真的十分廉价，但是信任本身应该是一个十分昂贵的东西。我也与一些非利益相关的人，将整个事情的经历描述了一次，请他们分析原因。我得到了一些启发。有的人会做错事情，但是做错事情之后会反思自己的行为并为他的行为感到抱歉，然后对受到影响的人道歉；有的人则是知道自己做了错事，但是就是不愿意去承认、去道歉；有的人却是根本不认为自己做了错事，并且继续我行我素。我的一位INFP朋友和T君都认为W应该属于第三种（十分感谢T君带我了解了MBTI这种神奇的东西）。我们再将第三种样例拓展一下，就会发现这种人还有可能将自己的个人经历扭曲，因为他们发现不了问题的主要矛盾，而找其他的原因去解释一些问题。于是我就开始思考，我从认识W的开始，他是不是就是在伪装？或者说他不是在伪装，而是他给的描述是自己认为正确但是实际上是错误的。他告诉我的那些个人经历，实际上都是来自他错误的分析，导致他经历那些事情的原因不应该是他所描述的，而是有其他原因的。我毫无根据地猜想，会不会与现在我所经历地他的那些做法相似呢？我不敢继续想象了。</p>
+<p>好了，我的梦话说完了。</p>
+]]></content>
+      <categories>
+        <category>disorder</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Arch折腾记录</title>
+    <url>/2021/11/02/2021/arch_setup/</url>
+    <content><![CDATA[<p><img src="/images/2021-11-02_14-09.png"></p>
+<p>我的y7000上装了三个操作系统，win10，ubuntu，arch。其中win10和ubuntu都跑了俩年了都没挂。前几个星期不小心把arch滚挂了，就没再去理她，反正还有一个ubuntu可以用。然后前几天给ubuntu换桌面启动器的时候一不小心把它也整挂了，各种调试都不行（主要是我菜），于是就打算直接重装一个arch吧，只是重装系统，文件数据都还是有保留的。</p>
+<p>这一篇只会记录一些我在装arch的时候查询的网站和一些注意事项，不会详细讲怎么装，毕竟网上已经有这么多教程了。</p>
+<p><a href="https://www.viseator.com/2017/05/19/arch_setup/">https://www.viseator.com/2017/05/19/arch_setup&#x2F;</a></p>
+<p><a href="https://www.cnblogs.com/freerqy/p/8502838.html">https://www.cnblogs.com/freerqy/p/8502838.html</a></p>
+<p><a href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">https://archlinuxstudio.github.io/ArchLinuxTutorial/#/</a></p>
+<p><a href="https://arch.icekylin.online/prologue.html">https://arch.icekylin.online/prologue.html</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a></p>
+<p>上面这几个链接基本上可以解决90%的安装时候的问题了吧（</p>
+<p>记录几个坑点</p>
+<h2 id="wifi连接"><a href="#wifi连接" class="headerlink" title="wifi连接"></a>wifi连接</h2><p>在进入usb启动盘里的arch,wifi是默认关闭的，所以要先将它打开。</p>
+<p><code>rfkill unblock wifi</code></p>
+<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><p>大多数教程并不是使用cfdisk来分区的，我比较喜欢用cfdisk来分区，因为界面相对友好，看的也比较清楚。</p>
+<p>我给根目录分区分的太小了，只分了30g，用了两三天就爆满了。并且后续更改根目录分区是一件比较困难的事情。如果cfdisk上显示根目录分区后已经没有更多的剩余空间了，是很难通过常规手段进行扩容的，所以划分区的时候要注意，要么根目录分区大一些，要么在根目录后剩余一点未分配的磁盘空间。</p>
+<p>我的情况是，跟目录后有一个8g的交换分区，交换分区后面有一个10g的剩余磁盘空间。于是就把交换分区删了，一共腾出来18g的新空间给根目录扩容。然后交换分区就用交换文件来替代。并且在删除&#x2F;添加分区后，要更改fstab文件的相关内容。</p>
+<h2 id="交换空间-x2F-交换文件"><a href="#交换空间-x2F-交换文件" class="headerlink" title="交换空间&#x2F;交换文件"></a>交换空间&#x2F;交换文件</h2><p>交换空间可以用交换目录来替代，因为有的时候电脑的物理内存会满了，然后就会用交换空间&#x2F;交换目录来替代物理内存。也就是说当电脑的物理内存爆满了，使用交换空间&#x2F;交换文件还可以抢救一下。</p>
+<p>关于交换空间&#x2F;交换文件的大小分配，网上各种说法众说纷纭，我选择的是分配了8g给交换文件。一个参考区间是8g~32g建议的大小是8g。</p>
+<h2 id="关于双系统"><a href="#关于双系统" class="headerlink" title="关于双系统"></a>关于双系统</h2><p><a href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a> 这一篇文章已经详细介绍了如何安装双系统。第一次安装因为没有设置好EFI分区，导致进系统的时候有引导错误，于是采用了这篇文章里介绍的方法。</p>
+<h2 id="文件迁移"><a href="#文件迁移" class="headerlink" title="文件迁移"></a>文件迁移</h2><p>原先的arch系统的文件和系统是在我的机械硬盘上的，这次把系统装在了固态硬盘里。但是固态硬盘的空间是比较宝贵的，所以软件应该要安装在机械硬盘里，节省空间。可以直接使用上一次的arch的home目录分区的那一块磁盘，首先要做的是把这个盘挂在到当前系统，再使用chown命令重新更改一下那个home里面的文件所有者。chown的时间比较长，需要耐心等待一会儿。</p>
+<p>操作完成后就会发现，之前的软件设置全都回来了，还是十分方便的。</p>
+<h2 id="桌面美化"><a href="#桌面美化" class="headerlink" title="桌面美化"></a>桌面美化</h2><p>这个部分可以直接到b站找一些视频对着操作就好了，kde store里面有许多现成的配置。</p>
+<p>比如我的arch现在看起来是这样的。</p>
+<p><img src="/images/2021-11-02_14-07.png"></p>
+<h2 id="常用应用"><a href="#常用应用" class="headerlink" title="常用应用"></a>常用应用</h2><p>可以在我上面的dock里面看到，我装的常用软件都在dock里面了。</p>
+<p>其中qq是用的deepin-wine-qq，运行起来比较卡，但是目前没有比它好一些的解决方案了。安装方法是yay -s deepin-wine-qq，有一个依赖是deepin-wine6-stable，在安装的时候会产生包冲突，还是反复安装了几次的。要注意的是首先需要去掉<code>/etc/pacman.conf</code>里面multilib的注释，才可以进行安装。</p>
+<p>其他应用使用搜索引擎查一下安装起来还是十分轻松的。</p>
+<p>也可以再在上面提到的那几篇文章里面进行查看，安装自己喜欢的应用。</p>
+]]></content>
+      <categories>
+        <category>os</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何给一个新的语言命名？</title>
+    <url>/2021/10/26/2021/howtonameanewlanugage/</url>
+    <content><![CDATA[<p>最近在看Crafting Interpreters，虽然只看到第一章，但是其中的一个note还是挺有意思的，所以在这里记录、翻译一下。</p>
+<blockquote>
+<h3 id="DESIGN-NOTE-WHAT’S-IN-A-NAME"><a href="#DESIGN-NOTE-WHAT’S-IN-A-NAME" class="headerlink" title="DESIGN NOTE: WHAT’S IN A NAME?"></a>DESIGN NOTE: WHAT’S IN A NAME?</h3><p>One of the hardest challenges in writing this book was coming up with a name for the language it implements. I went through pages of candidates before I found one that worked. As you’ll discover on the first day you start building your own language, naming is deviously hard. A good name satisfies a few criteria:</p>
+<ol>
+<li><p><strong>It isn’t in use.</strong> You can run into all sorts of trouble, legal and social, if you inadvertently step on someone else’s name.</p>
+</li>
+<li><p><strong>It’s easy to pronounce.</strong> If things go well, hordes of people will be saying and writing your language’s name. Anything longer than a couple of syllables or a handful of letters will annoy them to no end.</p>
+</li>
+<li><p><strong>It’s distinct enough to search for.</strong> People will Google your language’s name to learn about it, so you want a word that’s rare enough that most results point to your docs. Though, with the amount of AI search engines are packing today, that’s less of an issue. Still, you won’t be doing your users any favors if you name your language “for”.</p>
+</li>
+<li><p><strong>It doesn’t have negative connotations across a number of cultures.</strong> This is hard to be on guard for, but it’s worth considering. The designer of Nimrod ended up renaming his language to “Nim” because too many people remember that Bugs Bunny used “Nimrod” as an insult. (Bugs was using it ironically.)</p>
+</li>
+</ol>
+<p>If your potential name makes it through that gauntlet, keep it. Don’t get hung up on trying to find an appellation that captures the quintessence of your language. If the names of the world’s other successful languages teach us anything, it’s that the name doesn’t matter much. All you need is a reasonably unique token.</p>
+</blockquote>
+<h3 id="以下是我翻译的内容"><a href="#以下是我翻译的内容" class="headerlink" title="以下是我翻译的内容"></a>以下是我翻译的内容</h3><p>编写这本书的时候最困难的挑战之一就是为其实现的语言命名。在选择出一个合适的名字之前，我浏览了几页候选的名字。就好像你在构建自己的语言的第一天就会发现，命名十分困难。一个好名字满足几个条件：</p>
+<ol>
+<li><p><strong>没有被使用过。</strong> 如果你不小心与别人的名字重名了，那么就会遇到诸如法律问题、社会问题等的各种麻烦。</p>
+</li>
+<li><p><strong>发音容易。</strong> 如果一切顺利，那么大家将可能念出以及写下你的语言的名字，任何长于几个音节或者比几个字母长的东西都会使大家厌烦的。</p>
+</li>
+<li><p><strong>足够独特，易于搜索。</strong>大家会通过搜索引擎搜索你的语言名称来了解它，所以你需要一个足够罕见的词，那么大多数的结果都会指向你的文档了。不过随着目前人工智能搜索引擎数量的增加，这已经不是什么问题了。尽管如此，如果你把你的语言命名为“for”，这是不会给你的用户带来好处的。</p>
+</li>
+<li><p><strong>在许多文化中没有负面意义。</strong>，这是很难提防的，但是也是值得考虑的。Nimrod的设计师最终把他的语言重命名为”Nim”，因为大多数人及的Bugs Bunny使用“Nimrod”作为侮辱。</p>
+</li>
+</ol>
+<p>如果你的潜在名字通过了这些挑战，请保留它。不要急于寻找一个能体现你的语言精髓的称谓。如果说世界上的其他语言的名字教会了我们什么，那就是名字并不重要。你所需要只是一个相当独特的象征。</p>
+<hr>
+<p>然后我已经想好了在读完这本书后该给我的语言取的名字了，等我真的把这个语言做出来了再讲。</p>
+]]></content>
+      <categories>
+        <category>book</category>
+        <category>解释器</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>java package小记</title>
+    <url>/2021/11/16/2021/java-package/</url>
+    <content><![CDATA[<p>今天我开始构造lox语言了，lox也就是crafting interpreters这本书实现的一个语言，原书是使用java语言实现的。</p>
+<p>代码仓库：<a href="https://github.com/emp1dAo/code-of-crafting-interpreters/tree/master/jlox">https://github.com/emp1dAo/code-of-crafting-interpreters/tree/master/jlox</a></p>
+<p>因为我java很菜，所以马上就遇到了一个问题，这里记录一下问题以及解决方案。</p>
+<p>我使用emacs加终端来编写编译</p>
+<p>在<code>~/code-of-crafting-interpreters/jlox</code> 目录进行编译<code>javac Lox.java</code>，得到编译后文件<code>Lox.class</code>，按理来说直接敲<code>java Lox</code>应该就能运行了，但是出现了<code>错误: 找不到或无法加载主类 jlox</code>这样的错误。</p>
+<p>源码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> jlox;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lox</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">boolean</span> hadError = <span class="keyword">false</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (args.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Usage: jlox [script]&quot;</span>);</span><br><span class="line">        System.exit(<span class="number">64</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (args.length == <span class="number">1</span>) &#123;</span><br><span class="line">        runFile(args[<span class="number">0</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        runPrompt();</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = Files.readAllBytes(Paths.get(path));</span><br><span class="line">    run(<span class="keyword">new</span> String(bytes, Charset.defaultCharset()));</span><br><span class="line">    <span class="keyword">if</span> (hadError) System.exit(<span class="number">65</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runPrompt</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    InputStreamReader input = <span class="keyword">new</span> InputStreamReader(System.in);</span><br><span class="line">    BufferedReader reader = <span class="keyword">new</span> BufferedReader(input);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">        String line = reader.readLine();</span><br><span class="line">        <span class="keyword">if</span> (line == <span class="keyword">null</span>) <span class="keyword">break</span>;</span><br><span class="line">        run(line);</span><br><span class="line">        hadError = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String source)</span> </span>&#123;</span><br><span class="line">    Scanner scanner = <span class="keyword">new</span> Scanner(source);</span><br><span class="line">    List&lt;Token&gt; tokens = scanner.scanTokens();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Token token : tokens) &#123;</span><br><span class="line">        System.out.println(token);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">(<span class="keyword">int</span> line, String message)</span> </span>&#123;</span><br><span class="line">    report(line, <span class="string">&quot;&quot;</span>, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">report</span><span class="params">(<span class="keyword">int</span> line, String where,</span></span></span><br><span class="line"><span class="params"><span class="function">                   String message)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="string">&quot;[line &quot;</span> + line + <span class="string">&quot;] error&quot;</span> + where + <span class="string">&quot;: &quot;</span> + message);</span><br><span class="line">    hadError = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>据说这种错误是不会在IDE上出现的，应该是终端运行的问题。主要问题出在代码的第一行<code>package jlox;</code>，这时候需要到<code>jlox</code>的上一层目录进行运行，命令也就变成了<code>java jlox.Lox</code>，这样就可以顺利运行了。</p>
+]]></content>
+      <categories>
+        <category>interpreter</category>
+        <category>java</category>
+        <category>book</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>java手动编译小记</title>
+    <url>/2021/11/18/2021/java_compile/</url>
+    <content><![CDATA[<p>这篇文章记录如何不使用IDE，使用javac进行编译。</p>
+<h2 id="单文件编译"><a href="#单文件编译" class="headerlink" title="单文件编译"></a>单文件编译</h2><p>最简单的例子就是HelloWorld程序了，直接给出代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意文件名与类名相同，所以应该保存为HelloWorld.java，直接在当前目录进行编译即可。</p>
+<p><code>javac HelloWorld.java</code></p>
+<p>会在当前目录（与HelloWorld.java的同一级目录）生成了HelloWorld.class。</p>
+<p>直接运行<code>java HelloWorld</code>就可以看见输出了，要注意的是<code>java HelloWorld.class</code>是无法运行的。</p>
+<p>传入的是main函数所在的类的名字，而不是class文件；java会根据类名自动去找class文件。</p>
+<h3 id="添加包名"><a href="#添加包名" class="headerlink" title="添加包名"></a>添加包名</h3><p>这个内容在<a href="https://scheng52123.com/index.php/2021/11/16/java-package/">上一篇文章</a>里已经提到了，再复述一下。</p>
+<p>在原先的HelloWorld里面加一句<code>package com.test</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>javac HelloWorld.java</code>，生成了<code>HelloWorld.class</code>文件。这时需要先创建目录：<code>/com/test</code>然后在<code>com/</code>的上一层目录执行<code>java com.test.HelloWorld</code>。</p>
+<p>或者使用命令<code>javac -d . HelloWorld.java</code>，会在当前目录下生成一个<code>.../com/test/HelloWorld.class</code>，然后再运行<code>java com.test.HelloWorld</code>这样子也是可以的。</p>
+<p>以上的这些行为说明，增加了package名，class名也会变化，在需要运行时候就要使用全限定名（关于全限定名、简单名的定义可以查看<a href="https://mingshan.fun/2018/09/18/fully-qualified-name-simple-name-descriptor/">这篇文章</a>）；java会根据包名对应出目录结构，并从class path搜索该目录去找到class文件。</p>
+<h2 id="多文件编译"><a href="#多文件编译" class="headerlink" title="多文件编译"></a>多文件编译</h2><p>有两个文件如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com1.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HelloService service = <span class="keyword">new</span> HelloService();</span><br><span class="line">        service.printHello(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com1.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HelloService service = <span class="keyword">new</span> HelloService();</span><br><span class="line">        service.printHello(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有两种编译方式，第一种和上面单文件编译类似。</p>
+<p>先执行<code>javac -d . HelloService.java</code>得到了<code>com1/test/HelloService.class</code>，再执行<code>javac -d . HelloWorld.java</code>，得到了<code>com1/test/HelloWorld.class</code>，然后就可以通过<code>java com1.test.HelloWorld</code>顺利运行了。</p>
+<p>另外一种是直接写上全部需要的文件，在现在情况下就是<code>javac -d . HelloWorld.java HelloService.java</code>，不需要区分前后，会根据依赖关系自动确定顺序。</p>
+<p>也可以使用<code>javac -d . *.java</code>直接对当前目录下的所有java文件进行编译。</p>
+<h2 id="使用src和target目录"><a href="#使用src和target目录" class="headerlink" title="使用src和target目录"></a>使用src和target目录</h2><p>希望能够想IDE一样，src目录下保存原文件，target目录下生成可运行文件。例如在<code>javatest</code>目录下有<code>src</code>目录，<code>src</code>目录中保存了各种java原文件。在<code>javatest</code>目录下执行<code>javac -d target src/*.java</code>就能将编译后的文件生成在<code>target</code>目录下了。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何让Vue.js能够调用Python函数？</title>
+    <url>/2021/10/27/2021/jsreadwrite/</url>
+    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
+<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次，在Python端定义函数:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
+
+<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>vue-js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>从零开始的Emacs配置学习</title>
+    <url>/2021/01/30/2021/learnemacs/</url>
+    <content><![CDATA[<p>该怎么说呢，很早就下载了这个操作系统（编辑器）了，一年前（2019）在看SICP的时候就有想法用emacs写scheme，但是由于配置过于复杂，还是选择了用vscode进行编辑。然后中间因为一些其他的事情停止了对SICP的学习，总共四章的内容也只看了两章多，这次放假希望一次性把emacs配置好再把SICP看完吧。接下来将介绍我的emacs配置过程。</p>
+<h2 id="快捷键的使用"><a href="#快捷键的使用" class="headerlink" title="快捷键的使用"></a>快捷键的使用</h2><p>C 即 Control , M 即 Alt (至少在我的键盘上是这样的)</p>
+<p><code>C - x , C - s</code> 对当前文档进行保存</p>
+<p><code>C - x, C - c</code> 关闭当前程序</p>
+<p><code>C - x, C - f</code> 输入文件名，emacs会搜索文件并打开</p>
+<p><code>M - x</code> 输入具体操作(这个比较类似 sublime 和 vscode 里面的<code>C - p</code>)</p>
+<p><code>C - w</code>剪切</p>
+<p><code>M - w</code> 复制</p>
+<p><code>C - y</code> 粘贴</p>
+<p><code>M - y</code> 在按下<code>C - y</code>后，按此键，切换粘贴的内容</p>
+<p><code>C - /</code> 撤销</p>
+<p><code>C - g</code>中断当前命令输入</p>
+<p><code>C - s</code> 或者<code>C - r</code> 搜索（方向不同）</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在emacs 27以前的版本通常是在”.emacs”这个文件里进行修改的，具体操作是<code>M - x</code>后，输入.emac回车，就可以进入配置文件了。</p>
+<h2 id="关闭滚动条与工具栏"><a href="#关闭滚动条与工具栏" class="headerlink" title="关闭滚动条与工具栏"></a>关闭滚动条与工具栏</h2><p><code>(scroll-bar-mode -1)</code> 关闭滚动条 <code>(tool-bar-mode -1)</code> 关闭工具栏</p>
+<h2 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h2><p>这个设置和Linux系统下的添加镜像源的操作如出一辙。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; add tinghua resource</span><br><span class="line">(setq package-archives &#x27;((&quot;gnu&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;)</span><br><span class="line">             (&quot;org&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;)</span><br><span class="line">                         (&quot;melpa&quot; . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;)))</span><br><span class="line"></span><br><span class="line">(package-initialize) ;; You might already have this line</span><br></pre></td></tr></table></figure>
+
+<h2 id="包管理器的初始化、刷新、安装"><a href="#包管理器的初始化、刷新、安装" class="headerlink" title="包管理器的初始化、刷新、安装"></a>包管理器的初始化、刷新、安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ;; package initialize</span><br><span class="line">(setq package-check-signature nil)</span><br><span class="line"></span><br><span class="line">(require &#x27;package)</span><br><span class="line"></span><br><span class="line">(unless (bound-and-true-p package--initialized)</span><br><span class="line">  (package-initialize))</span><br><span class="line"></span><br><span class="line">;; refresh resource</span><br><span class="line">(unless package-archive-contents</span><br><span class="line">  (package-refresh-contents))</span><br><span class="line"></span><br><span class="line">;; use-package</span><br><span class="line">(unless (package-installed-p &#x27;use-package)</span><br><span class="line">  (package-refresh-contents)</span><br><span class="line">  (package-install &#x27;use-package))</span><br></pre></td></tr></table></figure>
+
+<p><code>unless</code> 语句即如果没有进行(…)那么就进行(…)。</p>
+<h2 id="使用use-package管理扩展"><a href="#使用use-package管理扩展" class="headerlink" title="使用use-package管理扩展"></a>使用use-package管理扩展</h2><h3 id="最基本的格式"><a href="#最基本的格式" class="headerlink" title="最基本的格式"></a>最基本的格式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(use-package restart-emacs)</span><br></pre></td></tr></table></figure>
+
+<p><code>M-x</code>后输入<code>restart-emacs</code>,emacs就会重启了。</p>
+<h3 id="常用格式"><a href="#常用格式" class="headerlink" title="常用格式"></a>常用格式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; 常用格式</span><br><span class="line">(use-package smooth-scrolling</span><br><span class="line">: ensure t; 是否一定要确保已安装</span><br><span class="line">: defer nil ;是否延迟加载</span><br><span class="line">: init (setq smooth-scrolling-margin 2) ;初始化参数</span><br><span class="line">: config (smooth-scrolling-mode t) ;基本配置参数</span><br><span class="line">: bind ;快捷键绑定</span><br><span class="line">: hook ;hook模式的绑定)</span><br></pre></td></tr></table></figure>
+
+<h3 id="推荐添加的配置"><a href="#推荐添加的配置" class="headerlink" title="推荐添加的配置"></a>推荐添加的配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(eval-and-compile</span><br><span class="line">  (setq use-package-always-ensure t)    ; 不用每个包都手动添加:ensure t 关键字</span><br><span class="line">  (setq use-package-always-defer t)     ; 默认都是延时加载，不用每个包都手动添加:defer t 关键字</span><br><span class="line">  (setq use-package-always-demand nil)  ;</span><br><span class="line">  (setq use-package-expand-minimally t) ;</span><br><span class="line">  (setq use-package-verbose t)          ; 打印安装过程</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="使用-use-package-安装"><a href="#使用-use-package-安装" class="headerlink" title="使用 use-package 安装"></a>使用 use-package 安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过他人编写的文件安装"><a href="#通过他人编写的文件安装" class="headerlink" title="通过他人编写的文件安装"></a>通过他人编写的文件安装</h3><p>在这个开源项目（<a href="https://github.com/belak/emacs-monokai-pro-theme">https://github.com/belak/emacs-monokai-pro-theme</a> ）中找到了合适版本的emacs配色，然后根据README.md的教程完成。</p>
+<p>将monokai-pro-theme.el文件放入.emacs.d&#x2F;themes&#x2F;中 然后执行<code>M-x package-install monokai-pro-theme</code> 将<code>(load-theme &#39;monokai-pro t)</code>添加到配置文件，重启后就可以看见主题更改了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t）</span><br></pre></td></tr></table></figure>
+
+<h2 id="更换一个更加优雅的状态栏"><a href="#更换一个更加优雅的状态栏" class="headerlink" title="更换一个更加优雅的状态栏"></a>更换一个更加优雅的状态栏</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示行标"><a href="#显示行标" class="headerlink" title="显示行标"></a>显示行标</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(global-linum-mode t)</span><br></pre></td></tr></table></figure>
+
+<h2 id="工程化管理配置"><a href="#工程化管理配置" class="headerlink" title="工程化管理配置"></a>工程化管理配置</h2><p>由于将所有的配置都写到.emacs里会使整个文档看起来很凌乱，于是就需要将不同方面（ui界面，use-package管理等）的配置代码区分开来。</p>
+<p>于是不妨新建一个文件夹&#x2F;.emacs.d&#x2F;lisp&#x2F;里面专门存放配置文件。并且根据配置的不同方向，命名如下：</p>
+<ul>
+<li>init-elpa.el 存放镜像源相关配置</li>
+<li>init-package.el 存放包管理器的相关配置u</li>
+<li>init-startup.el emacs启动时运行的一些代码（关闭工具栏和滚动条等）</li>
+<li>init-ui.el 界面的主题和字体等配置</li>
+</ul>
+<p>比如目前我的init-ui.el是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br><span class="line"></span><br><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t)</span><br><span class="line"></span><br><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br><span class="line"></span><br><span class="line">;; show the line number</span><br><span class="line">(global-linum-mode t)</span><br><span class="line"></span><br><span class="line">;; make the background transparent</span><br><span class="line">(set-frame-parameter (selected-frame) &#x27;alpha (list 85 60))</span><br><span class="line">(add-to-list &#x27;default-frame-alist (cons &#x27;alpha (list 85 60)))</span><br><span class="line">(put &#x27;downcase-region &#x27;disabled nil)</span><br><span class="line"></span><br><span class="line">(provide &#x27;init-ui)</span><br></pre></td></tr></table></figure>
+
+<p><code>(provide &#39;init-ui)</code>在这里是将<code>init-ui</code>暴露的意思，后续的<code>require</code>会根据是否暴露来找到配置文件。</p>
+<p>将所有的配置往&#x2F;.emacs.d&#x2F;目录下的init.el文件里迁移。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(add-to-list &#x27;load-path</span><br><span class="line">         (expand-file-name(concat user-emacs-directory &quot;lisp&quot;)))</span><br><span class="line"></span><br><span class="line">(require &#x27;init-startup)</span><br><span class="line">(require &#x27;init-elpa)</span><br><span class="line">(require &#x27;init-ui)</span><br><span class="line">(require &#x27;init-package)</span><br></pre></td></tr></table></figure>
+
+<p><code>load-path</code>是一个<code>list</code>，需要将配置添加进去。</p>
+<p><code>expand-file-name</code>将后面的两个字符串拼接成一个目录，<code>concat</code>是拼接的意思,<code>user-emacs-directory</code>系统的全局变量，寻找emacs的目录，即&#x2F;.emacs.d&#x2F;这个目录。</p>
+<p>诸如<code>(require &#39;init-startup)</code>require和provide是配对的，调用之前配置好的<code>init-startup</code>。</p>
+<p>这些都配置好了以后就可以把.emacs文件删了。</p>
+<h2 id="关于自定义配置"><a href="#关于自定义配置" class="headerlink" title="关于自定义配置"></a>关于自定义配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(setq custom-file (expand-file-name &quot;custom.el&quot; user-emacs-directory))</span><br></pre></td></tr></table></figure>
+
+<p>通过这个命令可以将一些自定义配置(诸如鼠标点击的)后系统生成的文字，保存到custom.el里面。 通过这个方法可以使得init.el文件看上去并不是那么凌乱了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(when (file-exits-p custom-file)</span><br><span class="line">  (load-file custom-file))</span><br></pre></td></tr></table></figure>
+
+<p>系统可能不会自动加载custom里面的配置，这里的代码意思是当发现custom-file文件存在是就自动加载。</p>
+<h2 id="启动配置"><a href="#启动配置" class="headerlink" title="启动配置"></a>启动配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(prefer-coding-system &#x27;utf-8)</span><br><span class="line">(set-default-coding-systems &#x27;utf-8)</span><br><span class="line">(set-terminal-coding-system &#x27;utf-8)</span><br><span class="line">(set-keyboard-coding-system &#x27;utf-8)</span><br><span class="line">(setq default-buffer-file-coding-system &#x27;utf-8)</span><br></pre></td></tr></table></figure>
+
+<p>用于解决乱码问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(setq gc-cons-threshold most-positive-fixnum)</span><br></pre></td></tr></table></figure>
+
+<p>控制垃圾回收阈值，满了再回收。</p>
+<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><p>使用company插件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(use-package company</span><br><span class="line">  :diminish (company-mode &quot; Cmp.&quot;)</span><br><span class="line">  :defines (company-dabbrev-ignore-case company-dabbrev-downcase)</span><br><span class="line">  :hook (after-init . global-company-mode)</span><br><span class="line">  :config (setq company-dabbrev-code-everywhere t</span><br><span class="line">                company-dabbrev-code-modes t</span><br><span class="line">                company-dabbrev-code-other-buffers &#x27;all</span><br><span class="line">                company-dabbrev-downcase nil</span><br><span class="line">                company-dabbrev-ignore-case t</span><br><span class="line">                company-dabbrev-other-buffers &#x27;all</span><br><span class="line">                company-require-match nil</span><br><span class="line">                company-minimum-prefix-length 1</span><br><span class="line">                company-show-numbers t</span><br><span class="line">                company-tooltip-limit 20</span><br><span class="line">                company-idle-delay 0</span><br><span class="line">                company-echo-delay 0</span><br><span class="line">                company-tooltip-offset-display &#x27;scrollbar</span><br><span class="line">                company-begin-commands &#x27;(self-insert-command))</span><br><span class="line">  (eval-after-load &#x27;company</span><br><span class="line">    &#x27;(add-to-list &#x27;company-backends</span><br><span class="line">                  &#x27;(company-abbrev company-yasnippet company-capf))))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>emacs</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>npm权限调试小记</title>
+    <url>/2021/08/26/2021/npm1/</url>
+    <content><![CDATA[<p>今天安装javascript的lovefield插件，github地址为：<a href="https://github.com/google/lovefield/blob/master/demos/todo/README.md">https://github.com/google/lovefield/blob/master/demos/todo/README.md</a></p>
+<p>根据这个教程，首先是要安装gulp等插件的。</p>
+<p>我将<code>npm install -g gulp·</code>输入终端，结果出现了这样的错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall mkdir</span><br><span class="line">npm ERR! path /usr/lib/node_modules/gulp</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, mkdir &#x27;/usr/lib/node_modules/gulp&#x27;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, mkdir &#x27;/usr/lib/node_modules/gulp&#x27;] &#123;</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &#x27;EACCES&#x27;,</span><br><span class="line">npm ERR!   syscall: &#x27;mkdir&#x27;,</span><br><span class="line">npm ERR!   path: &#x27;/usr/lib/node_modules/gulp&#x27;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/scheng/.npm/_logs/2021-08-26T14_32_18_031Z-debug.log</span><br></pre></td></tr></table></figure>
+
+<p>起先以为是权限问题，于是就很粗糙地加了个sudo，也就是<code>sudo npm install -g gulp</code></p>
+<p>结果就出现了一个类似代理问题的东西：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm ERR! code ENOTFOUND</span><br><span class="line">npm ERR! syscall getaddrinfo</span><br><span class="line">npm ERR! errno ENOTFOUND</span><br><span class="line">npm ERR! network request to https://registry.npm.taobao.org+/bower failed, reason: getaddrinfo ENOTFOUND registry.npm.taobao.org+</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network </span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network &#x27;proxy&#x27; config is set properly.  See: &#x27;npm help config&#x27;</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /root/.npm/_logs/2021-08-26T14_12_05_523Z-debug.log</span><br></pre></td></tr></table></figure>
+
+<p>首先是解决这个问题，查找一番以为是npm设置了代理，但是代理并没有设置正确，就导致了无法正常下载。 那么先<code>npm config list</code>检查一下配置，发现是没有设置代理的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">; &quot;user&quot; config from /home/scheng/.npmrc</span><br><span class="line"></span><br><span class="line">proxy = false </span><br><span class="line">registry = &quot;https://registry.npmjs.org/&quot; </span><br><span class="line"></span><br><span class="line">; node bin location = /usr/bin/node</span><br><span class="line">; cwd = /home/scheng/eaf-rss-reader</span><br><span class="line">; HOME = /home/scheng</span><br><span class="line">; Run `npm config ls -l` to show all defaults.</span><br></pre></td></tr></table></figure>
+
+<p>然后就突发奇想，要不设置个代理?于是就<code>npm config set proxy http://x.xxx.xxx.xxx:xxx</code>，然后重新install，结果还是无法正常下载，就默默地把这一行配置有删掉了…</p>
+<p>然后回头解决最初的那个问题，也就是权限的问题。 可以根据这个网页的内容来操作：<a href="https://stackoverflow.com/questions/48910876/error-eacces-permission-denied-access-usr-local-lib-node-modules">https://stackoverflow.com/questions/48910876/error-eacces-permission-denied-access-usr-local-lib-node-modules</a></p>
+<p>先是 <code>ls -la /usr/local/lib/node_modules</code>查看一下node_modules的权限，但是终端给我报错说并没有<code>/usr/local/lib/node_modules</code>这个目录， 那么就<code>whereis node_modules</code>查看一下它在哪里，原来我的arch把它装在了<code>/usr/lib/node_modules</code>这个目录…那么后续就是<code>ls -la /usr/lib/node_modules</code> 查看权限，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drwxr-xr-x   8 root root   4096  7月 22 15:11 .</span><br><span class="line">drwxr-xr-x 251 root root 270336  8月 26 00:54 ..</span><br><span class="line">drwxr-xr-x   5 root root   4096  5月 28 21:23 cnpm</span><br><span class="line">drwxr-xr-x   9 root root   4096  7月 25 16:58 node-gyp</span><br><span class="line">drwxr-xr-x   5 root root   4096  7月 22 15:11 nopt</span><br><span class="line">drwxr-xr-x   6 root root   4096  8月  4 12:13 npm</span><br><span class="line">drwxr-xr-x   8 root root   4096  5月 27 10:26 semver</span><br><span class="line">drwxr-xr-x   7 root root   4096  5月 28 21:24 vue-cli</span><br></pre></td></tr></table></figure>
+
+<p>这里普通用户是需要root权限的,链接里面提供了三种方法，这里不再赘述。我使用的是：<code>sudo chown -R ownerName: /usr/lib/node_modules</code></p>
+<p>然后再去跑最初的那个安装命令，就能完美安装啦。</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于opml，使用lxml解析opml文件小记</title>
+    <url>/2021/11/10/2021/opml/</url>
+    <content><![CDATA[<p>首先来介绍一下什么是opml文件。</p>
+<p>了解到这种文件主要是因为eaf-rss-reader的一个issue。一般来说像feedly，Inoreader这种的rss-reader是提供了引入&#x2F;导出opml文件的功能的。opml文件将你的feed链接都收集到一个文件里，方便将所有的feed订阅转移到其他的阅读器上。</p>
+<p>opml文件其实就是一个xml文件，使用能够解析xml文件的一些库就能将它解析了。但是比较怪的是，feedly网站上居然无法解析由Inoreader生成的xml文件…</p>
+<p>对python来说，解析xml通常会用xml库或者lxml库，我觉得lxml操作起来更加方便，于是就用lxml了。值得注意的一个地方是，xml文件里面有默认的几个特殊字符 <strong>&lt; &gt; &amp; ‘ “</strong> ，如果需要被提取的地方出现了这几个字符，那么就会报一个出现特殊字符的错误：lxml.etree.XMLSyntaxError: xmlParseEntityRef: no name，这个问题是由Emacs China论坛的用户提出的。</p>
+<h2 id="导入解析opml"><a href="#导入解析opml" class="headerlink" title="导入解析opml"></a>导入解析opml</h2><p>接下來介绍一下解析过程。</p>
+<ol>
+<li><p>首先需要一个文件输入，就是将opml文件的位置传入到程序里。</p>
+</li>
+<li><p>获取到文件，开始解析。将opml文件转换成一个feeds_list，里面记录feed链接。</p>
+</li>
+<li><p>逐个将链接解析，添加到本地rss库中。</p>
+</li>
+</ol>
+<p>第1步没有什么好展开讲的，现在在mini-buffer里面直接输入地址还不能补全，也没有检查路径是否存在，所以说实现方案还不够友好，需要再改进一下。</p>
+<p>解析过程最重要的步骤也就是第2步了，这里贴出我的代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_import_opml</span>(<span class="params">self, opml_file</span>):</span></span><br><span class="line">        message_to_emacs(<span class="string">&quot;Importing...&quot;</span>)</span><br><span class="line">        parser = etree.XMLParser(encoding = <span class="string">&quot;utf-8&quot;</span>, recover = <span class="literal">True</span>)</span><br><span class="line">        tree = etree.parse(opml_file, parser = parser)</span><br><span class="line">        feeds = tree.xpath(<span class="string">&#x27;/opml/body/outline&#x27;</span>)</span><br><span class="line">        feeds_list = []</span><br><span class="line">        feeds_list = tree.xpath(<span class="string">&#x27;/opml/body/outline/@xmlUrl&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># The above method may not be able to obtain xmlUrl.</span></span><br><span class="line">        <span class="keyword">for</span> feed <span class="keyword">in</span> feeds:</span><br><span class="line">            <span class="keyword">for</span> rss <span class="keyword">in</span> feed.iterchildren():</span><br><span class="line">                feeds_list.append(rss.get(<span class="string">&#x27;xmlUrl&#x27;</span>))</span><br><span class="line">        feeds_list = <span class="built_in">sorted</span>(<span class="built_in">set</span>(feeds_list), key = feeds_list.index)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># unique feed</span></span><br><span class="line">        <span class="keyword">for</span> index, feed <span class="keyword">in</span> <span class="built_in">enumerate</span>(feeds_list):</span><br><span class="line">            <span class="keyword">if</span> feed <span class="keyword">in</span> self.main_item.feedlink_list:</span><br><span class="line">                feeds_list.pop(index)</span><br><span class="line">                message_to_emacs(<span class="string">&quot;Feedlink &#x27;&#123;&#125;&#x27; exists.&quot;</span>.<span class="built_in">format</span>(feed))</span><br><span class="line"></span><br><span class="line">        self.import_opml_thread(feeds_list)</span><br></pre></td></tr></table></figure>
+
+<p>第三行是定义了一个解析器，因为要解决上面提到的特殊字符的问题，所以引入了<code>recover=True</code>这个参数，作用是当碰到特殊字符时直接把他们覆盖掉（用空格）。因为这里并不取到特殊字符所在的那一部分内容，所以是可以直接覆盖掉的。</p>
+<p>第四行使用上面定义的解析器解析xml文件。之后用xpath先读到outline所在位置，这里其实是一个temp。直接用xpath读到xmlUrl标签，记录在feeds_list中，但是有一些网站提供的opml又会读不到。就需要对上面生成的那个temp再操作一次，这个temp主要是为了解决多层outline包裹的问题（比如feedly如果定义了分类那么就会多层包裹）。</p>
+<p>10～12是对多层包裹的处理，考虑到这里实际上是进行了两次解析，可能会生成重复的feeds，于是在13进行一个去重。16～18是与本地feeds进行对比，然后去重，先去重再抓取，提高效率。</p>
+<p>第3步，我最初想的是单个调用原先写的多线程处理抓取的方法，但是这样实现起来会难以控制抓取结果，feed的index也会出现问题（标号index的操作比抓取线程快很多，就会导致index出错）。于是就重新为引入opml重新写了一个独立的线程，不过我觉得这样其实并不优雅。</p>
+<h2 id="导出opml"><a href="#导出opml" class="headerlink" title="导出opml"></a>导出opml</h2><p>导出opml比引入opml实现起来要简单些。</p>
+<p>因为直接使用python的xml库生成的xml文件是没有排版的，整个文件就一行，十分地丑，于是我就写了一个美化排版的递归函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">beautify_opml</span>(<span class="params">self, element, indent, newline, level = <span class="number">0</span></span>):</span></span><br><span class="line">       <span class="keyword">if</span> element:</span><br><span class="line">           <span class="keyword">if</span> element.text == <span class="literal">None</span> <span class="keyword">or</span> element.text.isspace():</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>)</span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>) + element.text.strip() + newline + indent * (level + <span class="number">1</span>)     </span><br><span class="line">       temp = <span class="built_in">list</span>(element)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> subelement <span class="keyword">in</span> temp:</span><br><span class="line">           <span class="keyword">if</span> temp.index(subelement) &lt; (<span class="built_in">len</span>(temp) - <span class="number">1</span>):     </span><br><span class="line">               subelement.tail = newline + indent * (level + <span class="number">1</span>)    </span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               subelement.tail = newline + indent * level   </span><br><span class="line">           self.beautify_opml(subelement, indent, newline, level = level + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>主要思路就是根据层级关系来判断是否需要加缩进以及换行，然后对子树节点再进行递归操作。</p>
+<p>接下来是生成函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_opml</span>(<span class="params">self</span>):</span></span><br><span class="line">    message_to_emacs(<span class="string">&quot;Exporting...&quot;</span>)</span><br><span class="line">    root = Element(<span class="string">&#x27;opml&#x27;</span>)</span><br><span class="line">    root.<span class="built_in">set</span>(<span class="string">&#x27;version&#x27;</span>, <span class="string">&#x27;1.0&#x27;</span>)</span><br><span class="line">    head = SubElement(root, <span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    title = SubElement(head, <span class="string">&#x27;title&#x27;</span>)</span><br><span class="line">    user_name = get_emacs_var(<span class="string">&quot;user-login-name&quot;</span>)</span><br><span class="line">    title.text = <span class="string">&quot;Feeds of &#123;&#125; from eaf-rss-reader&quot;</span>.<span class="built_in">format</span>(user_name)</span><br><span class="line">    body = SubElement(root, <span class="string">&#x27;body&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> self.rss_list:</span><br><span class="line">        outline = SubElement(body, <span class="string">&#x27;outline&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;rss&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;text&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;title&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;xmlUrl&#x27;</span>, item[<span class="string">&#x27;feed_link&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;link&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">            link = item[<span class="string">&#x27;link&#x27;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                link = feedparser.parse(item[<span class="string">&#x27;feed_link&#x27;</span>]).feed.link</span><br><span class="line">            <span class="keyword">except</span> AttributeError:</span><br><span class="line">                link = item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            message_to_emacs(<span class="string">&quot;Failed to export &#123;&#125; &#123;&#125;, please try again later.&quot;</span>.<span class="built_in">format</span>(</span><br><span class="line">                item[<span class="string">&#x27;feed_title&#x27;</span>]</span><br><span class="line">                ,item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            ))</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;htmlUrl&#x27;</span>, link)</span><br><span class="line"></span><br><span class="line">    tree = ElementTree(root)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    self.beautify_opml(root, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    file_location = os.path.join(self.location,</span><br><span class="line">    <span class="string">&#x27;eaf-rss-reader-&#x27;</span> + time.strftime(<span class="string">&quot;%Y-%m-%d-%H%M%S&quot;</span>, time.localtime()) + <span class="string">&#x27;.opml&#x27;</span>)</span><br><span class="line">    tree.write(file_location, encoding = <span class="string">&#x27;utf-8&#x27;</span>, xml_declaration=<span class="literal">True</span>)</span><br><span class="line">    message_to_emacs(<span class="string">&quot;All feeds have been exported. Location is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(file_location))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>生成下一层子节点的方法是<code>SubElement()</code>，eaf-rss-reader的opml文件的层级结构大致是这样的：opml -&gt; head &#x2F; body -&gt; outline1&#x2F;outline2&#x2F;…，某个feed的信息储存在outline的标签参数里面。11～28生成outline，主要包括了feed的title，feed的链接，feed的原链接（网页链接）这三个参数，因为最开始抓取feed的解析疏忽了，没有保存原链接地址，现在已经补上了，对于仍然没有原链接的那部分feed，会进行一个重新抓取，获取到原链接。抓取不到那就只能报错了。</p>
+<p>30～36就是美化排版函数的调用和生成文件了，为了文件不重名，所以采用了时间戳命名的方法。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SICP回顾：cons函数、使用过程定义数据结构（上）</title>
+    <url>/2021/11/20/2021/re_sicp1/</url>
+    <content><![CDATA[<p>最近在使用python完成SICP2.2部分的一些经典例题，因为在我看来使用不同的语言来完成一件相同的事情能够加深印象和理解。用python实现例题的部分也会再写成一篇文章，但是这里遇到了一些问题，需要先记录一下。</p>
+<p>首先是我对2.2节的感悟：构造一个复杂的东西，是需要许多模块进行组合的。这些模块也可以进行拆分，但是拆分到最底层的某些部分，这些部分的构造一定是简单又正确的。（看上去是一句废话，但是要把一个东西构造成简单但是又正确的，还是比较困难的一件事情）</p>
+<p>2.2节的最简单又正确的构造就是三个基本的函数<code>cons</code>、<code>car</code>、<code>cdr</code>，他们是那么简单，但是我又无法使用python将他们用一种优雅的方式构造出来。</p>
+<p>到底是用python的元组来构造scheme的list，还是用python的列表来构造scheme的list，我没有进行深究，我认为这两种数据结构的效果是类似的。</p>
+<h2 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>我打算用python现成的数据结构来表达scheme的list，那么<code>cons</code>、<code>car</code>、<code>cdr</code>也是要基于这种数据结构来进行编写的。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple1) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple1 = (tuple1,)</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple2) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple2 = (tuple2,)</span><br><span class="line">    <span class="keyword">return</span> tuple1 + tuple2</span><br></pre></td></tr></table></figure>
+
+<p>这样的构造在不嵌套元组操作的时候看上去是对的，比如说<code>c = cons(1,2)</code>这样的操作会得到<code>c=(1,2)</code>；但是如果进行嵌套元组操作，就会出错，比如说<code>c=cons((1,2,3),(4,5,6))</code>，我们期望得到的是类似<code>c=((1,2,3),(4,5,6))</code>这样的结构，但是输出结果是<code>c=(1,2,3,4,5,6)</code>。这样的构造是不行的。</p>
+<h2 id="第二次尝试"><a href="#第二次尝试" class="headerlink" title="第二次尝试"></a>第二次尝试</h2><p>我改变了<code>cons</code>的构造，然后整体呈现是</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item == ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (tuple1,tuple2)</span><br></pre></td></tr></table></figure>
+
+<p>但是这样构造的输出比较丑，我得把元组写成<code>a = (1,(2,(3,(4,()))))</code>这种形式，等价于scheme里面<code>(define a (list 1 2 3 4))</code>，不过后续的部分操作都是对的。使用<code>accumulate</code>函数稍稍验证一下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accumulate</span>(<span class="params">op, init, seqs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> is_null(seqs):</span><br><span class="line">        <span class="keyword">return</span> init</span><br><span class="line">    <span class="keyword">return</span> op(car(seqs), accumulate(op, init, cdr(seqs)))</span><br><span class="line"></span><br><span class="line">accumulate(cons, (), a)</span><br><span class="line">accumulate(add, <span class="number">0</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">num1, num2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> num1 + num2</span><br></pre></td></tr></table></figure>
+
+<p>如果硬要把元组写成<code>a=(1,2,3,4)</code>这种格式，会出一点问题….使用<code>accumulate(cons, (), a)</code>看一下就明白了，会变成<code>(1, (2, (3, (4, ()))))</code>这样的格式。显然的，<code>a=(1,2,3,4)</code>这种形式要比<code>(1, (2, (3, (4, ()))))</code>看上去美观多了。</p>
+<p>但是在scheme却不会出现这种情况，比如说对一个list进行操作：</p>
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>))</span><br><span class="line">accumulate(<span class="name"><span class="builtin-name">cons</span></span>, &#x27;(), a&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>最终的输出仍然是<code>(1 2 3 4)</code>，所以我推测应该是list与cons的实现存在问题。cons的实现并不是如同我上面那样构造的，或者说当cons应用在list上时呈现效果会有变化。不过更加具体的分析我还没有想好。还有一件更加奇怪的事情。</p>
+<p>当我们去嵌套地调用<code>cons</code>函数时，出现的效果是这样的：</p>
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> b (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">cons</span></span> a b ) = ((<span class="name">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我将它描述为“b嵌套了a”或者”a被b嵌套了”。</p>
+<p>但是当我去使用一个函数，情况就发生了变化：</p>
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">accumulate-n</span> op init seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">null?</span></span> (<span class="name"><span class="builtin-name">car</span></span> seqs))</span><br><span class="line">      &#x27;()</span><br><span class="line">      (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name">accumulate</span> op init (<span class="name">car-n</span> seqs))</span><br><span class="line">        (<span class="name">accumulate-n</span> op init (<span class="name">cdr-n</span> seqs)))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">car-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> car seqs))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">cdr-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> cdr seqs))</span><br><span class="line">(<span class="name"><span class="builtin-name">load</span></span> <span class="string">&quot;accumulate.scm&quot;</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> sequence (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span>)))</span><br><span class="line"></span><br><span class="line">(<span class="name">accumulate-n</span> cons &#x27;() sequence&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>最后一行的效果是向<code>list1</code>进行一个矩阵翻转。</p>
+<p><code>car-n</code>的结果是生成一个list,然后通过accumulate-n将他们都链接起来，链接的方法是<code>cons</code>，但是最后输出的是<code>((1 4 7 10) (2 5 8 11) (3 6 9 12))</code>，并不是嵌套情况！前面举例的那个方法也是两个list通过<code>cons</code>方法链接起来，但是呈现结果是嵌套的。</p>
+<p>我就开始猜想是不是因为scheme会根据数据结构的不同来选择不一样的链接方案？比如两个list链接就是类似链表的一种链接，而第二个例子因为已经指明了原本的数据结构是一个list,所以<code>cons</code>的链接方案仍然是list形式的。</p>
+<p>我觉得在没有具体了解<code>cons</code>在scheme里面的实现，是无法得到正确的结论的。</p>
+<p>所以对于python直接使用现成数据结构构造<code>cons</code>，我目前只能达到这个阶段了。更深层的内容需要更加了解函数式构造方法后再来补充。现在只能用这种丑陋的方法继续完成sicp例题了。</p>
+<h2 id="第三次尝试，使用过程构造数据结构"><a href="#第三次尝试，使用过程构造数据结构" class="headerlink" title="第三次尝试，使用过程构造数据结构"></a>第三次尝试，使用过程构造数据结构</h2><p>既然都在构造cons了，不如回顾一下p61提到的使用过程构造cons。</p>
+<p>在我之前的尝试里面，cons理所当然地应该是一种数据结构，但是sicp个给了一种方法使他能够被函数构造出来。</p>
+<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cons</span></span> x y)</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">dispatch</span> m)</span><br><span class="line">    (<span class="name"><span class="builtin-name">cond</span></span> ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">0</span>) x)</span><br><span class="line">      ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">1</span>) y)</span><br><span class="line">      (<span class="name"><span class="builtin-name">else</span></span> (<span class="name">error</span> <span class="string">&quot;Argument not 0 or 1 -- CONS&quot;</span> m))))</span><br><span class="line">  dispatch)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">car</span></span> z) (<span class="name">z</span> <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cdr</span></span> z) (<span class="name">z</span> <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>以及python</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">m</span>):</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">elif</span> m == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> y</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Argument not 0 or 1 -- CONSS&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> dispatch</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里定义的cons car cdr等都是过程，cons本质上是一个数据结构。</p>
+<p>当使用cons对两个数据进行组合的时候，返回的是一个函数：</p>
+<p><code>cons(1,2)</code></p>
+<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb550&gt;</code></p>
+<p><code>cons((1,2,3),(4,5,6))</code></p>
+<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code></p>
+<p>当对被构造出来的这种结构使用car、cdr时，会根据情况来返回值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = cons((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>))</span><br><span class="line">b = cons((<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>),a)</span><br><span class="line">car(a)</span><br><span class="line">car(b)</span><br><span class="line">cdr(a)</span><br><span class="line">cdr(b)</span><br></pre></td></tr></table></figure>
+
+<p>前面三种查询都是返回元组本身，也就是可以直接查看到值的结果，但是第四个返回的是<code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code>，因为相当于直接查看a了，a的构造实际上是一个函数。</p>
+<p>其实将被构造出来的这些数据带入car、cdr、cons函数并不难理解，这又让我想起来了经典的例题2.6，同样的2.6是使用过程“重新定义”了数字，这里是用过程重新定义cons的数据结构。</p>
+<p>其实还有一些问题，不过我已经找到较为优雅的方法了，请看我的<a href="https://scheng52123.com/index.php/2021/11/22/re_sicp1/">下一篇文章</a>。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>scheme</category>
+        <category>sicp</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SICP回顾：cons函数、使用过程定义数据结构（下）</title>
+    <url>/2021/11/22/2021/re_sicp2/</url>
+    <content><![CDATA[<p>接着写<a href="https://scheng52123.com/index.php/2021/11/20/re_sicp1/">上一篇</a>的内容，我打算实现三个基本函数<code>cons</code>、<code>car</code>、<code>cdr</code>，尝试了几种方法都没能很好的实现，并且前两种方法在后来的测试中发现都有问题（第二种方法在嵌套使用的时候仍然有bug）。我逛了一圈github，发现有一位老哥已经用python实现了SICP的大部分习题，<a href="https://github.com/Reo-LEI/SICP-Python">https://github.com/Reo-LEI/SICP-Python</a> 。其中他编写了一个<a href="https://github.com/Reo-LEI/SICP-Python/blob/master/orderedPair.py">ordered.py</a>，其中对cons的实现和对lister（在scheme里面是list）的实现是比较优雅的。</p>
+<p>我将他的代码稍稍修改了一下，现在的构造是这样的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (a, b)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lister</span>(<span class="params">*args</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coner</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        <span class="keyword">if</span> y == []:</span><br><span class="line">            <span class="keyword">return</span> cons(x, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(x, coner(y[<span class="number">0</span>], y[<span class="number">1</span>:]))</span><br><span class="line">    L = <span class="built_in">list</span>(args)</span><br><span class="line">    first, other = L[<span class="number">0</span>], L[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">return</span> coner(first, other)</span><br></pre></td></tr></table></figure>
+
+<p>其实就是在我的第二次尝试的代码里面使用cons重新写了一个lister数据结构，使cons能够正确处理嵌套结构。</p>
+<p>一个lister接受多个参数（*args使函数能够接收若干个参数）。将args转换为list作为temp保存，<code>tuple()</code>无法接受多个参数。 first取第一个（类似car），other取剩余的（类似cdr），使用内部函数对first与other继续递归构造。而coner函数就是将这个list（或者说是other参数）展开，逐个地将元素用cons链接起来，到list被分解完毕了，就返回一个<code>None</code>作为递归的结束（这就类似scheme里的<code>&#39;()</code> 或者 <code>nil</code>了）。</p>
+<p>这个数据结构能够很好的处理嵌套的lister和cons，是我上一次构造的时候没想到的，我认为是一个较为优雅的方法了，唯一不足的就是对一个lister的直接呈现效果仍然是这样<code>(1, (2, (3, None)))</code>，而不是<code>(1, 2, 3)</code>这样的。不过问题不大。</p>
+<p>因为对重新构造了list的数据结构，那基于list的一些操作函数也会发生变化，python自带的<code>map</code>函数已经无法处理这里的lister了，所以就重新构造了一个<code>mapping</code>和<code>mapping_n</code>函数来作为新的<code>map</code>函数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping</span>(<span class="params">func, item</span>):</span> </span><br><span class="line">    <span class="keyword">if</span> is_null(item):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> cons(func(car(item)), mapping(func, cdr(item)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping_n</span>(<span class="params">func, *seqs</span>):</span></span><br><span class="line">    <span class="comment"># 将序列转化为元组</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">seq_trans</span>(<span class="params">seq</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">translator</span>(<span class="params">s</span>):</span></span><br><span class="line">            <span class="keyword">if</span> is_null(cdr(s)):</span><br><span class="line">                <span class="keyword">return</span> [car(s)]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [car(s)]+translator(cdr(s))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">tuple</span>(translator(seq))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_map</span>(<span class="params">f, seq</span>):</span></span><br><span class="line">        <span class="keyword">if</span> is_null(car(seq)):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(f(*seq_trans(car_n(seq))), _<span class="built_in">map</span>(f, cdr_n(seq)))  <span class="comment"># 用*解包元组调用f</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断seqs为树或者多个列表并解包</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(seqs) &gt; <span class="number">1</span>:</span><br><span class="line">        seqs = lister(*seqs)</span><br><span class="line">    <span class="comment"># 若为树直接解包</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        seqs = seqs[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> _<span class="built_in">map</span>(func, seqs)</span><br></pre></td></tr></table></figure>
+
+<p><code>mapping(func, item)</code>，类似原map函数，mapping的第一个参数接受一个函数，第二个参数接受一种数据或者一种数据结构。</p>
+<p>使用cons将item重新链接，并用car、cdr进行分解，对<code>car(item)</code>执行func操作，<code>cdr(item)</code>取剩下的数据部分，传入mapping进行递归。</p>
+<p>而<code>mapping_n</code>是P70脚注78提到的map扩充函数，能够接受多个表作&#x2F;序列作为参数，依次取各个序列第k元素组成序列<code>seq(k)</code>作为<code>func</code>的参数，返回结果序列。</p>
+<p><a href="https://github.com/ShaoChenHeng/learnSICP/blob/master/orderedPair.py">这是我修改后的文件</a>，我希望后续能将它变成一个python抽象scheme的标准函数库。</p>
+]]></content>
+      <categories>
+        <category>emacs</category>
+        <category>python</category>
+        <category>scheme</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>我的音乐播放器，Rubber2</title>
+    <url>/2021/12/26/2021/rubber2/</url>
+    <content><![CDATA[<p>这是本学期一门课程（移动互联）的课程作业，这门课安排的语言是kotlin，但是我用了两下感觉编程体验并不好。后来得知是可以使用任何语言的，于是就选择了较为趁手的Vue.js，再结合uni-app套件实现安卓打包，理论上也可以打包成为ipa，不过我目前还没测试过。</p>
+<p>github地址为：<a href="https://github.com/ShaoChenHeng/Rubber2">https://github.com/ShaoChenHeng/Rubber2</a></p>
+<p>更多的描述内容已经写在github页面了，可以自行查看，这里不再赘述。</p>
+<h2 id="运行图片"><a href="#运行图片" class="headerlink" title="运行图片"></a>运行图片</h2><p><img src="/images/home.jpg" alt="home"> <img src="/images/play1.jpg" alt="play1"> <img src="/images/play2.jpg" alt="play2"> <img src="/images/mine.jpg" alt="mine">) <img src="/images/search2.jpg" alt="search">)</p>
+<h2 id="weex-和-uni-app-以及-Hbuilderx"><a href="#weex-和-uni-app-以及-Hbuilderx" class="headerlink" title="weex 和 uni-app 以及 Hbuilderx"></a>weex 和 uni-app 以及 Hbuilderx</h2><p>（要不是这里是博客，我可能已经破口大骂了，哈哈哈。）</p>
+<p>weex和uni-app还有许多兼容性问题，这也给我的css排版工作带来了很多问题。最终地播放界面是可以更加好看的（我的最初设想是提取图片主色和次色进行颜色渐变作为背景，无奈各种npm库无法直接使用，手写八叉树的话，uni-app画布建立又与传统js不同；css部分也不支持blur，不支持多方向多颜色的渐变。所以我十分痛苦也十分无奈。），以后我也会慢慢改进呈现出我想要的那个状态来。</p>
+<p>uni-app只能在Hbuilderx上进行编译运行，而Hbuilderx只能运行在Windows上，这给我带来了一次 <strong>最不好</strong> 的编程体验。在写这个程序的十天里，我经历了两次莫名奇妙的文件自行被编辑器改动；只要出现引号内的长内容（比如说在进行数据渲染前我需要添加一些测试图片url），就会出现文字排版错误，光标不知道自己该在哪里。</p>
+<p>在逐渐习惯了Emacs的全键盘操作后，频繁地进行键鼠切换是一件很痛苦地事情。</p>
+<p>要不是迫不得已，我以后不会优先考虑将Hbuilderx作为我的编辑器。</p>
+]]></content>
+      <categories>
+        <category>android</category>
+        <category>javascript</category>
+        <category>vue-js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>树的映射以及map函数</title>
+    <url>/2021/11/07/2021/scale-tree/</url>
+    <content><![CDATA[<p>这篇文章是sicp2.2节内容的笔记，主要记录一下里面提到的scale-tree这个函数。</p>
+<p>```(scale-tree tree factor)```以一棵树和一个因子作为参数，将树上的所有节点的值都乘上因子。</p>
+<p>首先提供了一个朴素版本的scale-tree，就是递归左右子树，检查当前节点是否属于叶子节点。如果是，那么就乘上因子；如果不是，那么就继续左右递归。</p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree</span> tree factor)</span><br><span class="line">  (<span class="name">cond</span> ((<span class="name">null</span>? tree) &#x27;())</span><br><span class="line">    ((<span class="name">not</span> (<span class="name">pair</span>? tree)) (<span class="name">*</span> tree factor))</span><br><span class="line">    (<span class="name">else</span> (<span class="name">cons</span> (<span class="name">scale-tree</span> (<span class="name">car</span> tree) factor)</span><br><span class="line">            (<span class="name">scale-tree</span> (<span class="name">cdr</span> tree) factor)))))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> tree1 (<span class="name">list</span> <span class="number">1</span> (<span class="name">list</span> <span class="number">2</span> (<span class="name">list</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">5</span>) (<span class="name">list</span> <span class="number">5</span> <span class="number">7</span>)))</span><br><span class="line"></span><br><span class="line">（scale-tree  tree1 <span class="number">10</span>）</span><br></pre></td></tr></table></figure>
+
+<p>会使原来的树(也就是tree1)的节点上的值都乘以10。</p>
+<p>下面又提供了一个map加lambda匿名函数的版本，但是比较抽象，一下子难以理解。</p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree1</span> tree factor)</span><br><span class="line">  (<span class="name">map</span> (<span class="name">lambda</span> (<span class="name">sub-tree</span>)</span><br><span class="line">     (<span class="name">if</span> (<span class="name">pair</span>? sub-tree)</span><br><span class="line">         (<span class="name">scale-tree</span> sub-tree factor)</span><br><span class="line">         (<span class="name">*</span> sub-tree factor)))</span><br><span class="line">       tree))</span><br></pre></td></tr></table></figure>
+
+<p>我使用python重新写了一次，加深理解。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> sub_tree : scale_tree(sub_tree, factor) <span class="keyword">if</span> <span class="built_in">type</span>(sub_tree) == <span class="built_in">tuple</span> <span class="keyword">else</span> sub_tree * factor,tree))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree2</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="built_in">iter</span>, tree))</span><br><span class="line"></span><br><span class="line">t = ((<span class="number">1</span>, <span class="number">2</span>), <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里定义的两个函数功能上是一样的，因为scale_tree同时用map、lambda可读性可能不是很高，于是就用高阶函数的方法重新构造了scale_tree2这个函数。</p>
+<p>首先要讲的是map函数，通常使用的map函数的参数列表应该是这样的：</p>
+<p><code>map(function, parameter)</code></p>
+<p>第一个参数接受一个函数，第二个接受一个值或者某种数据结构（也可以传入更多个）。然后将对后面的这个参数使用<code>function</code>。比如说下面这个最简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(square, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])))</span><br></pre></td></tr></table></figure>
+
+<p><code>map</code>会对列表中的每一个数都执行一次square,最后会返回一个<code>[1,4,9]</code>。不过这只是对于一层的列表来执行的。通过更高阶的函数配合可以进行更深层的操作，也就是<code>scale-tree</code>，对树的映射。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>iter</code>函数接受的参数是一棵子树，我这里用python的元组来表示scheme中的list，如果当前位置的元素不是元组了，那么就说明是叶子节点，就需要乘以因子；如果不是那么就继续递归遍历子树，不过值得注意的是这里的递归并不是显示的，是通过map函数来进行的，因为它能将函数迭代地操作在每一层的结构上。</p>
+<p>再去看上面的那个scheme版本，其实就是一样的写法，不过这种遍历树的方法实在是太妙了。</p>
+<p>本来这篇文章应该在上周或者上上周就写好了，但是因为中途又重装了一次arch，又去更新eaf-rss-reader的opml功能，所以一直拖延到了今天才写。不过我总算是把这个这么美妙的方法记录下来了。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>scheme</category>
+        <category>sicp</category>
+        <category>book</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>我的中国开源之夏2021</title>
+    <url>/2021/10/16/2021/summer2021/</url>
+    <content><![CDATA[<p>今年中科院软件研究所的summer2021活动我参与的是<a href="https://github.com/emacs-eaf/emacs-application-framework">EAF社区（Emacs Application Framework）</a>，具体内容可以查看这个链接：<a href="https://summer.iscas.ac.cn/#/org/prodetail/210510561">Emacs EAF：基于Vue.js实现RSS新闻阅读器</a>，主要的任务是基于EAF框架实现一个Emacs的RSS阅读器。</p>
+<p>因为去年参加的<a href="https://github.com/OI-wiki/OI-wiki">OI Wiki社区</a>的撰写文章的活动是完全在我的舒适区内的任务，以后不再继续参与算法竞赛了，并且打算学习一些新东西于是选择了EAF的<a href="https://summer.iscas.ac.cn/#/org/prodetail/210510561">Emacs EAF：基于Vue.js实现RSS新闻阅读器</a>。</p>
+<p>项目仓库，<a href="https://github.com/ShaoChenHeng/eaf-rss-reader">eaf-rss-reader</a>。</p>
+<p><img src="/images/screenshot-1.png" alt="RSS-Reader1"></p>
+<h2 id="申请流程"><a href="#申请流程" class="headerlink" title="申请流程"></a>申请流程</h2><p>去年的申请流程可以查看这篇文章， <a href="https://scheng52123.com/index.php/2020/09/29/summer-2020/">Summer 2020 从申请到结项</a>。</p>
+<p>今年年初到3月份一直无所事事，寒假看了一些科普书，因为当时以为上半年不会有比赛了，所以没怎么写算法题，也没有去看开源项目相关的事情。到了三月末突发想到似乎快gsoc了，于是打开gsoc的页面看了一眼…发现再过两天就开始投proposal了…于是马上开始看gsoc的项目，同时也看了一下中科院这边的暑期活动，中科院这边还是社区申请的阶段（先社区向中科院申请slot，然后学生向中选社区申请），发现很早EAF就已经中选了，去年就关注这个社区了。因为大一的时候看过一点SICP，体验过Emacs编辑器，也简单配置过自己的.emacs文件，这个内容可以在我的文章 <a href="https://scheng52123.com/index.php/2021/01/31/learnemacs/">从零开始的Emacs配置学习</a>里面看见。但是感觉当时自己还是太弱了，lisp只会一点，所以就没有信心去参与EAF社区。gsoc这边花了几天时间从上千个项目中筛选出两个，一个是<a href="https://github.com/saketkc/gencode_regions">gencode_regions</a>，另一个是JavaScript的slang。当时中科院这边的任务还没发布出来，为了防止出现和gsoc一样的匆忙状况，期间给EAF的维护者，也就是我后来的导师MatthewZMD，发了一篇邮件，问了一下今年的任务情况。写完两篇proposal后发现自己被分配到打银川区域赛了…就开始学新的算法，没有再细看EAF的东西…gsoc这边最后两个都没中。</p>
+<p>打完区域赛浪了一段时间，就到了五月中旬。5.19左右EAF的具体项目已经发布出来了，今年导师认领任务的情况有变，一个导师最多只能认领三个项目，然而EAF的导师最终只有一位，所以最后也只有三个项目，分别是重构代码（低），写EAF图片处理工具（中），写RSS阅读器（中）。因为去年有一个music-player的项目很感兴趣，但是因为今年已经做出基于vue-js的music-player了所以这个项目在今年就没有出现。然后我就开始仔细研究这三个项目，因为抓取rss文件的过程和爬虫差不多，最开始学习python的时候写的最多的也就是爬虫，于是就选择了编写RSS阅读器的任务（其实本来是想找个难度为高的项目的，无奈EAF这边没有，其他社区slot也已经有人了，我也没再去考虑）。</p>
+<p>查询了一些资料，了解了一下RSS阅读器到底是什么东西，看了一些Github上的RSS阅读器的仓库，也体验了一下<a href="https://feedly.com/">Feedly</a>之类的阅读器，然后就开始写proposal了。在6.1完成了<a href="https://docs.google.com/document/d/1bSuUJaW1A6-22lL1aeyLdYsNzgsJqG5JhHkqaibHi4s/edit?usp=sharing">项目申请书</a>,mentor表示写的很好，做了一些小修改最后上交的也就是这一篇。</p>
+<p>这次申请过程一路畅通无阻，到最后这个项目也只有我一个申请人（不像去年那个撰写的最后都有8人了…），不过今年的确人数增加了许多，有的项目还是挺卷的。期间帮助自己学校的几位同学申请，最后自己学校有两位同学也入选了今年的暑期活动。其中一位的项目就挺卷的，但是好在她很早就联系了mentor，这个项目的整个构想都是她提出的所以最后也是她入选了。</p>
+<p>不过要提醒的是，项目申请书还是得好好写的，虽然有的项目候选人只有一位，但是不好好写申请书的话，还是会落选的。</p>
+<p>在提交项目申请书到审核到入选的过程中，看了一下vue.js的官方文档，然后就去冲期末考试了。当时是完全没看懂vue.js编程的，因为之前没接触过这种编程。后面具体的参与过程可以看我的这篇<a href="https://docs.google.com/document/d/1xnKz7avptIV7mXvPSkYQT4SeyjUHhAlNiUNYbP3XYTE/edit">结项报告</a>。接下来我想要详细介绍一下RSS阅读器。</p>
+<h2 id="RSS阅读器"><a href="#RSS阅读器" class="headerlink" title="RSS阅读器"></a>RSS阅读器</h2><p>说实话，在接触这个项目之前，我是完全不知道RSS阅读器是什么东西的。现在简单介绍一下。</p>
+<p>首先我们可以将网页上的内容整理成一个rss链接，有提供这种rss链接的网站我们可以认为是支持rss服务的，最浅显的一个例子就是豆瓣的个人页面，我们可以在个人页面的右下角看到一个 RSS2.0 的链接，点进去就可以看见这位用户的内容整理了。因为是豆瓣，所以这个链接里面整理的就是这个用户最新的“想读的书”、“看过的电影”之类的内容。如果是某些新闻网站的话，整理出来的就是一些文章了，比如说开源中国提供的一个rss链接<a href="https://www.oschina.net/news/rss">https://www.oschina.net/news/rss</a> 。</p>
+<p>但是这种链接点开来是类似一种类似html的超文本格式的，无法直接通过肉眼来看内容，那么就需要一个工具，将rss链接进行解析，得到链接里面的内容并且呈现出来，这个工具就是rss阅读器。并且我们可以在rss阅读器里面添加许多这种链接，这样也就相当于把自己感兴趣的所有东西都放在一个容器里了。</p>
+<p>那么只要通过rss阅读器就可以查看内容进入到这个网站的首页查看内容了。也就意味着，我们可以在rss阅读器上专一地看自己感兴趣的内容。我一直有一个想法，其实根本没有必要存在这么多app，很多app提供的主体功能实际上通过浏览器和网页就能够实现了，手机的内存空间也可以得到释放。多年以前手机还没有像今天这样流行的时候其实就是这样的，当时使用平板电脑或者手机还可以在网页的淘宝上进行购物，也可以在网页的qq上进行聊天，但是现在这样的功能已经越来越少，各种服务的app也越来越臃肿、冗余。今天的发展离我的这个想法就是越走越远，不过rss阅读器还是很契合我的想法的，这也是我最后选择它作为我的暑期项目的理由之一。</p>
+<p>然而并不是所有的网站都有提供RSS服务的，所以有的网页我们就无法订阅，这时候就需要一个Github上的开源项目：<a href="https://github.com/DIYgod/RSSHub">RSSHub</a>，通过这个项目可以将任何网页生成RSS链接，再使用RSS阅读器就可以订阅互联网上的所有页面了。但是目前我的eaf-rss-reader还无法使用RSSHub生成的链接，主要是代理上的问题，后续会给出解决方案。</p>
+<h2 id="关于本项目"><a href="#关于本项目" class="headerlink" title="关于本项目"></a>关于本项目</h2><p><img src="/images/screenshot-2.png" alt="RSS-Reader2"></p>
+<p>来讲一讲这次项目使用到的技术栈，vue.js以及其组件vuex，Python-PyQt5、emacs-lisp（主要用于EAF的.el文件编写）、javascript等，并且这里列举的都是在三个月内我学会并且实现的。其他部分python一直是会的，但是图形的PyQt部分一直没有接触过，对于js也只是今年上半年时候读了一部分的javascript编程艺术这本书（粉色封面）学会了一些dom操作。</p>
+<p>通过上面提到的那些技术栈的组合，最终完成了一个能够实现feed订阅、feed删除、标记阅读状态、访问源页面（直接调用EAF的browser）、刷新以及自动刷新功能的RSS-Reader。并且其中的添加订阅、刷新功能是多线程的。这也是我第一次学习多线程操作，使用了QThread。</p>
+<p>前期以及中期最困难的一个部分是无法使用vue.js调用python函数，不过后来参考了EAF的file-manager项目采取了QWebChannel的方法，十分优雅地解决了，并且这个方法将对我以后编写的程序起到很大的帮助。接下来我会用两篇文章详细介绍一下QThread方法和QWebChannel方法。</p>
+<p>关于我的RSS-Reader还欠缺的一些地方，目前只能够直接使用我设计的配色，还没有将配色留出.el文件；preview页面中的文章排版还有问题，也无法显示图片；无法使用RSSHub的链接等。</p>
+<h2 id="后续计划"><a href="#后续计划" class="headerlink" title="后续计划"></a>后续计划</h2><p>解决上面提到的问题。</p>
+<p>继续配置Emacs，使它成为我的主力编辑器。</p>
+<p>使用Emacs完成SICP。</p>
+<p>2022年可能不会参与GSoc或者中科院开源之夏了，如果EAF2022年叫我去当mentor，那我是很乐意的（逃）。下一次参与这种活动可能就是2023年以后了，如果我在那个时间点以后还将继续读书的话。（（（</p>
+]]></content>
+      <categories>
+        <category>summer</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>远程服务器复制操作小记</title>
+    <url>/2021/09/01/2021/server-copy/</url>
+    <content><![CDATA[<p>因为最近在写学校每日一报自动签到的东西，在远程服务器上写了一个autoSign.py的文件，同时我将这个文件传到了github上（这个操作是在我本地的linux系统上进行的），那么当我在远程服务器上更改了autoSign.py的文件的时候，我想要同步保存它，就需要在远程服务器上使用git了，但是我不想这样子做，于是搜索了一番打算将远程服务器上的文件复制到我本地的linux系统上，再通过本地的linux系统上传文件到github，操作如下（当然下面出现的ip是没用的）</p>
+<p>假设远程服务器IP地址为 192.168.1.100</p>
+<h2 id="从服务器复制文件到本地"><a href="#从服务器复制文件到本地" class="headerlink" title="从服务器复制文件到本地"></a>从服务器复制文件到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp root@192.168.1.100:/data/test.txt /home/myfile/</span><br><span class="line">补充：</span><br><span class="line">1. 多文件拷贝</span><br><span class="line">　　scp root@192.168.1.100:/data/\&#123;test1.txt,test2.cpp,test3.bin,test.*\&#125; /home/myfile/</span><br><span class="line">2. scp默认连接的远端主机22端口，如果ssh不是使用标准的22端口（以233为例）则使用-P（P大写）指定：</span><br><span class="line">　　scp -P 233 root@192.168.1.100:/data/test.txt /home/myfile/</span><br></pre></td></tr></table></figure>
+
+<p><a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#x36;&#x38;&#x2e;&#49;&#x2e;&#49;&#48;&#48;">&#114;&#111;&#x6f;&#116;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#x36;&#x38;&#x2e;&#49;&#x2e;&#49;&#48;&#48;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
+<h2 id="从服务器复制文件夹到本地"><a href="#从服务器复制文件夹到本地" class="headerlink" title="从服务器复制文件夹到本地"></a>从服务器复制文件夹到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r root@192.168.1.100:/data/ /home/myfile/</span><br></pre></td></tr></table></figure>
+
+<h2 id="从本地复制文件到服务器"><a href="#从本地复制文件到服务器" class="headerlink" title="从本地复制文件到服务器"></a>从本地复制文件到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp /home/myfile/test.txt root@192.168.1.100:/data/</span><br><span class="line">补充：多文件拷贝</span><br><span class="line">scp /home/myfile/test1.txt test2.cpp test3.bin test.* root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
+
+<h2 id="从本地复制文件夹到服务器"><a href="#从本地复制文件夹到服务器" class="headerlink" title="从本地复制文件夹到服务器"></a>从本地复制文件夹到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r /home/myfile/ root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.cnblogs.com/clovershell/p/9870603.html">参考文章</a></p>
+]]></content>
+      <categories>
+        <category>os</category>
+      </categories>
+  </entry>
+  <entry>
     <title>2020牛客寒假算法基础集训营1</title>
     <url>/2020/02/04/2020/2020niukewintercontest1/</url>
     <content><![CDATA[<p>题目链接:<a href="https://ac.nowcoder.com/acm/contest/3002#question">https://ac.nowcoder.com/acm/contest/3002#question</a></p>
@@ -2248,507 +2783,6 @@ return 0;
     <content><![CDATA[]]></content>
       <categories>
         <category>algorithmanddatastruct</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>泥潭</title>
-    <url>/2021/07/14/2021/856/</url>
-    <content><![CDATA[<p>首先我想说的是这篇文章本来不应该存在的，但是由于太多想法如果不写一写，我就会一直思考这些想法，现在我不想去再想这些事情了。这篇文章会有很多我的主观情感，但是我尽量写的客观一些。五月份就打算写了，一直因为很多事情才拖到现在。主要记录一下到目前（大二结束）我看待事物看待人的态度的转变。</p>
-<p>刚刚进入大学的时候我对待各种人和事情的看法还是和高中相似的，我的高中没有什么坏人，所以一开始我就习惯用好的眼光看待别人。十分感谢我的专业的学长学姐，是他们带我第一次在未进入真正大学生活的军训期间给了我改变自己的想法的机会，大学的大部分人都是为了自己的利益的。就像这些带学弟学妹的学长学姐，或是为了学分或是为了其他目的，自己能力根本不够，但是硬是要凑上去，只是为了自己的利益。但是我还是把大学的整个环境想的太好了。我想想，这些学长学姐也只是学生，为了一些学分绩点无可厚非，但是老师教授总不会这样子吧？</p>
-<p>大一一开始的十月份，我认识了一个人，以下就简称为W。当时听了他讲述，我认为他是一个十分厉害的人，在那个时候可以算是志同道合的一个人吧。但是认识的人总是如同第一次见面的时候该有多好，随着对一个人的深入了解，这个人的各种个性就会暴露出来。大一第一次放假，是爸妈来接我回家的，当时我对他们说我认识了一个很厉害的人，人生经历曲折，而且这些事情他都挺过来了。不得不说我爸妈在这一方面还是有远见的，他们说“这种人十分聪明，也许表面上他看上去容易相处，但是内心并不是这样的，甚至连怎么算计你都已经想好了。”当时我觉得他们的话太过恶毒，就没有太理会。后来W的种种行为的确证明了我父母的话是正确的。在大一阶段，我会因为一个人的单一行为直接认定他是好的，并且不会因为一个人的单一行为直接认定他的坏的。然而就目前而言，我对待一个人的态度的改变是渐进的，我不会因为一个人的单一行为直接认定他是好的，可能会因为一个人的单一行为直接认定他的坏的，并且在第一次了解到某人时，我不会认定对方是一个好人。这种态度转变和W的行为和学院里认识的一些人的行为是有关系的。</p>
-<p>我第一次接触编程是在初三的一个假期，当时上网冲浪无意间看到了一些和编程相关的内容，就开始搜索各种编程语言，看到最多的就是C和C++了。我一直对这方面的东西很感兴趣。询问正在学习编程的表哥，他推荐我先学Python,于是在初三五一的假期我安装了第一个Python的解释器，写了写 ```print”Hello World!”```以及其他的一些语句。中考考完的第二天，我马上去图书馆找来了Python的相关书籍以及Linux的书开始学编程。到高一开始，我写的最棒的程序大概就是一个Python的百度贴吧爬虫了吧。后来高中学业繁忙就没有在深入学习了。但是有一次表哥和我提到了算法，那是我第一听说算法，所有的程序的背后都是由算法支撑的。高二的一个晚自习下课，学校的某科技社团突然说要找人报名信息技术竞赛（也就是Noip），我就报名了后来暑假学习C语言和算法，准备10月份（对不起我忘记了是10月还是11月）的Noip。第一次参加很烂很烂，不再细说…虽然第二次也很烂。反正这就是我对算法和数据结构的最初体验，我感觉我对这个东西还是喜欢的，这也成为了我高中时期的一个爱好。</p>
-<p>那么到了大学我自然是继续研究算法与数据结构了，也很自然地参加了校ACM集训队，如果不发生意外，在大一的下学期是完全有机会去参加区域赛的。但是意外还是发生了，这也是我对W态度改观的最初阶段。突然发生的疫情冲击了我所有的安排，我再也无心关注这些比赛。我觉得这些比赛再当时的那个时间节点已经不可能举行了，我就开始读一些科普的书，而不是写代码。我高中读的书（非技术性书本）真的很少，更多是在写题目和看课内书。W开始散播焦虑，W就是一个容易焦虑的人，并且喜欢将焦虑施加在其他人身上。并且W的控制欲望也在逐渐表达。</p>
-<p>返校后W似乎有要排除异己的行为。我当时在看SICP，W来询问我最近在做的事情，我和W说了一番，从W的举止反应来看，W应该已经觉得不参加训练而去看其他的书已经是令W十分失望的行为了。我当时同时在学算法与FP（函数式编程），FP真的太妙了！FP的各种表达与我一直接触的过程式的程序设计完全不同，对我吸引很强。但是后来我没有继续看SICP，继续去搞算法与程序设计竞赛的事情了。</p>
-<p>当为一个爱好投入了太多时间，而忽略了其他事情（也有可能是其他的爱好）的时候，也是一件十分悲伤的事情。</p>
-<p>到了大一的暑假时间，我把大部分的暑假时间都投入到了训练里面。但是以防万一，我申请了中科院的编程之夏。我在刚进入大学的时候就有两个目标，一个是参与GSoC，一个是ACM铜牌。中科院编程之夏作为我的GSoC的前置任务吧，通过它来熟悉开源这方面的一些东西，并且是参与OI Wiki社区，也是对我训练的一个提升。庆幸的是，还好我申请了中科院编程之夏。暑假过后，内部决定将更多的名额分配给上一届学长。然后有趣的事情就发生了。由于学长队伍的变动，W将我许多已经组建完的队伍数次拆分重组，这也导致了许多同学心态的变化。区域赛拿到的名额是打星，没有正式名额。十分混乱地，我居然参加了省赛，并且在强力的D君的领导下，我们成功地得到了铜牌。后来的各种打星均无入铜线。W多次散播焦虑，让同学们感受与他自己相同程度的压力，下半年的时间里我已经开始对W的行为反感了，并且他对同班同学一些行为让我觉得这个人是有问题的。</p>
-<p>关于学校的课程，我最初进入大学以为我终于可以一门心思学编程的东西了，但是事实不是这样子的。学校总是会喜欢安排一些不相关的东西来影响学生学习的。诸如大学物理、电工电子技术这些课程，我曾无数次地自问，我明明是要成为软件工程师或者算法工程师的，为什么却要学习这种以后一辈子都用不上的东西呢？类似的问题在我的高中阶段也出现过，我问过自己我以后是要进计算机或者软件工程专业的人，为什么要去学习生物和地理呢？每一次上生物课的时候我都无比煎熬，每一天我都为了认真学习生物而找一个能够说服自己去学习生物学的理由。所以我高中阶段就一直对大学抱有幻想，幻想我能够一门心思学编程和我感兴趣的东西，但是到了大学才发现实际上不是这样的。我和我的大学班主任W君讨论过这个问题，我很深刻地记得他的一句话“当我们没有能去去改变自己不喜欢的事情的时候，最好的办法就是接受它。”。我知道这句话是绝对正确的，但是我根本无法服从。我也和学院领导T讨论过课程的事情，我洋洋洒洒写了许多字，里面包括了我对诸如大学物理、电工、应用文（计算机专业居然要学应用文，太可笑了）这些无用课程的讨论，以及我希望添加学习的一些最基础内容，诸如Git，Python,增强基础数学的学习等等。但是没有回应，渐渐地我觉得我们学院可能已经没救了，虽然它有许多“光鲜”的荣誉。我也不再想去纠正事情不好的做法。</p>
-<p>2020年的下半年的大部分时间直到2021年的4月上旬，是我目前过的最难受的一段时间。因为我真的不知道该去做些什么，是应该继续训练竞赛，还是去做工程方面的东西？一直没有决定，也没有行动。只是看了一些书，期间在看混凝土数学和GEB。精神也不好，由于W的行为，原本安静的实验室可以说是乌烟瘴气，我忍受不了嘈杂的环境，神经性耳鸣了半个多月。W喜欢用自己的思维来决定事情的发展方向，例如一场比拼手速的比赛名额通过思维来选拔参赛队员，由于W除了思维强力，在别的事情上一无是处，于是他经常安排码量少想的多的问题给大家。这也造成了各种题目训练不均的问题。再加上学院领导给了W过多的权力，W的控制欲的本性暴露了出来。由于神经性耳鸣，每天都十分难受，我已经不想再去管这些事情了。期间唯二的好事，一是认识了T君，但是T君是一个保守的人，起初并无过多交谈，是痛苦但又快乐的一件事；二是我找到了一件可能成为我终身参与的一项运动————网球，进入大学这么久，我终于开始运动了。我觉得我通过打网球认识的一些同学，性质上来说就很单纯，因为与他们不会有其他的一些活动，就是单纯的打球，所以不会再产生对这个人的种种看法。事实上，参与程序设计竞赛也应该是一件十分简单的事情，或者说什么事情本身都应该是简单纯粹的，但是由于人的因素，因为人会加入个人的情感到一件事情上，这就会使一些原本简单事情变得很复杂。</p>
-<p>到了2021年的4月下旬，我突然想起来我应该去参加GSoC了，于是翻看各种社区，查找各种资料，看了将近一周，在五月初完成了proposal。然后又得知了我的队伍居然被分配到去银川参赛了，因为各种队伍的参赛队伍都已经打完名额了，大二拿得出手的队伍又那么几个，于是我的队伍就去比赛了。之后就是和队友隔几天就进行一次组队训练，我也很意外地发现了，我可能再写计算几何方面的题目上有一些天赋？可惜发现的太晚了，我已经打算好了在银川赛后就不再打了，认真搞工程和开源方面的事情。但是恶心人的事情就发生了。（事实上在银川的时候我也非常厌恶他的做法了，用D君的话来说就是“明明是一个心智不成熟的人，却要伪装成大人模样，太搞笑了。”）。</p>
-<p>我不想详细描述这件事情，用一句话概括就是，君子疾夫舍曰欲之而必为之辞。我终于还是被W给恶心到了，他的做法犹如去年暑假对待同届同学一样恶心，只不过去年没有恶心到我，今年把我恶心到了。这件事情之后，又有多少同届的同学会再相信他呢？估计不多吧。我又可怜起下一届的同学们了，也许在他们半年多的训练之后，也经历一次W的“舍曰欲之而必为之辞”。</p>
-<p>实际上这件事情对我的影响不是很大，但是我的确是看清了W，并且不会再去轻易相信一个人。现在想想我先前的信任真的十分廉价，但是信任本身应该是一个十分昂贵的东西。我也与一些非利益相关的人，将整个事情的经历描述了一次，请他们分析原因。我得到了一些启发。有的人会做错事情，但是做错事情之后会反思自己的行为并为他的行为感到抱歉，然后对受到影响的人道歉；有的人则是知道自己做了错事，但是就是不愿意去承认、去道歉；有的人却是根本不认为自己做了错事，并且继续我行我素。我的一位INFP朋友和T君都认为W应该属于第三种（十分感谢T君带我了解了MBTI这种神奇的东西）。我们再将第三种样例拓展一下，就会发现这种人还有可能将自己的个人经历扭曲，因为他们发现不了问题的主要矛盾，而找其他的原因去解释一些问题。于是我就开始思考，我从认识W的开始，他是不是就是在伪装？或者说他不是在伪装，而是他给的描述是自己认为正确但是实际上是错误的。他告诉我的那些个人经历，实际上都是来自他错误的分析，导致他经历那些事情的原因不应该是他所描述的，而是有其他原因的。我毫无根据地猜想，会不会与现在我所经历地他的那些做法相似呢？我不敢继续想象了。</p>
-<p>好了，我的梦话说完了。</p>
-]]></content>
-      <categories>
-        <category>disorder</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Arch折腾记录</title>
-    <url>/2021/11/02/2021/arch_setup/</url>
-    <content><![CDATA[<p><img src="/images/2021-11-02_14-09.png"></p>
-<p>我的y7000上装了三个操作系统，win10，ubuntu，arch。其中win10和ubuntu都跑了俩年了都没挂。前几个星期不小心把arch滚挂了，就没再去理她，反正还有一个ubuntu可以用。然后前几天给ubuntu换桌面启动器的时候一不小心把它也整挂了，各种调试都不行（主要是我菜），于是就打算直接重装一个arch吧，只是重装系统，文件数据都还是有保留的。</p>
-<p>这一篇只会记录一些我在装arch的时候查询的网站和一些注意事项，不会详细讲怎么装，毕竟网上已经有这么多教程了。</p>
-<p><a href="https://www.viseator.com/2017/05/19/arch_setup/">https://www.viseator.com/2017/05/19/arch_setup&#x2F;</a></p>
-<p><a href="https://www.cnblogs.com/freerqy/p/8502838.html">https://www.cnblogs.com/freerqy/p/8502838.html</a></p>
-<p><a href="https://archlinuxstudio.github.io/ArchLinuxTutorial/#/">https://archlinuxstudio.github.io/ArchLinuxTutorial/#/</a></p>
-<p><a href="https://arch.icekylin.online/prologue.html">https://arch.icekylin.online/prologue.html</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a></p>
-<p>上面这几个链接基本上可以解决90%的安装时候的问题了吧（</p>
-<p>记录几个坑点</p>
-<h2 id="wifi连接"><a href="#wifi连接" class="headerlink" title="wifi连接"></a>wifi连接</h2><p>在进入usb启动盘里的arch,wifi是默认关闭的，所以要先将它打开。</p>
-<p><code>rfkill unblock wifi</code></p>
-<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><p>大多数教程并不是使用cfdisk来分区的，我比较喜欢用cfdisk来分区，因为界面相对友好，看的也比较清楚。</p>
-<p>我给根目录分区分的太小了，只分了30g，用了两三天就爆满了。并且后续更改根目录分区是一件比较困难的事情。如果cfdisk上显示根目录分区后已经没有更多的剩余空间了，是很难通过常规手段进行扩容的，所以划分区的时候要注意，要么根目录分区大一些，要么在根目录后剩余一点未分配的磁盘空间。</p>
-<p>我的情况是，跟目录后有一个8g的交换分区，交换分区后面有一个10g的剩余磁盘空间。于是就把交换分区删了，一共腾出来18g的新空间给根目录扩容。然后交换分区就用交换文件来替代。并且在删除&#x2F;添加分区后，要更改fstab文件的相关内容。</p>
-<h2 id="交换空间-x2F-交换文件"><a href="#交换空间-x2F-交换文件" class="headerlink" title="交换空间&#x2F;交换文件"></a>交换空间&#x2F;交换文件</h2><p>交换空间可以用交换目录来替代，因为有的时候电脑的物理内存会满了，然后就会用交换空间&#x2F;交换目录来替代物理内存。也就是说当电脑的物理内存爆满了，使用交换空间&#x2F;交换文件还可以抢救一下。</p>
-<p>关于交换空间&#x2F;交换文件的大小分配，网上各种说法众说纷纭，我选择的是分配了8g给交换文件。一个参考区间是8g~32g建议的大小是8g。</p>
-<h2 id="关于双系统"><a href="#关于双系统" class="headerlink" title="关于双系统"></a>关于双系统</h2><p><a href="https://zhuanlan.zhihu.com/p/138951848">https://zhuanlan.zhihu.com/p/138951848</a> 这一篇文章已经详细介绍了如何安装双系统。第一次安装因为没有设置好EFI分区，导致进系统的时候有引导错误，于是采用了这篇文章里介绍的方法。</p>
-<h2 id="文件迁移"><a href="#文件迁移" class="headerlink" title="文件迁移"></a>文件迁移</h2><p>原先的arch系统的文件和系统是在我的机械硬盘上的，这次把系统装在了固态硬盘里。但是固态硬盘的空间是比较宝贵的，所以软件应该要安装在机械硬盘里，节省空间。可以直接使用上一次的arch的home目录分区的那一块磁盘，首先要做的是把这个盘挂在到当前系统，再使用chown命令重新更改一下那个home里面的文件所有者。chown的时间比较长，需要耐心等待一会儿。</p>
-<p>操作完成后就会发现，之前的软件设置全都回来了，还是十分方便的。</p>
-<h2 id="桌面美化"><a href="#桌面美化" class="headerlink" title="桌面美化"></a>桌面美化</h2><p>这个部分可以直接到b站找一些视频对着操作就好了，kde store里面有许多现成的配置。</p>
-<p>比如我的arch现在看起来是这样的。</p>
-<p><img src="/images/2021-11-02_14-07.png"></p>
-<h2 id="常用应用"><a href="#常用应用" class="headerlink" title="常用应用"></a>常用应用</h2><p>可以在我上面的dock里面看到，我装的常用软件都在dock里面了。</p>
-<p>其中qq是用的deepin-wine-qq，运行起来比较卡，但是目前没有比它好一些的解决方案了。安装方法是yay -s deepin-wine-qq，有一个依赖是deepin-wine6-stable，在安装的时候会产生包冲突，还是反复安装了几次的。要注意的是首先需要去掉<code>/etc/pacman.conf</code>里面multilib的注释，才可以进行安装。</p>
-<p>其他应用使用搜索引擎查一下安装起来还是十分轻松的。</p>
-<p>也可以再在上面提到的那几篇文章里面进行查看，安装自己喜欢的应用。</p>
-]]></content>
-      <categories>
-        <category>os</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>如何给一个新的语言命名？</title>
-    <url>/2021/10/26/2021/howtonameanewlanugage/</url>
-    <content><![CDATA[<p>最近在看Crafting Interpreters，虽然只看到第一章，但是其中的一个note还是挺有意思的，所以在这里记录、翻译一下。</p>
-<blockquote>
-<h3 id="DESIGN-NOTE-WHAT’S-IN-A-NAME"><a href="#DESIGN-NOTE-WHAT’S-IN-A-NAME" class="headerlink" title="DESIGN NOTE: WHAT’S IN A NAME?"></a>DESIGN NOTE: WHAT’S IN A NAME?</h3><p>One of the hardest challenges in writing this book was coming up with a name for the language it implements. I went through pages of candidates before I found one that worked. As you’ll discover on the first day you start building your own language, naming is deviously hard. A good name satisfies a few criteria:</p>
-<ol>
-<li><p><strong>It isn’t in use.</strong> You can run into all sorts of trouble, legal and social, if you inadvertently step on someone else’s name.</p>
-</li>
-<li><p><strong>It’s easy to pronounce.</strong> If things go well, hordes of people will be saying and writing your language’s name. Anything longer than a couple of syllables or a handful of letters will annoy them to no end.</p>
-</li>
-<li><p><strong>It’s distinct enough to search for.</strong> People will Google your language’s name to learn about it, so you want a word that’s rare enough that most results point to your docs. Though, with the amount of AI search engines are packing today, that’s less of an issue. Still, you won’t be doing your users any favors if you name your language “for”.</p>
-</li>
-<li><p><strong>It doesn’t have negative connotations across a number of cultures.</strong> This is hard to be on guard for, but it’s worth considering. The designer of Nimrod ended up renaming his language to “Nim” because too many people remember that Bugs Bunny used “Nimrod” as an insult. (Bugs was using it ironically.)</p>
-</li>
-</ol>
-<p>If your potential name makes it through that gauntlet, keep it. Don’t get hung up on trying to find an appellation that captures the quintessence of your language. If the names of the world’s other successful languages teach us anything, it’s that the name doesn’t matter much. All you need is a reasonably unique token.</p>
-</blockquote>
-<h3 id="以下是我翻译的内容"><a href="#以下是我翻译的内容" class="headerlink" title="以下是我翻译的内容"></a>以下是我翻译的内容</h3><p>编写这本书的时候最困难的挑战之一就是为其实现的语言命名。在选择出一个合适的名字之前，我浏览了几页候选的名字。就好像你在构建自己的语言的第一天就会发现，命名十分困难。一个好名字满足几个条件：</p>
-<ol>
-<li><p><strong>没有被使用过。</strong> 如果你不小心与别人的名字重名了，那么就会遇到诸如法律问题、社会问题等的各种麻烦。</p>
-</li>
-<li><p><strong>发音容易。</strong> 如果一切顺利，那么大家将可能念出以及写下你的语言的名字，任何长于几个音节或者比几个字母长的东西都会使大家厌烦的。</p>
-</li>
-<li><p><strong>足够独特，易于搜索。</strong>大家会通过搜索引擎搜索你的语言名称来了解它，所以你需要一个足够罕见的词，那么大多数的结果都会指向你的文档了。不过随着目前人工智能搜索引擎数量的增加，这已经不是什么问题了。尽管如此，如果你把你的语言命名为“for”，这是不会给你的用户带来好处的。</p>
-</li>
-<li><p><strong>在许多文化中没有负面意义。</strong>，这是很难提防的，但是也是值得考虑的。Nimrod的设计师最终把他的语言重命名为”Nim”，因为大多数人及的Bugs Bunny使用“Nimrod”作为侮辱。</p>
-</li>
-</ol>
-<p>如果你的潜在名字通过了这些挑战，请保留它。不要急于寻找一个能体现你的语言精髓的称谓。如果说世界上的其他语言的名字教会了我们什么，那就是名字并不重要。你所需要只是一个相当独特的象征。</p>
-<hr>
-<p>然后我已经想好了在读完这本书后该给我的语言取的名字了，等我真的把这个语言做出来了再讲。</p>
-]]></content>
-      <categories>
-        <category>book</category>
-        <category>解释器</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>java package小记</title>
-    <url>/2021/11/16/2021/java-package/</url>
-    <content><![CDATA[<p>今天我开始构造lox语言了，lox也就是crafting interpreters这本书实现的一个语言，原书是使用java语言实现的。</p>
-<p>代码仓库：<a href="https://github.com/emp1dAo/code-of-crafting-interpreters/tree/master/jlox">https://github.com/emp1dAo/code-of-crafting-interpreters/tree/master/jlox</a></p>
-<p>因为我java很菜，所以马上就遇到了一个问题，这里记录一下问题以及解决方案。</p>
-<p>我使用emacs加终端来编写编译</p>
-<p>在<code>~/code-of-crafting-interpreters/jlox</code> 目录进行编译<code>javac Lox.java</code>，得到编译后文件<code>Lox.class</code>，按理来说直接敲<code>java Lox</code>应该就能运行了，但是出现了<code>错误: 找不到或无法加载主类 jlox</code>这样的错误。</p>
-<p>源码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> jlox;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lox</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">boolean</span> hadError = <span class="keyword">false</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (args.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Usage: jlox [script]&quot;</span>);</span><br><span class="line">        System.exit(<span class="number">64</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (args.length == <span class="number">1</span>) &#123;</span><br><span class="line">        runFile(args[<span class="number">0</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        runPrompt();</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = Files.readAllBytes(Paths.get(path));</span><br><span class="line">    run(<span class="keyword">new</span> String(bytes, Charset.defaultCharset()));</span><br><span class="line">    <span class="keyword">if</span> (hadError) System.exit(<span class="number">65</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runPrompt</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    InputStreamReader input = <span class="keyword">new</span> InputStreamReader(System.in);</span><br><span class="line">    BufferedReader reader = <span class="keyword">new</span> BufferedReader(input);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;&gt;&quot;</span>);</span><br><span class="line">        String line = reader.readLine();</span><br><span class="line">        <span class="keyword">if</span> (line == <span class="keyword">null</span>) <span class="keyword">break</span>;</span><br><span class="line">        run(line);</span><br><span class="line">        hadError = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String source)</span> </span>&#123;</span><br><span class="line">    Scanner scanner = <span class="keyword">new</span> Scanner(source);</span><br><span class="line">    List&lt;Token&gt; tokens = scanner.scanTokens();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Token token : tokens) &#123;</span><br><span class="line">        System.out.println(token);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">(<span class="keyword">int</span> line, String message)</span> </span>&#123;</span><br><span class="line">    report(line, <span class="string">&quot;&quot;</span>, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">report</span><span class="params">(<span class="keyword">int</span> line, String where,</span></span></span><br><span class="line"><span class="params"><span class="function">                   String message)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="string">&quot;[line &quot;</span> + line + <span class="string">&quot;] error&quot;</span> + where + <span class="string">&quot;: &quot;</span> + message);</span><br><span class="line">    hadError = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>据说这种错误是不会在IDE上出现的，应该是终端运行的问题。主要问题出在代码的第一行<code>package jlox;</code>，这时候需要到<code>jlox</code>的上一层目录进行运行，命令也就变成了<code>java jlox.Lox</code>，这样就可以顺利运行了。</p>
-]]></content>
-      <categories>
-        <category>interpreter</category>
-        <category>java</category>
-        <category>book</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>java手动编译小记</title>
-    <url>/2021/11/18/2021/java_compile/</url>
-    <content><![CDATA[<p>这篇文章记录如何不使用IDE，使用javac进行编译。</p>
-<h2 id="单文件编译"><a href="#单文件编译" class="headerlink" title="单文件编译"></a>单文件编译</h2><p>最简单的例子就是HelloWorld程序了，直接给出代码。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意文件名与类名相同，所以应该保存为HelloWorld.java，直接在当前目录进行编译即可。</p>
-<p><code>javac HelloWorld.java</code></p>
-<p>会在当前目录（与HelloWorld.java的同一级目录）生成了HelloWorld.class。</p>
-<p>直接运行<code>java HelloWorld</code>就可以看见输出了，要注意的是<code>java HelloWorld.class</code>是无法运行的。</p>
-<p>传入的是main函数所在的类的名字，而不是class文件；java会根据类名自动去找class文件。</p>
-<h3 id="添加包名"><a href="#添加包名" class="headerlink" title="添加包名"></a>添加包名</h3><p>这个内容在<a href="https://scheng52123.com/index.php/2021/11/16/java-package/">上一篇文章</a>里已经提到了，再复述一下。</p>
-<p>在原先的HelloWorld里面加一句<code>package com.test</code>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行<code>javac HelloWorld.java</code>，生成了<code>HelloWorld.class</code>文件。这时需要先创建目录：<code>/com/test</code>然后在<code>com/</code>的上一层目录执行<code>java com.test.HelloWorld</code>。</p>
-<p>或者使用命令<code>javac -d . HelloWorld.java</code>，会在当前目录下生成一个<code>.../com/test/HelloWorld.class</code>，然后再运行<code>java com.test.HelloWorld</code>这样子也是可以的。</p>
-<p>以上的这些行为说明，增加了package名，class名也会变化，在需要运行时候就要使用全限定名（关于全限定名、简单名的定义可以查看<a href="https://mingshan.fun/2018/09/18/fully-qualified-name-simple-name-descriptor/">这篇文章</a>）；java会根据包名对应出目录结构，并从class path搜索该目录去找到class文件。</p>
-<h2 id="多文件编译"><a href="#多文件编译" class="headerlink" title="多文件编译"></a>多文件编译</h2><p>有两个文件如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com1.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HelloService service = <span class="keyword">new</span> HelloService();</span><br><span class="line">        service.printHello(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com1.test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        HelloService service = <span class="keyword">new</span> HelloService();</span><br><span class="line">        service.printHello(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有两种编译方式，第一种和上面单文件编译类似。</p>
-<p>先执行<code>javac -d . HelloService.java</code>得到了<code>com1/test/HelloService.class</code>，再执行<code>javac -d . HelloWorld.java</code>，得到了<code>com1/test/HelloWorld.class</code>，然后就可以通过<code>java com1.test.HelloWorld</code>顺利运行了。</p>
-<p>另外一种是直接写上全部需要的文件，在现在情况下就是<code>javac -d . HelloWorld.java HelloService.java</code>，不需要区分前后，会根据依赖关系自动确定顺序。</p>
-<p>也可以使用<code>javac -d . *.java</code>直接对当前目录下的所有java文件进行编译。</p>
-<h2 id="使用src和target目录"><a href="#使用src和target目录" class="headerlink" title="使用src和target目录"></a>使用src和target目录</h2><p>希望能够想IDE一样，src目录下保存原文件，target目录下生成可运行文件。例如在<code>javatest</code>目录下有<code>src</code>目录，<code>src</code>目录中保存了各种java原文件。在<code>javatest</code>目录下执行<code>javac -d target src/*.java</code>就能将编译后的文件生成在<code>target</code>目录下了。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>如何让Vue.js能够调用Python函数？</title>
-    <url>/2021/10/27/2021/jsreadwrite/</url>
-    <content><![CDATA[<p>这个问题主要来自我今年的暑期项目，eaf-rss-reader。因为前端是使用vue.js，数据处理部分是python，涉及到了文件读写，但是出于安全考虑，vue.js以及js是不直接提供本地文件读写的，在eaf里提供了一种通过 <strong>QWebChannel</strong> 来实现vue.js调用python函数的方法。</p>
-<p>首先，在Vue组件的<code>created()</code>函数中写下如下代码，表示绑定Python端的QWebChannel对象<code>pyobject</code>到JavaScript端的<code>window.pyobject</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="comment">// eslint-disable-next-line no-undef</span></span><br><span class="line">  <span class="keyword">new</span> QWebChannel(qt.webChannelTransport, <span class="function"><span class="params">channel</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.pyobject = channel.objects.pyobject;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其次，在Python端定义函数:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore</span><br><span class="line"></span><br><span class="line"><span class="meta">@QtCore.pyqtSlot(<span class="params"><span class="built_in">str</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">open_in_dired</span>(<span class="params">self, path</span>):</span></span><br><span class="line">    eval_in_emacs(<span class="string">&#x27;dired&#x27;</span>, [path])</span><br></pre></td></tr></table></figure>
-
-<p>最后，直接在Vue组件任意地方调用<code>window.pyobject.open_in_dired(path)</code>即可。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>vue-js</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>从零开始的Emacs配置学习</title>
-    <url>/2021/01/30/2021/learnemacs/</url>
-    <content><![CDATA[<p>该怎么说呢，很早就下载了这个操作系统（编辑器）了，一年前（2019）在看SICP的时候就有想法用emacs写scheme，但是由于配置过于复杂，还是选择了用vscode进行编辑。然后中间因为一些其他的事情停止了对SICP的学习，总共四章的内容也只看了两章多，这次放假希望一次性把emacs配置好再把SICP看完吧。接下来将介绍我的emacs配置过程。</p>
-<h2 id="快捷键的使用"><a href="#快捷键的使用" class="headerlink" title="快捷键的使用"></a>快捷键的使用</h2><p>C 即 Control , M 即 Alt (至少在我的键盘上是这样的)</p>
-<p><code>C - x , C - s</code> 对当前文档进行保存</p>
-<p><code>C - x, C - c</code> 关闭当前程序</p>
-<p><code>C - x, C - f</code> 输入文件名，emacs会搜索文件并打开</p>
-<p><code>M - x</code> 输入具体操作(这个比较类似 sublime 和 vscode 里面的<code>C - p</code>)</p>
-<p><code>C - w</code>剪切</p>
-<p><code>M - w</code> 复制</p>
-<p><code>C - y</code> 粘贴</p>
-<p><code>M - y</code> 在按下<code>C - y</code>后，按此键，切换粘贴的内容</p>
-<p><code>C - /</code> 撤销</p>
-<p><code>C - g</code>中断当前命令输入</p>
-<p><code>C - s</code> 或者<code>C - r</code> 搜索（方向不同）</p>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>在emacs 27以前的版本通常是在”.emacs”这个文件里进行修改的，具体操作是<code>M - x</code>后，输入.emac回车，就可以进入配置文件了。</p>
-<h2 id="关闭滚动条与工具栏"><a href="#关闭滚动条与工具栏" class="headerlink" title="关闭滚动条与工具栏"></a>关闭滚动条与工具栏</h2><p><code>(scroll-bar-mode -1)</code> 关闭滚动条 <code>(tool-bar-mode -1)</code> 关闭工具栏</p>
-<h2 id="添加国内源"><a href="#添加国内源" class="headerlink" title="添加国内源"></a>添加国内源</h2><p>这个设置和Linux系统下的添加镜像源的操作如出一辙。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; add tinghua resource</span><br><span class="line">(setq package-archives &#x27;((&quot;gnu&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;)</span><br><span class="line">             (&quot;org&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;)</span><br><span class="line">                         (&quot;melpa&quot; . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;)))</span><br><span class="line"></span><br><span class="line">(package-initialize) ;; You might already have this line</span><br></pre></td></tr></table></figure>
-
-<h2 id="包管理器的初始化、刷新、安装"><a href="#包管理器的初始化、刷新、安装" class="headerlink" title="包管理器的初始化、刷新、安装"></a>包管理器的初始化、刷新、安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ;; package initialize</span><br><span class="line">(setq package-check-signature nil)</span><br><span class="line"></span><br><span class="line">(require &#x27;package)</span><br><span class="line"></span><br><span class="line">(unless (bound-and-true-p package--initialized)</span><br><span class="line">  (package-initialize))</span><br><span class="line"></span><br><span class="line">;; refresh resource</span><br><span class="line">(unless package-archive-contents</span><br><span class="line">  (package-refresh-contents))</span><br><span class="line"></span><br><span class="line">;; use-package</span><br><span class="line">(unless (package-installed-p &#x27;use-package)</span><br><span class="line">  (package-refresh-contents)</span><br><span class="line">  (package-install &#x27;use-package))</span><br></pre></td></tr></table></figure>
-
-<p><code>unless</code> 语句即如果没有进行(…)那么就进行(…)。</p>
-<h2 id="使用use-package管理扩展"><a href="#使用use-package管理扩展" class="headerlink" title="使用use-package管理扩展"></a>使用use-package管理扩展</h2><h3 id="最基本的格式"><a href="#最基本的格式" class="headerlink" title="最基本的格式"></a>最基本的格式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(use-package restart-emacs)</span><br></pre></td></tr></table></figure>
-
-<p><code>M-x</code>后输入<code>restart-emacs</code>,emacs就会重启了。</p>
-<h3 id="常用格式"><a href="#常用格式" class="headerlink" title="常用格式"></a>常用格式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; 常用格式</span><br><span class="line">(use-package smooth-scrolling</span><br><span class="line">: ensure t; 是否一定要确保已安装</span><br><span class="line">: defer nil ;是否延迟加载</span><br><span class="line">: init (setq smooth-scrolling-margin 2) ;初始化参数</span><br><span class="line">: config (smooth-scrolling-mode t) ;基本配置参数</span><br><span class="line">: bind ;快捷键绑定</span><br><span class="line">: hook ;hook模式的绑定)</span><br></pre></td></tr></table></figure>
-
-<h3 id="推荐添加的配置"><a href="#推荐添加的配置" class="headerlink" title="推荐添加的配置"></a>推荐添加的配置</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(eval-and-compile</span><br><span class="line">  (setq use-package-always-ensure t)    ; 不用每个包都手动添加:ensure t 关键字</span><br><span class="line">  (setq use-package-always-defer t)     ; 默认都是延时加载，不用每个包都手动添加:defer t 关键字</span><br><span class="line">  (setq use-package-always-demand nil)  ;</span><br><span class="line">  (setq use-package-expand-minimally t) ;</span><br><span class="line">  (setq use-package-verbose t)          ; 打印安装过程</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="使用-use-package-安装"><a href="#使用-use-package-安装" class="headerlink" title="使用 use-package 安装"></a>使用 use-package 安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br></pre></td></tr></table></figure>
-
-<h3 id="通过他人编写的文件安装"><a href="#通过他人编写的文件安装" class="headerlink" title="通过他人编写的文件安装"></a>通过他人编写的文件安装</h3><p>在这个开源项目（<a href="https://github.com/belak/emacs-monokai-pro-theme">https://github.com/belak/emacs-monokai-pro-theme</a> ）中找到了合适版本的emacs配色，然后根据README.md的教程完成。</p>
-<p>将monokai-pro-theme.el文件放入.emacs.d&#x2F;themes&#x2F;中 然后执行<code>M-x package-install monokai-pro-theme</code> 将<code>(load-theme &#39;monokai-pro t)</code>添加到配置文件，重启后就可以看见主题更改了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t）</span><br></pre></td></tr></table></figure>
-
-<h2 id="更换一个更加优雅的状态栏"><a href="#更换一个更加优雅的状态栏" class="headerlink" title="更换一个更加优雅的状态栏"></a>更换一个更加优雅的状态栏</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br></pre></td></tr></table></figure>
-
-<h2 id="显示行标"><a href="#显示行标" class="headerlink" title="显示行标"></a>显示行标</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(global-linum-mode t)</span><br></pre></td></tr></table></figure>
-
-<h2 id="工程化管理配置"><a href="#工程化管理配置" class="headerlink" title="工程化管理配置"></a>工程化管理配置</h2><p>由于将所有的配置都写到.emacs里会使整个文档看起来很凌乱，于是就需要将不同方面（ui界面，use-package管理等）的配置代码区分开来。</p>
-<p>于是不妨新建一个文件夹&#x2F;.emacs.d&#x2F;lisp&#x2F;里面专门存放配置文件。并且根据配置的不同方向，命名如下：</p>
-<ul>
-<li>init-elpa.el 存放镜像源相关配置</li>
-<li>init-package.el 存放包管理器的相关配置u</li>
-<li>init-startup.el emacs启动时运行的一些代码（关闭工具栏和滚动条等）</li>
-<li>init-ui.el 界面的主题和字体等配置</li>
-</ul>
-<p>比如目前我的init-ui.el是这样的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;; install a theme</span><br><span class="line">;;(use-package gruvbox-theme</span><br><span class="line">;;  :init(load-theme &#x27;gruvbox-dark-soft t))</span><br><span class="line"></span><br><span class="line">;; use monokai</span><br><span class="line">(load-theme &#x27;monokai t) ;; or (load-theme &#x27;monokai-pro t)</span><br><span class="line"></span><br><span class="line">;; an elegent mode-line</span><br><span class="line">(use-package smart-mode-line</span><br><span class="line">  :init</span><br><span class="line">  (setq sml/noconfir-load-theme t</span><br><span class="line">    sml/theme &#x27;respectful)</span><br><span class="line">  (sml/setup))</span><br><span class="line"></span><br><span class="line">;; show the line number</span><br><span class="line">(global-linum-mode t)</span><br><span class="line"></span><br><span class="line">;; make the background transparent</span><br><span class="line">(set-frame-parameter (selected-frame) &#x27;alpha (list 85 60))</span><br><span class="line">(add-to-list &#x27;default-frame-alist (cons &#x27;alpha (list 85 60)))</span><br><span class="line">(put &#x27;downcase-region &#x27;disabled nil)</span><br><span class="line"></span><br><span class="line">(provide &#x27;init-ui)</span><br></pre></td></tr></table></figure>
-
-<p><code>(provide &#39;init-ui)</code>在这里是将<code>init-ui</code>暴露的意思，后续的<code>require</code>会根据是否暴露来找到配置文件。</p>
-<p>将所有的配置往&#x2F;.emacs.d&#x2F;目录下的init.el文件里迁移。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(add-to-list &#x27;load-path</span><br><span class="line">         (expand-file-name(concat user-emacs-directory &quot;lisp&quot;)))</span><br><span class="line"></span><br><span class="line">(require &#x27;init-startup)</span><br><span class="line">(require &#x27;init-elpa)</span><br><span class="line">(require &#x27;init-ui)</span><br><span class="line">(require &#x27;init-package)</span><br></pre></td></tr></table></figure>
-
-<p><code>load-path</code>是一个<code>list</code>，需要将配置添加进去。</p>
-<p><code>expand-file-name</code>将后面的两个字符串拼接成一个目录，<code>concat</code>是拼接的意思,<code>user-emacs-directory</code>系统的全局变量，寻找emacs的目录，即&#x2F;.emacs.d&#x2F;这个目录。</p>
-<p>诸如<code>(require &#39;init-startup)</code>require和provide是配对的，调用之前配置好的<code>init-startup</code>。</p>
-<p>这些都配置好了以后就可以把.emacs文件删了。</p>
-<h2 id="关于自定义配置"><a href="#关于自定义配置" class="headerlink" title="关于自定义配置"></a>关于自定义配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(setq custom-file (expand-file-name &quot;custom.el&quot; user-emacs-directory))</span><br></pre></td></tr></table></figure>
-
-<p>通过这个命令可以将一些自定义配置(诸如鼠标点击的)后系统生成的文字，保存到custom.el里面。 通过这个方法可以使得init.el文件看上去并不是那么凌乱了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(when (file-exits-p custom-file)</span><br><span class="line">  (load-file custom-file))</span><br></pre></td></tr></table></figure>
-
-<p>系统可能不会自动加载custom里面的配置，这里的代码意思是当发现custom-file文件存在是就自动加载。</p>
-<h2 id="启动配置"><a href="#启动配置" class="headerlink" title="启动配置"></a>启动配置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(prefer-coding-system &#x27;utf-8)</span><br><span class="line">(set-default-coding-systems &#x27;utf-8)</span><br><span class="line">(set-terminal-coding-system &#x27;utf-8)</span><br><span class="line">(set-keyboard-coding-system &#x27;utf-8)</span><br><span class="line">(setq default-buffer-file-coding-system &#x27;utf-8)</span><br></pre></td></tr></table></figure>
-
-<p>用于解决乱码问题。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(setq gc-cons-threshold most-positive-fixnum)</span><br></pre></td></tr></table></figure>
-
-<p>控制垃圾回收阈值，满了再回收。</p>
-<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><p>使用company插件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(use-package company</span><br><span class="line">  :diminish (company-mode &quot; Cmp.&quot;)</span><br><span class="line">  :defines (company-dabbrev-ignore-case company-dabbrev-downcase)</span><br><span class="line">  :hook (after-init . global-company-mode)</span><br><span class="line">  :config (setq company-dabbrev-code-everywhere t</span><br><span class="line">                company-dabbrev-code-modes t</span><br><span class="line">                company-dabbrev-code-other-buffers &#x27;all</span><br><span class="line">                company-dabbrev-downcase nil</span><br><span class="line">                company-dabbrev-ignore-case t</span><br><span class="line">                company-dabbrev-other-buffers &#x27;all</span><br><span class="line">                company-require-match nil</span><br><span class="line">                company-minimum-prefix-length 1</span><br><span class="line">                company-show-numbers t</span><br><span class="line">                company-tooltip-limit 20</span><br><span class="line">                company-idle-delay 0</span><br><span class="line">                company-echo-delay 0</span><br><span class="line">                company-tooltip-offset-display &#x27;scrollbar</span><br><span class="line">                company-begin-commands &#x27;(self-insert-command))</span><br><span class="line">  (eval-after-load &#x27;company</span><br><span class="line">    &#x27;(add-to-list &#x27;company-backends</span><br><span class="line">                  &#x27;(company-abbrev company-yasnippet company-capf))))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>emacs</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>npm权限调试小记</title>
-    <url>/2021/08/26/2021/npm1/</url>
-    <content><![CDATA[<p>今天安装javascript的lovefield插件，github地址为：<a href="https://github.com/google/lovefield/blob/master/demos/todo/README.md">https://github.com/google/lovefield/blob/master/demos/todo/README.md</a></p>
-<p>根据这个教程，首先是要安装gulp等插件的。</p>
-<p>我将<code>npm install -g gulp·</code>输入终端，结果出现了这样的错误。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall mkdir</span><br><span class="line">npm ERR! path /usr/lib/node_modules/gulp</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, mkdir &#x27;/usr/lib/node_modules/gulp&#x27;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, mkdir &#x27;/usr/lib/node_modules/gulp&#x27;] &#123;</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &#x27;EACCES&#x27;,</span><br><span class="line">npm ERR!   syscall: &#x27;mkdir&#x27;,</span><br><span class="line">npm ERR!   path: &#x27;/usr/lib/node_modules/gulp&#x27;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/scheng/.npm/_logs/2021-08-26T14_32_18_031Z-debug.log</span><br></pre></td></tr></table></figure>
-
-<p>起先以为是权限问题，于是就很粗糙地加了个sudo，也就是<code>sudo npm install -g gulp</code></p>
-<p>结果就出现了一个类似代理问题的东西：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm ERR! code ENOTFOUND</span><br><span class="line">npm ERR! syscall getaddrinfo</span><br><span class="line">npm ERR! errno ENOTFOUND</span><br><span class="line">npm ERR! network request to https://registry.npm.taobao.org+/bower failed, reason: getaddrinfo ENOTFOUND registry.npm.taobao.org+</span><br><span class="line">npm ERR! network This is a problem related to network connectivity.</span><br><span class="line">npm ERR! network In most cases you are behind a proxy or have bad network settings.</span><br><span class="line">npm ERR! network </span><br><span class="line">npm ERR! network If you are behind a proxy, please make sure that the</span><br><span class="line">npm ERR! network &#x27;proxy&#x27; config is set properly.  See: &#x27;npm help config&#x27;</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /root/.npm/_logs/2021-08-26T14_12_05_523Z-debug.log</span><br></pre></td></tr></table></figure>
-
-<p>首先是解决这个问题，查找一番以为是npm设置了代理，但是代理并没有设置正确，就导致了无法正常下载。 那么先<code>npm config list</code>检查一下配置，发现是没有设置代理的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">; &quot;user&quot; config from /home/scheng/.npmrc</span><br><span class="line"></span><br><span class="line">proxy = false </span><br><span class="line">registry = &quot;https://registry.npmjs.org/&quot; </span><br><span class="line"></span><br><span class="line">; node bin location = /usr/bin/node</span><br><span class="line">; cwd = /home/scheng/eaf-rss-reader</span><br><span class="line">; HOME = /home/scheng</span><br><span class="line">; Run `npm config ls -l` to show all defaults.</span><br></pre></td></tr></table></figure>
-
-<p>然后就突发奇想，要不设置个代理?于是就<code>npm config set proxy http://x.xxx.xxx.xxx:xxx</code>，然后重新install，结果还是无法正常下载，就默默地把这一行配置有删掉了…</p>
-<p>然后回头解决最初的那个问题，也就是权限的问题。 可以根据这个网页的内容来操作：<a href="https://stackoverflow.com/questions/48910876/error-eacces-permission-denied-access-usr-local-lib-node-modules">https://stackoverflow.com/questions/48910876/error-eacces-permission-denied-access-usr-local-lib-node-modules</a></p>
-<p>先是 <code>ls -la /usr/local/lib/node_modules</code>查看一下node_modules的权限，但是终端给我报错说并没有<code>/usr/local/lib/node_modules</code>这个目录， 那么就<code>whereis node_modules</code>查看一下它在哪里，原来我的arch把它装在了<code>/usr/lib/node_modules</code>这个目录…那么后续就是<code>ls -la /usr/lib/node_modules</code> 查看权限，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drwxr-xr-x   8 root root   4096  7月 22 15:11 .</span><br><span class="line">drwxr-xr-x 251 root root 270336  8月 26 00:54 ..</span><br><span class="line">drwxr-xr-x   5 root root   4096  5月 28 21:23 cnpm</span><br><span class="line">drwxr-xr-x   9 root root   4096  7月 25 16:58 node-gyp</span><br><span class="line">drwxr-xr-x   5 root root   4096  7月 22 15:11 nopt</span><br><span class="line">drwxr-xr-x   6 root root   4096  8月  4 12:13 npm</span><br><span class="line">drwxr-xr-x   8 root root   4096  5月 27 10:26 semver</span><br><span class="line">drwxr-xr-x   7 root root   4096  5月 28 21:24 vue-cli</span><br></pre></td></tr></table></figure>
-
-<p>这里普通用户是需要root权限的,链接里面提供了三种方法，这里不再赘述。我使用的是：<code>sudo chown -R ownerName: /usr/lib/node_modules</code></p>
-<p>然后再去跑最初的那个安装命令，就能完美安装啦。</p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于opml，使用lxml解析opml文件小记</title>
-    <url>/2021/11/10/2021/opml/</url>
-    <content><![CDATA[<p>首先来介绍一下什么是opml文件。</p>
-<p>了解到这种文件主要是因为eaf-rss-reader的一个issue。一般来说像feedly，Inoreader这种的rss-reader是提供了引入&#x2F;导出opml文件的功能的。opml文件将你的feed链接都收集到一个文件里，方便将所有的feed订阅转移到其他的阅读器上。</p>
-<p>opml文件其实就是一个xml文件，使用能够解析xml文件的一些库就能将它解析了。但是比较怪的是，feedly网站上居然无法解析由Inoreader生成的xml文件…</p>
-<p>对python来说，解析xml通常会用xml库或者lxml库，我觉得lxml操作起来更加方便，于是就用lxml了。值得注意的一个地方是，xml文件里面有默认的几个特殊字符 <strong>&lt; &gt; &amp; ‘ “</strong> ，如果需要被提取的地方出现了这几个字符，那么就会报一个出现特殊字符的错误：lxml.etree.XMLSyntaxError: xmlParseEntityRef: no name，这个问题是由Emacs China论坛的用户提出的。</p>
-<h2 id="导入解析opml"><a href="#导入解析opml" class="headerlink" title="导入解析opml"></a>导入解析opml</h2><p>接下來介绍一下解析过程。</p>
-<ol>
-<li><p>首先需要一个文件输入，就是将opml文件的位置传入到程序里。</p>
-</li>
-<li><p>获取到文件，开始解析。将opml文件转换成一个feeds_list，里面记录feed链接。</p>
-</li>
-<li><p>逐个将链接解析，添加到本地rss库中。</p>
-</li>
-</ol>
-<p>第1步没有什么好展开讲的，现在在mini-buffer里面直接输入地址还不能补全，也没有检查路径是否存在，所以说实现方案还不够友好，需要再改进一下。</p>
-<p>解析过程最重要的步骤也就是第2步了，这里贴出我的代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_import_opml</span>(<span class="params">self, opml_file</span>):</span></span><br><span class="line">        message_to_emacs(<span class="string">&quot;Importing...&quot;</span>)</span><br><span class="line">        parser = etree.XMLParser(encoding = <span class="string">&quot;utf-8&quot;</span>, recover = <span class="literal">True</span>)</span><br><span class="line">        tree = etree.parse(opml_file, parser = parser)</span><br><span class="line">        feeds = tree.xpath(<span class="string">&#x27;/opml/body/outline&#x27;</span>)</span><br><span class="line">        feeds_list = []</span><br><span class="line">        feeds_list = tree.xpath(<span class="string">&#x27;/opml/body/outline/@xmlUrl&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># The above method may not be able to obtain xmlUrl.</span></span><br><span class="line">        <span class="keyword">for</span> feed <span class="keyword">in</span> feeds:</span><br><span class="line">            <span class="keyword">for</span> rss <span class="keyword">in</span> feed.iterchildren():</span><br><span class="line">                feeds_list.append(rss.get(<span class="string">&#x27;xmlUrl&#x27;</span>))</span><br><span class="line">        feeds_list = <span class="built_in">sorted</span>(<span class="built_in">set</span>(feeds_list), key = feeds_list.index)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># unique feed</span></span><br><span class="line">        <span class="keyword">for</span> index, feed <span class="keyword">in</span> <span class="built_in">enumerate</span>(feeds_list):</span><br><span class="line">            <span class="keyword">if</span> feed <span class="keyword">in</span> self.main_item.feedlink_list:</span><br><span class="line">                feeds_list.pop(index)</span><br><span class="line">                message_to_emacs(<span class="string">&quot;Feedlink &#x27;&#123;&#125;&#x27; exists.&quot;</span>.<span class="built_in">format</span>(feed))</span><br><span class="line"></span><br><span class="line">        self.import_opml_thread(feeds_list)</span><br></pre></td></tr></table></figure>
-
-<p>第三行是定义了一个解析器，因为要解决上面提到的特殊字符的问题，所以引入了<code>recover=True</code>这个参数，作用是当碰到特殊字符时直接把他们覆盖掉（用空格）。因为这里并不取到特殊字符所在的那一部分内容，所以是可以直接覆盖掉的。</p>
-<p>第四行使用上面定义的解析器解析xml文件。之后用xpath先读到outline所在位置，这里其实是一个temp。直接用xpath读到xmlUrl标签，记录在feeds_list中，但是有一些网站提供的opml又会读不到。就需要对上面生成的那个temp再操作一次，这个temp主要是为了解决多层outline包裹的问题（比如feedly如果定义了分类那么就会多层包裹）。</p>
-<p>10～12是对多层包裹的处理，考虑到这里实际上是进行了两次解析，可能会生成重复的feeds，于是在13进行一个去重。16～18是与本地feeds进行对比，然后去重，先去重再抓取，提高效率。</p>
-<p>第3步，我最初想的是单个调用原先写的多线程处理抓取的方法，但是这样实现起来会难以控制抓取结果，feed的index也会出现问题（标号index的操作比抓取线程快很多，就会导致index出错）。于是就重新为引入opml重新写了一个独立的线程，不过我觉得这样其实并不优雅。</p>
-<h2 id="导出opml"><a href="#导出opml" class="headerlink" title="导出opml"></a>导出opml</h2><p>导出opml比引入opml实现起来要简单些。</p>
-<p>因为直接使用python的xml库生成的xml文件是没有排版的，整个文件就一行，十分地丑，于是我就写了一个美化排版的递归函数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">beautify_opml</span>(<span class="params">self, element, indent, newline, level = <span class="number">0</span></span>):</span></span><br><span class="line">       <span class="keyword">if</span> element:</span><br><span class="line">           <span class="keyword">if</span> element.text == <span class="literal">None</span> <span class="keyword">or</span> element.text.isspace():</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>)</span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               element.text = newline + indent * (level + <span class="number">1</span>) + element.text.strip() + newline + indent * (level + <span class="number">1</span>)     </span><br><span class="line">       temp = <span class="built_in">list</span>(element)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> subelement <span class="keyword">in</span> temp:</span><br><span class="line">           <span class="keyword">if</span> temp.index(subelement) &lt; (<span class="built_in">len</span>(temp) - <span class="number">1</span>):     </span><br><span class="line">               subelement.tail = newline + indent * (level + <span class="number">1</span>)    </span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               subelement.tail = newline + indent * level   </span><br><span class="line">           self.beautify_opml(subelement, indent, newline, level = level + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>主要思路就是根据层级关系来判断是否需要加缩进以及换行，然后对子树节点再进行递归操作。</p>
-<p>接下来是生成函数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_opml</span>(<span class="params">self</span>):</span></span><br><span class="line">    message_to_emacs(<span class="string">&quot;Exporting...&quot;</span>)</span><br><span class="line">    root = Element(<span class="string">&#x27;opml&#x27;</span>)</span><br><span class="line">    root.<span class="built_in">set</span>(<span class="string">&#x27;version&#x27;</span>, <span class="string">&#x27;1.0&#x27;</span>)</span><br><span class="line">    head = SubElement(root, <span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    title = SubElement(head, <span class="string">&#x27;title&#x27;</span>)</span><br><span class="line">    user_name = get_emacs_var(<span class="string">&quot;user-login-name&quot;</span>)</span><br><span class="line">    title.text = <span class="string">&quot;Feeds of &#123;&#125; from eaf-rss-reader&quot;</span>.<span class="built_in">format</span>(user_name)</span><br><span class="line">    body = SubElement(root, <span class="string">&#x27;body&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> self.rss_list:</span><br><span class="line">        outline = SubElement(body, <span class="string">&#x27;outline&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;rss&#x27;</span>)</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;text&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;title&#x27;</span>, item[<span class="string">&#x27;feed_title&#x27;</span>])</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;xmlUrl&#x27;</span>, item[<span class="string">&#x27;feed_link&#x27;</span>])</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;link&#x27;</span> <span class="keyword">in</span> item:</span><br><span class="line">            link = item[<span class="string">&#x27;link&#x27;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                link = feedparser.parse(item[<span class="string">&#x27;feed_link&#x27;</span>]).feed.link</span><br><span class="line">            <span class="keyword">except</span> AttributeError:</span><br><span class="line">                link = item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            message_to_emacs(<span class="string">&quot;Failed to export &#123;&#125; &#123;&#125;, please try again later.&quot;</span>.<span class="built_in">format</span>(</span><br><span class="line">                item[<span class="string">&#x27;feed_title&#x27;</span>]</span><br><span class="line">                ,item[<span class="string">&#x27;feed_link&#x27;</span>]</span><br><span class="line">            ))</span><br><span class="line">        outline.<span class="built_in">set</span>(<span class="string">&#x27;htmlUrl&#x27;</span>, link)</span><br><span class="line"></span><br><span class="line">    tree = ElementTree(root)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    self.beautify_opml(root, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    file_location = os.path.join(self.location,</span><br><span class="line">    <span class="string">&#x27;eaf-rss-reader-&#x27;</span> + time.strftime(<span class="string">&quot;%Y-%m-%d-%H%M%S&quot;</span>, time.localtime()) + <span class="string">&#x27;.opml&#x27;</span>)</span><br><span class="line">    tree.write(file_location, encoding = <span class="string">&#x27;utf-8&#x27;</span>, xml_declaration=<span class="literal">True</span>)</span><br><span class="line">    message_to_emacs(<span class="string">&quot;All feeds have been exported. Location is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(file_location))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>生成下一层子节点的方法是<code>SubElement()</code>，eaf-rss-reader的opml文件的层级结构大致是这样的：opml -&gt; head &#x2F; body -&gt; outline1&#x2F;outline2&#x2F;…，某个feed的信息储存在outline的标签参数里面。11～28生成outline，主要包括了feed的title，feed的链接，feed的原链接（网页链接）这三个参数，因为最开始抓取feed的解析疏忽了，没有保存原链接地址，现在已经补上了，对于仍然没有原链接的那部分feed，会进行一个重新抓取，获取到原链接。抓取不到那就只能报错了。</p>
-<p>30～36就是美化排版函数的调用和生成文件了，为了文件不重名，所以采用了时间戳命名的方法。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SICP回顾：cons函数、使用过程定义数据结构（上）</title>
-    <url>/2021/11/20/2021/re_sicp1/</url>
-    <content><![CDATA[<p>最近在使用python完成SICP2.2部分的一些经典例题，因为在我看来使用不同的语言来完成一件相同的事情能够加深印象和理解。用python实现例题的部分也会再写成一篇文章，但是这里遇到了一些问题，需要先记录一下。</p>
-<p>首先是我对2.2节的感悟：构造一个复杂的东西，是需要许多模块进行组合的。这些模块也可以进行拆分，但是拆分到最底层的某些部分，这些部分的构造一定是简单又正确的。（看上去是一句废话，但是要把一个东西构造成简单但是又正确的，还是比较困难的一件事情）</p>
-<p>2.2节的最简单又正确的构造就是三个基本的函数<code>cons</code>、<code>car</code>、<code>cdr</code>，他们是那么简单，但是我又无法使用python将他们用一种优雅的方式构造出来。</p>
-<p>到底是用python的元组来构造scheme的list，还是用python的列表来构造scheme的list，我没有进行深究，我认为这两种数据结构的效果是类似的。</p>
-<h2 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>我打算用python现成的数据结构来表达scheme的list，那么<code>cons</code>、<code>car</code>、<code>cdr</code>也是要基于这种数据结构来进行编写的。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple1) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple1 = (tuple1,)</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">type</span>(tuple2) != <span class="built_in">tuple</span>):</span><br><span class="line">        tuple2 = (tuple2,)</span><br><span class="line">    <span class="keyword">return</span> tuple1 + tuple2</span><br></pre></td></tr></table></figure>
-
-<p>这样的构造在不嵌套元组操作的时候看上去是对的，比如说<code>c = cons(1,2)</code>这样的操作会得到<code>c=(1,2)</code>；但是如果进行嵌套元组操作，就会出错，比如说<code>c=cons((1,2,3),(4,5,6))</code>，我们期望得到的是类似<code>c=((1,2,3),(4,5,6))</code>这样的结构，但是输出结果是<code>c=(1,2,3,4,5,6)</code>。这样的构造是不行的。</p>
-<h2 id="第二次尝试"><a href="#第二次尝试" class="headerlink" title="第二次尝试"></a>第二次尝试</h2><p>我改变了<code>cons</code>的构造，然后整体呈现是</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item == ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">except</span> (TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">tuple_parameter</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> tuple_parameter[<span class="number">1</span>::]</span><br><span class="line">    <span class="keyword">except</span>(TypeError, IndexError):</span><br><span class="line">        <span class="keyword">return</span> ()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">tuple1, tuple2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (tuple1,tuple2)</span><br></pre></td></tr></table></figure>
-
-<p>但是这样构造的输出比较丑，我得把元组写成<code>a = (1,(2,(3,(4,()))))</code>这种形式，等价于scheme里面<code>(define a (list 1 2 3 4))</code>，不过后续的部分操作都是对的。使用<code>accumulate</code>函数稍稍验证一下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accumulate</span>(<span class="params">op, init, seqs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> is_null(seqs):</span><br><span class="line">        <span class="keyword">return</span> init</span><br><span class="line">    <span class="keyword">return</span> op(car(seqs), accumulate(op, init, cdr(seqs)))</span><br><span class="line"></span><br><span class="line">accumulate(cons, (), a)</span><br><span class="line">accumulate(add, <span class="number">0</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">num1, num2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> num1 + num2</span><br></pre></td></tr></table></figure>
-
-<p>如果硬要把元组写成<code>a=(1,2,3,4)</code>这种格式，会出一点问题….使用<code>accumulate(cons, (), a)</code>看一下就明白了，会变成<code>(1, (2, (3, (4, ()))))</code>这样的格式。显然的，<code>a=(1,2,3,4)</code>这种形式要比<code>(1, (2, (3, (4, ()))))</code>看上去美观多了。</p>
-<p>但是在scheme却不会出现这种情况，比如说对一个list进行操作：</p>
-<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>))</span><br><span class="line">accumulate(<span class="name"><span class="builtin-name">cons</span></span>, &#x27;(), a&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>最终的输出仍然是<code>(1 2 3 4)</code>，所以我推测应该是list与cons的实现存在问题。cons的实现并不是如同我上面那样构造的，或者说当cons应用在list上时呈现效果会有变化。不过更加具体的分析我还没有想好。还有一件更加奇怪的事情。</p>
-<p>当我们去嵌套地调用<code>cons</code>函数时，出现的效果是这样的：</p>
-<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> a (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> b (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>))</span><br><span class="line">(<span class="name"><span class="builtin-name">cons</span></span> a b ) = ((<span class="name">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-
-<p>我将它描述为“b嵌套了a”或者”a被b嵌套了”。</p>
-<p>但是当我去使用一个函数，情况就发生了变化：</p>
-<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">accumulate-n</span> op init seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">null?</span></span> (<span class="name"><span class="builtin-name">car</span></span> seqs))</span><br><span class="line">      &#x27;()</span><br><span class="line">      (<span class="name"><span class="builtin-name">cons</span></span> (<span class="name">accumulate</span> op init (<span class="name">car-n</span> seqs))</span><br><span class="line">        (<span class="name">accumulate-n</span> op init (<span class="name">cdr-n</span> seqs)))))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">car-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> car seqs))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">cdr-n</span> seqs)</span><br><span class="line">  (<span class="name"><span class="builtin-name">map</span></span> cdr seqs))</span><br><span class="line">(<span class="name"><span class="builtin-name">load</span></span> <span class="string">&quot;accumulate.scm&quot;</span>)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> sequence (<span class="name"><span class="builtin-name">list</span></span> (<span class="name"><span class="builtin-name">list</span></span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>)</span><br><span class="line">               (<span class="name"><span class="builtin-name">list</span></span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span>)))</span><br><span class="line"></span><br><span class="line">(<span class="name">accumulate-n</span> cons &#x27;() sequence&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>最后一行的效果是向<code>list1</code>进行一个矩阵翻转。</p>
-<p><code>car-n</code>的结果是生成一个list,然后通过accumulate-n将他们都链接起来，链接的方法是<code>cons</code>，但是最后输出的是<code>((1 4 7 10) (2 5 8 11) (3 6 9 12))</code>，并不是嵌套情况！前面举例的那个方法也是两个list通过<code>cons</code>方法链接起来，但是呈现结果是嵌套的。</p>
-<p>我就开始猜想是不是因为scheme会根据数据结构的不同来选择不一样的链接方案？比如两个list链接就是类似链表的一种链接，而第二个例子因为已经指明了原本的数据结构是一个list,所以<code>cons</code>的链接方案仍然是list形式的。</p>
-<p>我觉得在没有具体了解<code>cons</code>在scheme里面的实现，是无法得到正确的结论的。</p>
-<p>所以对于python直接使用现成数据结构构造<code>cons</code>，我目前只能达到这个阶段了。更深层的内容需要更加了解函数式构造方法后再来补充。现在只能用这种丑陋的方法继续完成sicp例题了。</p>
-<h2 id="第三次尝试，使用过程构造数据结构"><a href="#第三次尝试，使用过程构造数据结构" class="headerlink" title="第三次尝试，使用过程构造数据结构"></a>第三次尝试，使用过程构造数据结构</h2><p>既然都在构造cons了，不如回顾一下p61提到的使用过程构造cons。</p>
-<p>在我之前的尝试里面，cons理所当然地应该是一种数据结构，但是sicp个给了一种方法使他能够被函数构造出来。</p>
-<figure class="highlight scheme"><table><tr><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cons</span></span> x y)</span><br><span class="line">  (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">dispatch</span> m)</span><br><span class="line">    (<span class="name"><span class="builtin-name">cond</span></span> ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">0</span>) x)</span><br><span class="line">      ((<span class="name"><span class="builtin-name">=</span></span> m <span class="number">1</span>) y)</span><br><span class="line">      (<span class="name"><span class="builtin-name">else</span></span> (<span class="name">error</span> <span class="string">&quot;Argument not 0 or 1 -- CONS&quot;</span> m))))</span><br><span class="line">  dispatch)</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">car</span></span> z) (<span class="name">z</span> <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name"><span class="builtin-name">cdr</span></span> z) (<span class="name">z</span> <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-<p>以及python</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span>(<span class="params">m</span>):</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x</span><br><span class="line">        <span class="keyword">elif</span> m == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> y</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Argument not 0 or 1 -- CONSS&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> dispatch</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> z(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这里定义的cons car cdr等都是过程，cons本质上是一个数据结构。</p>
-<p>当使用cons对两个数据进行组合的时候，返回的是一个函数：</p>
-<p><code>cons(1,2)</code></p>
-<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb550&gt;</code></p>
-<p><code>cons((1,2,3),(4,5,6))</code></p>
-<p><code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code></p>
-<p>当对被构造出来的这种结构使用car、cdr时，会根据情况来返回值。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = cons((<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), (<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>))</span><br><span class="line">b = cons((<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>),a)</span><br><span class="line">car(a)</span><br><span class="line">car(b)</span><br><span class="line">cdr(a)</span><br><span class="line">cdr(b)</span><br></pre></td></tr></table></figure>
-
-<p>前面三种查询都是返回元组本身，也就是可以直接查看到值的结果，但是第四个返回的是<code>&lt;function cons.&lt;locals&gt;.dispatch at 0x7feab94bb700&gt;</code>，因为相当于直接查看a了，a的构造实际上是一个函数。</p>
-<p>其实将被构造出来的这些数据带入car、cdr、cons函数并不难理解，这又让我想起来了经典的例题2.6，同样的2.6是使用过程“重新定义”了数字，这里是用过程重新定义cons的数据结构。</p>
-<p>其实还有一些问题，不过我已经找到较为优雅的方法了，请看我的<a href="https://scheng52123.com/index.php/2021/11/22/re_sicp1/">下一篇文章</a>。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>scheme</category>
-        <category>sicp</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SICP回顾：cons函数、使用过程定义数据结构（下）</title>
-    <url>/2021/11/22/2021/re_sicp2/</url>
-    <content><![CDATA[<p>接着写<a href="https://scheng52123.com/index.php/2021/11/20/re_sicp1/">上一篇</a>的内容，我打算实现三个基本函数<code>cons</code>、<code>car</code>、<code>cdr</code>，尝试了几种方法都没能很好的实现，并且前两种方法在后来的测试中发现都有问题（第二种方法在嵌套使用的时候仍然有bug）。我逛了一圈github，发现有一位老哥已经用python实现了SICP的大部分习题，<a href="https://github.com/Reo-LEI/SICP-Python">https://github.com/Reo-LEI/SICP-Python</a> 。其中他编写了一个<a href="https://github.com/Reo-LEI/SICP-Python/blob/master/orderedPair.py">ordered.py</a>，其中对cons的实现和对lister（在scheme里面是list）的实现是比较优雅的。</p>
-<p>我将他的代码稍稍修改了一下，现在的构造是这样的：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cons</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (a, b)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">car</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cdr</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lister</span>(<span class="params">*args</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coner</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        <span class="keyword">if</span> y == []:</span><br><span class="line">            <span class="keyword">return</span> cons(x, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(x, coner(y[<span class="number">0</span>], y[<span class="number">1</span>:]))</span><br><span class="line">    L = <span class="built_in">list</span>(args)</span><br><span class="line">    first, other = L[<span class="number">0</span>], L[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">return</span> coner(first, other)</span><br></pre></td></tr></table></figure>
-
-<p>其实就是在我的第二次尝试的代码里面使用cons重新写了一个lister数据结构，使cons能够正确处理嵌套结构。</p>
-<p>一个lister接受多个参数（*args使函数能够接收若干个参数）。将args转换为list作为temp保存，<code>tuple()</code>无法接受多个参数。 first取第一个（类似car），other取剩余的（类似cdr），使用内部函数对first与other继续递归构造。而coner函数就是将这个list（或者说是other参数）展开，逐个地将元素用cons链接起来，到list被分解完毕了，就返回一个<code>None</code>作为递归的结束（这就类似scheme里的<code>&#39;()</code> 或者 <code>nil</code>了）。</p>
-<p>这个数据结构能够很好的处理嵌套的lister和cons，是我上一次构造的时候没想到的，我认为是一个较为优雅的方法了，唯一不足的就是对一个lister的直接呈现效果仍然是这样<code>(1, (2, (3, None)))</code>，而不是<code>(1, 2, 3)</code>这样的。不过问题不大。</p>
-<p>因为对重新构造了list的数据结构，那基于list的一些操作函数也会发生变化，python自带的<code>map</code>函数已经无法处理这里的lister了，所以就重新构造了一个<code>mapping</code>和<code>mapping_n</code>函数来作为新的<code>map</code>函数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_null</span>(<span class="params">item</span>):</span></span><br><span class="line">    <span class="keyword">return</span> item <span class="keyword">is</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping</span>(<span class="params">func, item</span>):</span> </span><br><span class="line">    <span class="keyword">if</span> is_null(item):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> cons(func(car(item)), mapping(func, cdr(item)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mapping_n</span>(<span class="params">func, *seqs</span>):</span></span><br><span class="line">    <span class="comment"># 将序列转化为元组</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">seq_trans</span>(<span class="params">seq</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">translator</span>(<span class="params">s</span>):</span></span><br><span class="line">            <span class="keyword">if</span> is_null(cdr(s)):</span><br><span class="line">                <span class="keyword">return</span> [car(s)]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> [car(s)]+translator(cdr(s))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">tuple</span>(translator(seq))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_map</span>(<span class="params">f, seq</span>):</span></span><br><span class="line">        <span class="keyword">if</span> is_null(car(seq)):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cons(f(*seq_trans(car_n(seq))), _<span class="built_in">map</span>(f, cdr_n(seq)))  <span class="comment"># 用*解包元组调用f</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断seqs为树或者多个列表并解包</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(seqs) &gt; <span class="number">1</span>:</span><br><span class="line">        seqs = lister(*seqs)</span><br><span class="line">    <span class="comment"># 若为树直接解包</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        seqs = seqs[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> _<span class="built_in">map</span>(func, seqs)</span><br></pre></td></tr></table></figure>
-
-<p><code>mapping(func, item)</code>，类似原map函数，mapping的第一个参数接受一个函数，第二个参数接受一种数据或者一种数据结构。</p>
-<p>使用cons将item重新链接，并用car、cdr进行分解，对<code>car(item)</code>执行func操作，<code>cdr(item)</code>取剩下的数据部分，传入mapping进行递归。</p>
-<p>而<code>mapping_n</code>是P70脚注78提到的map扩充函数，能够接受多个表作&#x2F;序列作为参数，依次取各个序列第k元素组成序列<code>seq(k)</code>作为<code>func</code>的参数，返回结果序列。</p>
-<p><a href="https://github.com/ShaoChenHeng/learnSICP/blob/master/orderedPair.py">这是我修改后的文件</a>，我希望后续能将它变成一个python抽象scheme的标准函数库。</p>
-]]></content>
-      <categories>
-        <category>emacs</category>
-        <category>python</category>
-        <category>scheme</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>我的音乐播放器，Rubber2</title>
-    <url>/2021/12/26/2021/rubber2/</url>
-    <content><![CDATA[<p>这是本学期一门课程（移动互联）的课程作业，这门课安排的语言是kotlin，但是我用了两下感觉编程体验并不好。后来得知是可以使用任何语言的，于是就选择了较为趁手的Vue.js，再结合uni-app套件实现安卓打包，理论上也可以打包成为ipa，不过我目前还没测试过。</p>
-<p>github地址为：<a href="https://github.com/ShaoChenHeng/Rubber2">https://github.com/ShaoChenHeng/Rubber2</a></p>
-<p>更多的描述内容已经写在github页面了，可以自行查看，这里不再赘述。</p>
-<h2 id="运行图片"><a href="#运行图片" class="headerlink" title="运行图片"></a>运行图片</h2><p><img src="/images/home.jpg" alt="home"> <img src="/images/play1.jpg" alt="play1"> <img src="/images/play2.jpg" alt="play2"> <img src="/images/mine.jpg" alt="mine">) <img src="/images/search2.jpg" alt="search">)</p>
-<h2 id="weex-和-uni-app-以及-Hbuilderx"><a href="#weex-和-uni-app-以及-Hbuilderx" class="headerlink" title="weex 和 uni-app 以及 Hbuilderx"></a>weex 和 uni-app 以及 Hbuilderx</h2><p>（要不是这里是博客，我可能已经破口大骂了，哈哈哈。）</p>
-<p>weex和uni-app还有许多兼容性问题，这也给我的css排版工作带来了很多问题。最终地播放界面是可以更加好看的（我的最初设想是提取图片主色和次色进行颜色渐变作为背景，无奈各种npm库无法直接使用，手写八叉树的话，uni-app画布建立又与传统js不同；css部分也不支持blur，不支持多方向多颜色的渐变。所以我十分痛苦也十分无奈。），以后我也会慢慢改进呈现出我想要的那个状态来。</p>
-<p>uni-app只能在Hbuilderx上进行编译运行，而Hbuilderx只能运行在Windows上，这给我带来了一次 <strong>最不好</strong> 的编程体验。在写这个程序的十天里，我经历了两次莫名奇妙的文件自行被编辑器改动；只要出现引号内的长内容（比如说在进行数据渲染前我需要添加一些测试图片url），就会出现文字排版错误，光标不知道自己该在哪里。</p>
-<p>在逐渐习惯了Emacs的全键盘操作后，频繁地进行键鼠切换是一件很痛苦地事情。</p>
-<p>要不是迫不得已，我以后不会优先考虑将Hbuilderx作为我的编辑器。</p>
-]]></content>
-      <categories>
-        <category>android</category>
-        <category>javascript</category>
-        <category>vue-js</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>树的映射以及map函数</title>
-    <url>/2021/11/07/2021/scale-tree/</url>
-    <content><![CDATA[<p>这篇文章是sicp2.2节内容的笔记，主要记录一下里面提到的scale-tree这个函数。</p>
-<p>```(scale-tree tree factor)```以一棵树和一个因子作为参数，将树上的所有节点的值都乘上因子。</p>
-<p>首先提供了一个朴素版本的scale-tree，就是递归左右子树，检查当前节点是否属于叶子节点。如果是，那么就乘上因子；如果不是，那么就继续左右递归。</p>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree</span> tree factor)</span><br><span class="line">  (<span class="name">cond</span> ((<span class="name">null</span>? tree) &#x27;())</span><br><span class="line">    ((<span class="name">not</span> (<span class="name">pair</span>? tree)) (<span class="name">*</span> tree factor))</span><br><span class="line">    (<span class="name">else</span> (<span class="name">cons</span> (<span class="name">scale-tree</span> (<span class="name">car</span> tree) factor)</span><br><span class="line">            (<span class="name">scale-tree</span> (<span class="name">cdr</span> tree) factor)))))</span><br><span class="line"></span><br><span class="line">(<span class="name">define</span> tree1 (<span class="name">list</span> <span class="number">1</span> (<span class="name">list</span> <span class="number">2</span> (<span class="name">list</span> <span class="number">3</span> <span class="number">4</span>) <span class="number">5</span>) (<span class="name">list</span> <span class="number">5</span> <span class="number">7</span>)))</span><br><span class="line"></span><br><span class="line">（scale-tree  tree1 <span class="number">10</span>）</span><br></pre></td></tr></table></figure>
-
-<p>会使原来的树(也就是tree1)的节点上的值都乘以10。</p>
-<p>下面又提供了一个map加lambda匿名函数的版本，但是比较抽象，一下子难以理解。</p>
-<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">(<span class="name">define</span> (<span class="name">scale-tree1</span> tree factor)</span><br><span class="line">  (<span class="name">map</span> (<span class="name">lambda</span> (<span class="name">sub-tree</span>)</span><br><span class="line">     (<span class="name">if</span> (<span class="name">pair</span>? sub-tree)</span><br><span class="line">         (<span class="name">scale-tree</span> sub-tree factor)</span><br><span class="line">         (<span class="name">*</span> sub-tree factor)))</span><br><span class="line">       tree))</span><br></pre></td></tr></table></figure>
-
-<p>我使用python重新写了一次，加深理解。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> sub_tree : scale_tree(sub_tree, factor) <span class="keyword">if</span> <span class="built_in">type</span>(sub_tree) == <span class="built_in">tuple</span> <span class="keyword">else</span> sub_tree * factor,tree))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_tree2</span>(<span class="params">tree, factor</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tuple</span>(<span class="built_in">map</span>(<span class="built_in">iter</span>, tree))</span><br><span class="line"></span><br><span class="line">t = ((<span class="number">1</span>, <span class="number">2</span>), <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这里定义的两个函数功能上是一样的，因为scale_tree同时用map、lambda可读性可能不是很高，于是就用高阶函数的方法重新构造了scale_tree2这个函数。</p>
-<p>首先要讲的是map函数，通常使用的map函数的参数列表应该是这样的：</p>
-<p><code>map(function, parameter)</code></p>
-<p>第一个参数接受一个函数，第二个接受一个值或者某种数据结构（也可以传入更多个）。然后将对后面的这个参数使用<code>function</code>。比如说下面这个最简单的例子：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">square</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * x</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(square, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])))</span><br></pre></td></tr></table></figure>
-
-<p><code>map</code>会对列表中的每一个数都执行一次square,最后会返回一个<code>[1,4,9]</code>。不过这只是对于一层的列表来执行的。通过更高阶的函数配合可以进行更深层的操作，也就是<code>scale-tree</code>，对树的映射。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter</span>(<span class="params">subtree</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(subtree) == <span class="built_in">tuple</span>:</span><br><span class="line">            <span class="keyword">return</span> scale_tree2(subtree, factor)</span><br><span class="line">        <span class="keyword">return</span> subtree * factor</span><br></pre></td></tr></table></figure>
-
-<p>这个<code>iter</code>函数接受的参数是一棵子树，我这里用python的元组来表示scheme中的list，如果当前位置的元素不是元组了，那么就说明是叶子节点，就需要乘以因子；如果不是那么就继续递归遍历子树，不过值得注意的是这里的递归并不是显示的，是通过map函数来进行的，因为它能将函数迭代地操作在每一层的结构上。</p>
-<p>再去看上面的那个scheme版本，其实就是一样的写法，不过这种遍历树的方法实在是太妙了。</p>
-<p>本来这篇文章应该在上周或者上上周就写好了，但是因为中途又重装了一次arch，又去更新eaf-rss-reader的opml功能，所以一直拖延到了今天才写。不过我总算是把这个这么美妙的方法记录下来了。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>scheme</category>
-        <category>sicp</category>
-        <category>book</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>远程服务器复制操作小记</title>
-    <url>/2021/09/01/2021/server-copy/</url>
-    <content><![CDATA[<p>因为最近在写学校每日一报自动签到的东西，在远程服务器上写了一个autoSign.py的文件，同时我将这个文件传到了github上（这个操作是在我本地的linux系统上进行的），那么当我在远程服务器上更改了autoSign.py的文件的时候，我想要同步保存它，就需要在远程服务器上使用git了，但是我不想这样子做，于是搜索了一番打算将远程服务器上的文件复制到我本地的linux系统上，再通过本地的linux系统上传文件到github，操作如下（当然下面出现的ip是没用的）</p>
-<p>假设远程服务器IP地址为 192.168.1.100</p>
-<h2 id="从服务器复制文件到本地"><a href="#从服务器复制文件到本地" class="headerlink" title="从服务器复制文件到本地"></a>从服务器复制文件到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp root@192.168.1.100:/data/test.txt /home/myfile/</span><br><span class="line">补充：</span><br><span class="line">1. 多文件拷贝</span><br><span class="line">　　scp root@192.168.1.100:/data/\&#123;test1.txt,test2.cpp,test3.bin,test.*\&#125; /home/myfile/</span><br><span class="line">2. scp默认连接的远端主机22端口，如果ssh不是使用标准的22端口（以233为例）则使用-P（P大写）指定：</span><br><span class="line">　　scp -P 233 root@192.168.1.100:/data/test.txt /home/myfile/</span><br></pre></td></tr></table></figure>
-
-<p><a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#x31;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#49;&#x2e;&#x31;&#48;&#x30;">&#114;&#111;&#111;&#116;&#x40;&#x31;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#49;&#x2e;&#x31;&#48;&#x30;</a> root是目标服务器的用户名(一般都是root吧？)，192.168.1.100是IP地址，后面紧跟的 “：” 不要忘记，&#x2F;data&#x2F;test.txt（多文件还有test1.txt，test2.cpp，test3.bin，test.a，test.c等） 是目标服务器中你要拷贝文件的地址，接一个空格，后面的 &#x2F;home&#x2F;myfile&#x2F; 是本地接收文件的地址。</p>
-<h2 id="从服务器复制文件夹到本地"><a href="#从服务器复制文件夹到本地" class="headerlink" title="从服务器复制文件夹到本地"></a>从服务器复制文件夹到本地</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r root@192.168.1.100:/data/ /home/myfile/</span><br></pre></td></tr></table></figure>
-
-<h2 id="从本地复制文件到服务器"><a href="#从本地复制文件到服务器" class="headerlink" title="从本地复制文件到服务器"></a>从本地复制文件到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp /home/myfile/test.txt root@192.168.1.100:/data/</span><br><span class="line">补充：多文件拷贝</span><br><span class="line">scp /home/myfile/test1.txt test2.cpp test3.bin test.* root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
-
-<h2 id="从本地复制文件夹到服务器"><a href="#从本地复制文件夹到服务器" class="headerlink" title="从本地复制文件夹到服务器"></a>从本地复制文件夹到服务器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scp -r /home/myfile/ root@192.168.1.100:/data/</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.cnblogs.com/clovershell/p/9870603.html">参考文章</a></p>
-]]></content>
-      <categories>
-        <category>os</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>我的中国开源之夏2021</title>
-    <url>/2021/10/16/2021/summer2021/</url>
-    <content><![CDATA[<p>今年中科院软件研究所的summer2021活动我参与的是<a href="https://github.com/emacs-eaf/emacs-application-framework">EAF社区（Emacs Application Framework）</a>，具体内容可以查看这个链接：<a href="https://summer.iscas.ac.cn/#/org/prodetail/210510561">Emacs EAF：基于Vue.js实现RSS新闻阅读器</a>，主要的任务是基于EAF框架实现一个Emacs的RSS阅读器。</p>
-<p>因为去年参加的<a href="https://github.com/OI-wiki/OI-wiki">OI Wiki社区</a>的撰写文章的活动是完全在我的舒适区内的任务，以后不再继续参与算法竞赛了，并且打算学习一些新东西于是选择了EAF的<a href="https://summer.iscas.ac.cn/#/org/prodetail/210510561">Emacs EAF：基于Vue.js实现RSS新闻阅读器</a>。</p>
-<p>项目仓库，<a href="https://github.com/ShaoChenHeng/eaf-rss-reader">eaf-rss-reader</a>。</p>
-<p><img src="/images/screenshot-1.png" alt="RSS-Reader1"></p>
-<h2 id="申请流程"><a href="#申请流程" class="headerlink" title="申请流程"></a>申请流程</h2><p>去年的申请流程可以查看这篇文章， <a href="https://scheng52123.com/index.php/2020/09/29/summer-2020/">Summer 2020 从申请到结项</a>。</p>
-<p>今年年初到3月份一直无所事事，寒假看了一些科普书，因为当时以为上半年不会有比赛了，所以没怎么写算法题，也没有去看开源项目相关的事情。到了三月末突发想到似乎快gsoc了，于是打开gsoc的页面看了一眼…发现再过两天就开始投proposal了…于是马上开始看gsoc的项目，同时也看了一下中科院这边的暑期活动，中科院这边还是社区申请的阶段（先社区向中科院申请slot，然后学生向中选社区申请），发现很早EAF就已经中选了，去年就关注这个社区了。因为大一的时候看过一点SICP，体验过Emacs编辑器，也简单配置过自己的.emacs文件，这个内容可以在我的文章 <a href="https://scheng52123.com/index.php/2021/01/31/learnemacs/">从零开始的Emacs配置学习</a>里面看见。但是感觉当时自己还是太弱了，lisp只会一点，所以就没有信心去参与EAF社区。gsoc这边花了几天时间从上千个项目中筛选出两个，一个是<a href="https://github.com/saketkc/gencode_regions">gencode_regions</a>，另一个是JavaScript的slang。当时中科院这边的任务还没发布出来，为了防止出现和gsoc一样的匆忙状况，期间给EAF的维护者，也就是我后来的导师MatthewZMD，发了一篇邮件，问了一下今年的任务情况。写完两篇proposal后发现自己被分配到打银川区域赛了…就开始学新的算法，没有再细看EAF的东西…gsoc这边最后两个都没中。</p>
-<p>打完区域赛浪了一段时间，就到了五月中旬。5.19左右EAF的具体项目已经发布出来了，今年导师认领任务的情况有变，一个导师最多只能认领三个项目，然而EAF的导师最终只有一位，所以最后也只有三个项目，分别是重构代码（低），写EAF图片处理工具（中），写RSS阅读器（中）。因为去年有一个music-player的项目很感兴趣，但是因为今年已经做出基于vue-js的music-player了所以这个项目在今年就没有出现。然后我就开始仔细研究这三个项目，因为抓取rss文件的过程和爬虫差不多，最开始学习python的时候写的最多的也就是爬虫，于是就选择了编写RSS阅读器的任务（其实本来是想找个难度为高的项目的，无奈EAF这边没有，其他社区slot也已经有人了，我也没再去考虑）。</p>
-<p>查询了一些资料，了解了一下RSS阅读器到底是什么东西，看了一些Github上的RSS阅读器的仓库，也体验了一下<a href="https://feedly.com/">Feedly</a>之类的阅读器，然后就开始写proposal了。在6.1完成了<a href="https://docs.google.com/document/d/1bSuUJaW1A6-22lL1aeyLdYsNzgsJqG5JhHkqaibHi4s/edit?usp=sharing">项目申请书</a>,mentor表示写的很好，做了一些小修改最后上交的也就是这一篇。</p>
-<p>这次申请过程一路畅通无阻，到最后这个项目也只有我一个申请人（不像去年那个撰写的最后都有8人了…），不过今年的确人数增加了许多，有的项目还是挺卷的。期间帮助自己学校的几位同学申请，最后自己学校有两位同学也入选了今年的暑期活动。其中一位的项目就挺卷的，但是好在她很早就联系了mentor，这个项目的整个构想都是她提出的所以最后也是她入选了。</p>
-<p>不过要提醒的是，项目申请书还是得好好写的，虽然有的项目候选人只有一位，但是不好好写申请书的话，还是会落选的。</p>
-<p>在提交项目申请书到审核到入选的过程中，看了一下vue.js的官方文档，然后就去冲期末考试了。当时是完全没看懂vue.js编程的，因为之前没接触过这种编程。后面具体的参与过程可以看我的这篇<a href="https://docs.google.com/document/d/1xnKz7avptIV7mXvPSkYQT4SeyjUHhAlNiUNYbP3XYTE/edit">结项报告</a>。接下来我想要详细介绍一下RSS阅读器。</p>
-<h2 id="RSS阅读器"><a href="#RSS阅读器" class="headerlink" title="RSS阅读器"></a>RSS阅读器</h2><p>说实话，在接触这个项目之前，我是完全不知道RSS阅读器是什么东西的。现在简单介绍一下。</p>
-<p>首先我们可以将网页上的内容整理成一个rss链接，有提供这种rss链接的网站我们可以认为是支持rss服务的，最浅显的一个例子就是豆瓣的个人页面，我们可以在个人页面的右下角看到一个 RSS2.0 的链接，点进去就可以看见这位用户的内容整理了。因为是豆瓣，所以这个链接里面整理的就是这个用户最新的“想读的书”、“看过的电影”之类的内容。如果是某些新闻网站的话，整理出来的就是一些文章了，比如说开源中国提供的一个rss链接<a href="https://www.oschina.net/news/rss">https://www.oschina.net/news/rss</a> 。</p>
-<p>但是这种链接点开来是类似一种类似html的超文本格式的，无法直接通过肉眼来看内容，那么就需要一个工具，将rss链接进行解析，得到链接里面的内容并且呈现出来，这个工具就是rss阅读器。并且我们可以在rss阅读器里面添加许多这种链接，这样也就相当于把自己感兴趣的所有东西都放在一个容器里了。</p>
-<p>那么只要通过rss阅读器就可以查看内容进入到这个网站的首页查看内容了。也就意味着，我们可以在rss阅读器上专一地看自己感兴趣的内容。我一直有一个想法，其实根本没有必要存在这么多app，很多app提供的主体功能实际上通过浏览器和网页就能够实现了，手机的内存空间也可以得到释放。多年以前手机还没有像今天这样流行的时候其实就是这样的，当时使用平板电脑或者手机还可以在网页的淘宝上进行购物，也可以在网页的qq上进行聊天，但是现在这样的功能已经越来越少，各种服务的app也越来越臃肿、冗余。今天的发展离我的这个想法就是越走越远，不过rss阅读器还是很契合我的想法的，这也是我最后选择它作为我的暑期项目的理由之一。</p>
-<p>然而并不是所有的网站都有提供RSS服务的，所以有的网页我们就无法订阅，这时候就需要一个Github上的开源项目：<a href="https://github.com/DIYgod/RSSHub">RSSHub</a>，通过这个项目可以将任何网页生成RSS链接，再使用RSS阅读器就可以订阅互联网上的所有页面了。但是目前我的eaf-rss-reader还无法使用RSSHub生成的链接，主要是代理上的问题，后续会给出解决方案。</p>
-<h2 id="关于本项目"><a href="#关于本项目" class="headerlink" title="关于本项目"></a>关于本项目</h2><p><img src="/images/screenshot-2.png" alt="RSS-Reader2"></p>
-<p>来讲一讲这次项目使用到的技术栈，vue.js以及其组件vuex，Python-PyQt5、emacs-lisp（主要用于EAF的.el文件编写）、javascript等，并且这里列举的都是在三个月内我学会并且实现的。其他部分python一直是会的，但是图形的PyQt部分一直没有接触过，对于js也只是今年上半年时候读了一部分的javascript编程艺术这本书（粉色封面）学会了一些dom操作。</p>
-<p>通过上面提到的那些技术栈的组合，最终完成了一个能够实现feed订阅、feed删除、标记阅读状态、访问源页面（直接调用EAF的browser）、刷新以及自动刷新功能的RSS-Reader。并且其中的添加订阅、刷新功能是多线程的。这也是我第一次学习多线程操作，使用了QThread。</p>
-<p>前期以及中期最困难的一个部分是无法使用vue.js调用python函数，不过后来参考了EAF的file-manager项目采取了QWebChannel的方法，十分优雅地解决了，并且这个方法将对我以后编写的程序起到很大的帮助。接下来我会用两篇文章详细介绍一下QThread方法和QWebChannel方法。</p>
-<p>关于我的RSS-Reader还欠缺的一些地方，目前只能够直接使用我设计的配色，还没有将配色留出.el文件；preview页面中的文章排版还有问题，也无法显示图片；无法使用RSSHub的链接等。</p>
-<h2 id="后续计划"><a href="#后续计划" class="headerlink" title="后续计划"></a>后续计划</h2><p>解决上面提到的问题。</p>
-<p>继续配置Emacs，使它成为我的主力编辑器。</p>
-<p>使用Emacs完成SICP。</p>
-<p>2022年可能不会参与GSoc或者中科院开源之夏了，如果EAF2022年叫我去当mentor，那我是很乐意的（逃）。下一次参与这种活动可能就是2023年以后了，如果我在那个时间点以后还将继续读书的话。（（（</p>
-]]></content>
-      <categories>
-        <category>summer</category>
       </categories>
   </entry>
   <entry>
